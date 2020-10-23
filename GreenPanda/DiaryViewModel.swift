@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct EntryViewModel {
+    let entryText: String
+}
+
 class DiaryViewModel {
     
     private let greenPandaModel: GreenPandaModel
@@ -18,4 +22,11 @@ class DiaryViewModel {
     var numberOfEntries:Int {
         greenPandaModel.entries.count
     }
+    
+    var entryViewModels: [EntryViewModel] {
+        greenPandaModel.entries.map {entry in
+            EntryViewModel(entryText: entry.entryText)
+        }
+    }
+
 }

@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct DiaryEntry {}
+struct DiaryEntry {
+    let entryText: String
+}
 
 protocol GreenPandaModel {
     var entries: [DiaryEntry] { get }
