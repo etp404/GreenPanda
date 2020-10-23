@@ -15,6 +15,7 @@
 		C97C09BB25409A31001E1E5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C97C09B925409A31001E1E5A /* LaunchScreen.storyboard */; };
 		C97C09C625409A31001E1E5A /* GreenPandaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09C525409A31001E1E5A /* GreenPandaTests.swift */; };
 		C97C09D125409A31001E1E5A /* GreenPandaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09D025409A31001E1E5A /* GreenPandaUITests.swift */; };
+		C97C09E225409A9B001E1E5A /* GreenPandaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		C97C09CC25409A31001E1E5A /* GreenPandaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreenPandaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97C09D025409A31001E1E5A /* GreenPandaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaUITests.swift; sourceTree = "<group>"; };
 		C97C09D225409A31001E1E5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				C97C09B725409A31001E1E5A /* Assets.xcassets */,
 				C97C09B925409A31001E1E5A /* LaunchScreen.storyboard */,
 				C97C09BC25409A31001E1E5A /* Info.plist */,
+				C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */,
 			);
 			path = GreenPanda;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			files = (
 				C97C09B325409A30001E1E5A /* ViewController.swift in Sources */,
 				C97C09AF25409A30001E1E5A /* AppDelegate.swift in Sources */,
+				C97C09E225409A9B001E1E5A /* GreenPandaModel.swift in Sources */,
 				C97C09B125409A30001E1E5A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
