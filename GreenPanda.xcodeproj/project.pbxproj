@@ -13,7 +13,7 @@
 		C97C09B625409A30001E1E5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C97C09B425409A30001E1E5A /* Main.storyboard */; };
 		C97C09B825409A31001E1E5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C97C09B725409A31001E1E5A /* Assets.xcassets */; };
 		C97C09BB25409A31001E1E5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C97C09B925409A31001E1E5A /* LaunchScreen.storyboard */; };
-		C97C09C625409A31001E1E5A /* GreenPandaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09C525409A31001E1E5A /* GreenPandaTests.swift */; };
+		C97C09C625409A31001E1E5A /* DiaryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09C525409A31001E1E5A /* DiaryViewModelTests.swift */; };
 		C97C09D125409A31001E1E5A /* GreenPandaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09D025409A31001E1E5A /* GreenPandaUITests.swift */; };
 		C97C09E225409A9B001E1E5A /* GreenPandaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */; };
 /* End PBXBuildFile section */
@@ -45,7 +45,7 @@
 		C97C09BA25409A31001E1E5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C97C09BC25409A31001E1E5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C97C09C125409A31001E1E5A /* GreenPandaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreenPandaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C97C09C525409A31001E1E5A /* GreenPandaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaTests.swift; sourceTree = "<group>"; };
+		C97C09C525409A31001E1E5A /* DiaryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewModelTests.swift; sourceTree = "<group>"; };
 		C97C09C725409A31001E1E5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C97C09CC25409A31001E1E5A /* GreenPandaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreenPandaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97C09D025409A31001E1E5A /* GreenPandaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaUITests.swift; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		C97C09C425409A31001E1E5A /* GreenPandaTests */ = {
 			isa = PBXGroup;
 			children = (
-				C97C09C525409A31001E1E5A /* GreenPandaTests.swift */,
+				C97C09C525409A31001E1E5A /* DiaryViewModelTests.swift */,
 				C97C09C725409A31001E1E5A /* Info.plist */,
 			);
 			path = GreenPandaTests;
@@ -272,7 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C97C09C625409A31001E1E5A /* GreenPandaTests.swift in Sources */,
+				C97C09C625409A31001E1E5A /* DiaryViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
