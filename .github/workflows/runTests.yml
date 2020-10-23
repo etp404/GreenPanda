@@ -8,9 +8,9 @@ on:
 jobs:
   build:
 
-    runs-on: macOS-latest
+    runs-on: macOS-10.15
     
     steps:
     - uses: actions/checkout@master
     - name: Start xcodebuild test
-      run: xcodebuild -project GreenPanda.xcodeproj -scheme GreenPanda -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.6' test
+      run: xcodebuild -project GreenPanda.xcodeproj -scheme GreenPanda -sdk iphonesimulator -destination 'platform=iOS,name=OS=14.2' test
