@@ -13,4 +13,4 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Start xcodebuild test
-      run: xcodebuild -project GreenPanda.xcodeproj -scheme GreenPanda -sdk iphonesimulator -destination 'platform=iOS,name=OS=14.2' test
+      run: xcrun instruments -s devices
