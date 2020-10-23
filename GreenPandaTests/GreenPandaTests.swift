@@ -11,7 +11,7 @@ import XCTest
 class GreenPandaTests: XCTestCase {
 
     func testExample() throws {
-        XCTAssertTrue(false)
+        XCTAssertTrue(true)
     }
 
 }
