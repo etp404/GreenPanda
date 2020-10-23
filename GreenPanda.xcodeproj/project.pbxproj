@@ -16,6 +16,7 @@
 		C97C09C625409A31001E1E5A /* DiaryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09C525409A31001E1E5A /* DiaryViewModelTests.swift */; };
 		C97C09D125409A31001E1E5A /* GreenPandaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09D025409A31001E1E5A /* GreenPandaUITests.swift */; };
 		C97C09E225409A9B001E1E5A /* GreenPandaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */; };
+		C9B4F47825437E550077DE2A /* DiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B4F47725437E550077DE2A /* DiaryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		C97C09D025409A31001E1E5A /* GreenPandaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaUITests.swift; sourceTree = "<group>"; };
 		C97C09D225409A31001E1E5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaModel.swift; sourceTree = "<group>"; };
+		C9B4F47725437E550077DE2A /* DiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				C97C09B925409A31001E1E5A /* LaunchScreen.storyboard */,
 				C97C09BC25409A31001E1E5A /* Info.plist */,
 				C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */,
+				C9B4F47725437E550077DE2A /* DiaryViewModel.swift */,
 			);
 			path = GreenPanda;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				C97C09B325409A30001E1E5A /* ViewController.swift in Sources */,
 				C97C09AF25409A30001E1E5A /* AppDelegate.swift in Sources */,
 				C97C09E225409A9B001E1E5A /* GreenPandaModel.swift in Sources */,
+				C9B4F47825437E550077DE2A /* DiaryViewModel.swift in Sources */,
 				C97C09B125409A30001E1E5A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

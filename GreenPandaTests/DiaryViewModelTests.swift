@@ -19,25 +19,6 @@ class DiaryViewModelTests: XCTestCase {
     
 }
 
-class DiaryViewModel {
-    
-    private let greenPandaModel: GreenPandaModel
-    
-    init(model greenPandaModel: GreenPandaModel) {
-        self.greenPandaModel = greenPandaModel
-    }
-    
-    var numberOfEntries:Int {
-        greenPandaModel.entries.count
-    }
-}
-
-struct DiaryEntry {}
-
-protocol GreenPandaModel {
-    var entries: [DiaryEntry] { get }
-}
-
 class MockGreenPandaModel : GreenPandaModel {
     var entries: [DiaryEntry] = []
 }

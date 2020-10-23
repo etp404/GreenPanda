@@ -7,7 +7,10 @@
 
 import Foundation
 
+struct DiaryEntry {}
+
 protocol GreenPandaModel {
+    var entries: [DiaryEntry] { get }
 }
 
 
