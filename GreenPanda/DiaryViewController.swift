@@ -37,7 +37,9 @@ extension DiaryViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let diaryEntry = collectionView.dequeueReusableCell(withReuseIdentifier: DiaryEntryCell.reuseIdentifier, for: indexPath) as! DiaryEntryCell
         
-        diaryEntry.bodyText.text = "Item \(indexPath.row)"
+        if let entry = viewModel?.entryViewModels[indexPath.row] {
+            diaryEntry.bodyText.text = entry.entryText
+        }
         return diaryEntry
     }
     
