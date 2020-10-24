@@ -17,6 +17,13 @@ class MainCoordinator: Coordinator {
 
     func start() {
         let vc = DiaryViewController(nibName: "DiaryViewController", bundle: nil)
+        vc.configure(with: DiaryViewModel(model: StubbedGreenPandaModel()))
         navigationController.pushViewController(vc, animated: false)
     }
+}
+
+class StubbedGreenPandaModel : GreenPandaModel{
+    var entries: [DiaryEntry] = []
+
+    
 }

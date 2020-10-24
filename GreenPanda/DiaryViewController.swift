@@ -9,6 +9,12 @@ import UIKit
 
 class DiaryViewController: ViewController {
 
+    private var viewModel:DiaryViewModel?
+    
+    func configure(with viewModel: DiaryViewModel) {
+        self.viewModel = viewModel
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
