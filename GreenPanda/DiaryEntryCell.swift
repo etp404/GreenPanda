@@ -9,6 +9,7 @@ import UIKit
 
 class DiaryEntryCell: UICollectionViewCell {
 
+    static let reuseIdentifier = "DiaryEntryCell"
     @IBOutlet weak var bodyText: UILabel!
     
     override func awakeFromNib() {

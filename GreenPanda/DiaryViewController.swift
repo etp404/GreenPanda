@@ -23,7 +23,7 @@ class DiaryViewController: ViewController {
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)
         collectionView.collectionViewLayout = layout
         collectionView.register(UINib(nibName: "DiaryEntryCell", bundle: nil),
-                                forCellWithReuseIdentifier: "DiaryEntryCell")
+                                forCellWithReuseIdentifier: DiaryEntryCell.reuseIdentifier)
         collectionView.dataSource = self
     }
 
@@ -35,7 +35,7 @@ extension ViewController : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let diaryEntry = collectionView.dequeueReusableCell(withReuseIdentifier: "DiaryEntryCell", for: indexPath) as! DiaryEntryCell
+        let diaryEntry = collectionView.dequeueReusableCell(withReuseIdentifier: DiaryEntryCell.reuseIdentifier, for: indexPath) as! DiaryEntryCell
         
         diaryEntry.bodyText.text = "Item \(indexPath.row)"
         return diaryEntry
