@@ -29,9 +29,9 @@ class DiaryViewController: ViewController {
 
 }
 
-extension ViewController : UICollectionViewDataSource {
+extension DiaryViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        self.viewModel?.numberOfEntries ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

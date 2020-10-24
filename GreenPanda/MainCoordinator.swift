@@ -23,7 +23,12 @@ class MainCoordinator: Coordinator {
 }
 
 class StubbedGreenPandaModel : GreenPandaModel{
-    var entries: [DiaryEntry] = []
+    var entries: [DiaryEntry] = [DiaryEntry(entryText: "Blah blah"),
+                                 DiaryEntry(entryText: "Blah blah"),
+                                 DiaryEntry(entryText: "Blah blah"),
+                                 DiaryEntry(entryText: "Blah blah"),
+                                 DiaryEntry(entryText: "Blah blah"),
+                                 DiaryEntry(entryText: "Blah blah")]
 
     
 }
