@@ -28,6 +28,7 @@ class StubbedGreenPandaModel : GreenPandaModel{
                                  DiaryEntry(entryText: "Blah blah"),
                                  DiaryEntry(entryText: "Blah blah"),
                                  DiaryEntry(entryText: "Blah blah"),
+                                 DiaryEntry(entryText: "Blah blah"),
                                  DiaryEntry(entryText: "Blah blah")]
 
     
