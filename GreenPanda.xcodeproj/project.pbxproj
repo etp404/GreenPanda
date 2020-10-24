@@ -17,6 +17,10 @@
 		C97C09D125409A31001E1E5A /* GreenPandaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09D025409A31001E1E5A /* GreenPandaUITests.swift */; };
 		C97C09E225409A9B001E1E5A /* GreenPandaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */; };
 		C9B4F47825437E550077DE2A /* DiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B4F47725437E550077DE2A /* DiaryViewModel.swift */; };
+		C9E069CE25443B1100B5978B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E069CD25443B1100B5978B /* Coordinator.swift */; };
+		C9E069D325443CAF00B5978B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E069D225443CAF00B5978B /* MainCoordinator.swift */; };
+		C9E069E52544431100B5978B /* DiaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9E069E42544431100B5978B /* DiaryViewController.xib */; };
+		C9E069ED2544475700B5978B /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E069EC2544475700B5978B /* DiaryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		C97C09D225409A31001E1E5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaModel.swift; sourceTree = "<group>"; };
 		C9B4F47725437E550077DE2A /* DiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewModel.swift; sourceTree = "<group>"; };
+		C9E069CD25443B1100B5978B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		C9E069D225443CAF00B5978B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		C9E069E42544431100B5978B /* DiaryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiaryViewController.xib; sourceTree = "<group>"; };
+		C9E069EC2544475700B5978B /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +120,10 @@
 				C97C09BC25409A31001E1E5A /* Info.plist */,
 				C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */,
 				C9B4F47725437E550077DE2A /* DiaryViewModel.swift */,
+				C9E069CD25443B1100B5978B /* Coordinator.swift */,
+				C9E069D225443CAF00B5978B /* MainCoordinator.swift */,
+				C9E069E42544431100B5978B /* DiaryViewController.xib */,
+				C9E069EC2544475700B5978B /* DiaryViewController.swift */,
 			);
 			path = GreenPanda;
 			sourceTree = "<group>";
@@ -239,6 +251,7 @@
 			files = (
 				C97C09BB25409A31001E1E5A /* LaunchScreen.storyboard in Resources */,
 				C97C09B825409A31001E1E5A /* Assets.xcassets in Resources */,
+				C9E069E52544431100B5978B /* DiaryViewController.xib in Resources */,
 				C97C09B625409A30001E1E5A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,7 +278,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C97C09B325409A30001E1E5A /* ViewController.swift in Sources */,
+				C9E069D325443CAF00B5978B /* MainCoordinator.swift in Sources */,
 				C97C09AF25409A30001E1E5A /* AppDelegate.swift in Sources */,
+				C9E069CE25443B1100B5978B /* Coordinator.swift in Sources */,
+				C9E069ED2544475700B5978B /* DiaryViewController.swift in Sources */,
 				C97C09E225409A9B001E1E5A /* GreenPandaModel.swift in Sources */,
 				C9B4F47825437E550077DE2A /* DiaryViewModel.swift in Sources */,
 				C97C09B125409A30001E1E5A /* SceneDelegate.swift in Sources */,
