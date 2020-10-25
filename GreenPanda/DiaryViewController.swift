@@ -39,6 +39,9 @@ extension DiaryViewController : UICollectionViewDataSource {
         
         if let entry = viewModel?.entryViewModels[indexPath.row] {
             diaryEntry.bodyText.text = entry.entryText
+            diaryEntry.date.text = entry.date
+            diaryEntry.score.text = entry.score
+            
         }
         return diaryEntry
     }

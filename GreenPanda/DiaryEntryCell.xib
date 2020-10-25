@@ -16,22 +16,41 @@
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Yn-EC-gWC">
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CoJ-3k-pIQ">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ve-SA-i7X">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="9"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Erz-js-NIb">
+                                <rect key="frame" x="0.0" y="9" width="50" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Yn-EC-gWC">
+                                <rect key="frame" x="0.0" y="29.5" width="50" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="7Yn-EC-gWC" firstAttribute="top" secondItem="xmH-yg-I8y" secondAttribute="top" id="DHb-i0-95o"/>
-                    <constraint firstItem="7Yn-EC-gWC" firstAttribute="leading" secondItem="xmH-yg-I8y" secondAttribute="leading" id="GaD-ei-mnq"/>
-                    <constraint firstAttribute="bottom" secondItem="7Yn-EC-gWC" secondAttribute="bottom" id="bvw-9O-HSo"/>
-                    <constraint firstAttribute="trailing" secondItem="7Yn-EC-gWC" secondAttribute="trailing" id="vTC-h1-U0o"/>
+                    <constraint firstAttribute="trailing" secondItem="CoJ-3k-pIQ" secondAttribute="trailing" id="7xb-mW-Kwa"/>
+                    <constraint firstItem="CoJ-3k-pIQ" firstAttribute="leading" secondItem="xmH-yg-I8y" secondAttribute="leading" id="N6e-Xl-ePG"/>
+                    <constraint firstItem="CoJ-3k-pIQ" firstAttribute="top" secondItem="xmH-yg-I8y" secondAttribute="top" id="VvW-LX-CYb"/>
+                    <constraint firstAttribute="bottom" secondItem="CoJ-3k-pIQ" secondAttribute="bottom" id="aOR-Iv-lKs"/>
                 </constraints>
             </collectionViewCellContentView>
             <connections>
                 <outlet property="bodyText" destination="7Yn-EC-gWC" id="aXu-OU-Ef0"/>
+                <outlet property="date" destination="3Ve-SA-i7X" id="mDp-Si-d6b"/>
+                <outlet property="score" destination="Erz-js-NIb" id="Ora-Ge-gU0"/>
             </connections>
             <point key="canvasLocation" x="-164" y="29"/>
         </collectionViewCell>
