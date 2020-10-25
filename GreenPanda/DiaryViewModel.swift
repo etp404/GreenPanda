@@ -16,9 +16,12 @@ struct EntryViewModel {
 class DiaryViewModel {
     
     private let greenPandaModel: GreenPandaModel
+    private let timezone: TimeZone
     
-    init(model greenPandaModel: GreenPandaModel) {
+    init(model greenPandaModel: GreenPandaModel,
+         timezone: TimeZone) {
         self.greenPandaModel = greenPandaModel
+        self.timezone = timezone
     }
     
     var numberOfEntries:Int {
@@ -28,6 +31,7 @@ class DiaryViewModel {
     var entryViewModels: [EntryViewModel] {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
+        dateFormatter.timeZone = timezone
         return greenPandaModel.entries.map {entry in
             EntryViewModel(date: dateFormatter.string(from:entry.timestamp),
                            entryText: entry.entryText,

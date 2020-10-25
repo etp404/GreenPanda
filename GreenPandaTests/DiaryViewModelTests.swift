@@ -12,39 +12,36 @@ class DiaryViewModelTests: XCTestCase {
 
     let entry1Text = "entry1Text"
     let entry2Text = "entry2Text"
-    let mockGreenPandaModel = MockGreenPandaModel()
+    var mockGreenPandaModel: MockGreenPandaModel!
+    var diaryViewModel: DiaryViewModel!
 
     override func setUp() {
         self.continueAfterFailure = false;
+        mockGreenPandaModel = MockGreenPandaModel()
         mockGreenPandaModel.entries = [DiaryEntry(timestamp: Date(timeIntervalSince1970: 1603645316), entryText: entry1Text, score: 1),
                                        DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 2),
                                        DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 3),
                                        DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 4),
                                        DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 5)]
+        diaryViewModel = DiaryViewModel(model: mockGreenPandaModel, timezone: TimeZone.init(abbreviation: "CET")!)
     }
     
     func testThatExpectedNNumberEntriesAreReturned() throws {
-        let diarViewModel = DiaryViewModel(model: mockGreenPandaModel)
-        XCTAssertEqual(diarViewModel.numberOfEntries, 5)
+        XCTAssertEqual(diaryViewModel.numberOfEntries, 5)
     }
     
     func testThatExpectedEntryTextsAreReturned() throws {
-        let diarViewModel = DiaryViewModel(model: mockGreenPandaModel)
         
-        XCTAssertEqual(diarViewModel.entryViewModels[0].entryText, entry1Text)
-        XCTAssertEqual(diarViewModel.entryViewModels[1].entryText, entry2Text)
+        XCTAssertEqual(diaryViewModel.entryViewModels[0].entryText, entry1Text)
+        XCTAssertEqual(diaryViewModel.entryViewModels[1].entryText, entry2Text)
     }
     
     func testThatExpectedEntryDatesAreReturned() throws {
-        let diaryViewModel = DiaryViewModel(model: mockGreenPandaModel)
-        
-        XCTAssertEqual(diaryViewModel.entryViewModels[0].date, "Sun, 25 Oct 2020 17:01")
-        XCTAssertEqual(diaryViewModel.entryViewModels[1].date, "Sun, 20 Sep 2020 23:51")
+        XCTAssertEqual(diaryViewModel.entryViewModels[0].date, "Sun, 25 Oct 2020 18:01")
+        XCTAssertEqual(diaryViewModel.entryViewModels[1].date, "Mon, 21 Sep 2020 00:51")
     }
     
     func testThatExpectedScoreIsReturnedAsEpected() throws {
-        let diaryViewModel = DiaryViewModel(model: mockGreenPandaModel)
-        
         XCTAssertEqual(diaryViewModel.entryViewModels[0].score, "😩")
         XCTAssertEqual(diaryViewModel.entryViewModels[1].score, "😕")
         XCTAssertEqual(diaryViewModel.entryViewModels[2].score, "😐")
