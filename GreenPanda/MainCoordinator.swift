@@ -23,13 +23,13 @@ class MainCoordinator: Coordinator {
 }
 
 class StubbedGreenPandaModel : GreenPandaModel{
-    var entries: [DiaryEntry] = [DiaryEntry(timestamp: Date(), entryText: "Blah blah"),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah"),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah"),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah"),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah"),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah"),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah")]
+    var entries: [DiaryEntry] = [DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
+                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
+                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
+                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
+                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
+                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
+                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4)]
 
     
 }
