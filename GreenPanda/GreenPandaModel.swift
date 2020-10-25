@@ -8,6 +8,7 @@
 import Foundation
 
 struct DiaryEntry {
+    let timestamp: Date
     let entryText: String
 }
 

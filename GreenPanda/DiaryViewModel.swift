@@ -8,6 +8,7 @@
 import Foundation
 
 struct EntryViewModel {
+    let date: String
     let entryText: String
 }
 
@@ -24,8 +25,10 @@ class DiaryViewModel {
     }
     
     var entryViewModels: [EntryViewModel] {
-        greenPandaModel.entries.map {entry in
-            EntryViewModel(entryText: entry.entryText)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
+        return greenPandaModel.entries.map {entry in
+            EntryViewModel(date: dateFormatter.string(from:entry.timestamp), entryText: entry.entryText)
         }
     }
 
