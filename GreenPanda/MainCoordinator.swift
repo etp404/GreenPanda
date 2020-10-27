@@ -8,17 +8,13 @@
 import UIKit
 
 class MainCoordinator: Coordinator {
-    var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    private var navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
     func start() {
-        let vc = DiaryViewController(nibName: "DiaryViewController", bundle: nil)
-        vc.configure(with: DiaryViewModel(model: StubbedGreenPandaModel(),
-                                          timezone: TimeZone.current))
-        navigationController.pushViewController(vc, animated: false)
+        DiaryEntriesCoordinator(navigationController: navigationController).start()
     }
 }
