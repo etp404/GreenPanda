@@ -24,7 +24,7 @@ class DiaryEntriesCoordinator: Coordinator, DiaryViewModelCoordinatorDelegate {
     }
     
     func openComposeView() {
-        
+        ComposeDiaryEntryCoordinator(navigationController: navigationController).start()
     }
     
 }
