@@ -19,7 +19,7 @@
 		C98052C02548A0890071B64C /* StubbedGreenPandaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98052BF2548A0890071B64C /* StubbedGreenPandaModel.swift */; };
 		C98052C52548A1590071B64C /* DiaryEntriesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98052C42548A1590071B64C /* DiaryEntriesCoordinator.swift */; };
 		C98052CA2548A31D0071B64C /* DiaryViewModelCoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98052C92548A31D0071B64C /* DiaryViewModelCoordinatorDelegate.swift */; };
-		C98052CF2548A72C0071B64C /* ComposeDiaryEntry.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98052CE2548A72C0071B64C /* ComposeDiaryEntry.xib */; };
+		C98052CF2548A72C0071B64C /* ComposeDiaryEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98052CE2548A72C0071B64C /* ComposeDiaryEntryViewController.xib */; };
 		C98052D42548A7420071B64C /* ComposeDiaryEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98052D32548A7420071B64C /* ComposeDiaryEntryViewController.swift */; };
 		C98052D92548A78E0071B64C /* ComposeDiaryEntryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98052D82548A78E0071B64C /* ComposeDiaryEntryCoordinator.swift */; };
 		C9B4F47825437E550077DE2A /* DiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B4F47725437E550077DE2A /* DiaryViewModel.swift */; };
@@ -67,7 +67,7 @@
 		C98052BF2548A0890071B64C /* StubbedGreenPandaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubbedGreenPandaModel.swift; sourceTree = "<group>"; };
 		C98052C42548A1590071B64C /* DiaryEntriesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEntriesCoordinator.swift; sourceTree = "<group>"; };
 		C98052C92548A31D0071B64C /* DiaryViewModelCoordinatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewModelCoordinatorDelegate.swift; sourceTree = "<group>"; };
-		C98052CE2548A72C0071B64C /* ComposeDiaryEntry.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComposeDiaryEntry.xib; sourceTree = "<group>"; };
+		C98052CE2548A72C0071B64C /* ComposeDiaryEntryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComposeDiaryEntryViewController.xib; sourceTree = "<group>"; };
 		C98052D32548A7420071B64C /* ComposeDiaryEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeDiaryEntryViewController.swift; sourceTree = "<group>"; };
 		C98052D82548A78E0071B64C /* ComposeDiaryEntryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeDiaryEntryCoordinator.swift; sourceTree = "<group>"; };
 		C9B4F47725437E550077DE2A /* DiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewModel.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 				C98052BF2548A0890071B64C /* StubbedGreenPandaModel.swift */,
 				C98052C42548A1590071B64C /* DiaryEntriesCoordinator.swift */,
 				C98052C92548A31D0071B64C /* DiaryViewModelCoordinatorDelegate.swift */,
-				C98052CE2548A72C0071B64C /* ComposeDiaryEntry.xib */,
+				C98052CE2548A72C0071B64C /* ComposeDiaryEntryViewController.xib */,
 				C98052D32548A7420071B64C /* ComposeDiaryEntryViewController.swift */,
 				C98052D82548A78E0071B64C /* ComposeDiaryEntryCoordinator.swift */,
 			);
@@ -278,7 +278,7 @@
 				C9E069E52544431100B5978B /* DiaryViewController.xib in Resources */,
 				C97C09B625409A30001E1E5A /* Main.storyboard in Resources */,
 				C9CB0E402544845600D7C2B3 /* DiaryEntryCell.xib in Resources */,
-				C98052CF2548A72C0071B64C /* ComposeDiaryEntry.xib in Resources */,
+				C98052CF2548A72C0071B64C /* ComposeDiaryEntryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

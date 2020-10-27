@@ -10,6 +10,10 @@ import UIKit
 class DiaryViewController: ViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBAction func composeButtonPRessed(_ sender: Any) {
+        viewModel?.composeButtonPressed()
+    }
+    
     private var viewModel:DiaryViewModel?
     
     func configure(with viewModel: DiaryViewModel) {
