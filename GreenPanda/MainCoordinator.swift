@@ -22,15 +22,3 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: false)
     }
 }
-
-class StubbedGreenPandaModel : GreenPandaModel{
-    var entries: [DiaryEntry] = [DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4)]
-
-    
-}
