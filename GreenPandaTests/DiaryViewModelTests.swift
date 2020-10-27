@@ -14,6 +14,7 @@ class DiaryViewModelTests: XCTestCase {
     let entry2Text = "entry2Text"
     var mockGreenPandaModel: MockGreenPandaModel!
     var diaryViewModel: DiaryViewModel!
+    var mockDiaryViewModelCoordinatorDelegate: MockDiaryViewModelCoordinatorDelegate!
 
     override func setUp() {
         self.continueAfterFailure = false;
@@ -23,7 +24,12 @@ class DiaryViewModelTests: XCTestCase {
                                        DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 3),
                                        DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 4),
                                        DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 5)]
-        diaryViewModel = DiaryViewModel(model: mockGreenPandaModel, timezone: TimeZone.init(abbreviation: "CET")!)
+        mockDiaryViewModelCoordinatorDelegate = MockDiaryViewModelCoordinatorDelegate()
+
+        diaryViewModel = DiaryViewModel(model: mockGreenPandaModel,
+                                        timezone: TimeZone.init(abbreviation: "CET")!,
+                                        coordinatorDelegate: mockDiaryViewModelCoordinatorDelegate)
+        
     }
     
     func testThatExpectedNNumberEntriesAreReturned() throws {
@@ -49,7 +55,22 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertEqual(diaryViewModel.entryViewModels[4].score, "😁")
     }
     
+    func testThatPressingTheComposeButtonOpensTheComposeView() {
+        diaryViewModel.composeButtonPressed()
+        
+        XCTAssertTrue(mockDiaryViewModelCoordinatorDelegate.openComposeViewInvoked)
+    }
+
 }
+
+class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {
+    var openComposeViewInvoked = false
+    
+    func openComposeView() {
+        openComposeViewInvoked = true
+    }
+}
+    
 
 class MockGreenPandaModel : GreenPandaModel {
     var entries: [DiaryEntry] = []

@@ -17,11 +17,14 @@ class DiaryViewModel {
     
     private let greenPandaModel: GreenPandaModel
     private let timezone: TimeZone
+    private let coordinatorDelegate: DiaryViewModelCoordinatorDelegate
     
     init(model greenPandaModel: GreenPandaModel,
-         timezone: TimeZone) {
+         timezone: TimeZone,
+         coordinatorDelegate: DiaryViewModelCoordinatorDelegate) {
         self.greenPandaModel = greenPandaModel
         self.timezone = timezone
+        self.coordinatorDelegate = coordinatorDelegate
     }
     
     var numberOfEntries:Int {
@@ -37,6 +40,10 @@ class DiaryViewModel {
                            entryText: entry.entryText,
                            score: scoreSmiley(for: entry.score))
         }
+    }
+    
+    func composeButtonPressed() {
+        coordinatorDelegate.openComposeView()
     }
     
     private func scoreSmiley(for score:Int) -> String {

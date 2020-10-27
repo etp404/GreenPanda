@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DiaryEntriesCoordinator: Coordinator {
+class DiaryEntriesCoordinator: Coordinator, DiaryViewModelCoordinatorDelegate {
     
     private var navigationController: UINavigationController
     
@@ -18,9 +18,13 @@ class DiaryEntriesCoordinator: Coordinator {
     func start() {
         let vc = DiaryViewController(nibName: "DiaryViewController", bundle: nil)
         vc.configure(with: DiaryViewModel(model: StubbedGreenPandaModel(),
-                                          timezone: TimeZone.current))
+                                          timezone: TimeZone.current,
+                                          coordinatorDelegate: self))
         navigationController.pushViewController(vc, animated: false)
     }
     
-
+    func openComposeView() {
+        
+    }
+    
 }
