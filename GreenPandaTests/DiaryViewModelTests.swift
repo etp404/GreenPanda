@@ -71,7 +71,3 @@ class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate 
     }
 }
     
-
-class MockGreenPandaModel : GreenPandaModel {
-    var entries: [DiaryEntry] = []
-}

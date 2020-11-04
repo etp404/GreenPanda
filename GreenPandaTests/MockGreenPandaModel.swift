@@ -6,7 +6,12 @@
 //
 
 import UIKit
+@testable import GreenPanda
 
-class MockGreenPandaModel: NSObject {
-
+class MockGreenPandaModel : GreenPandaModel {
+    func add(entry: DiaryEntry) {
+        entries.append(entry)
+    }
+    
+    var entries: [DiaryEntry] = []
 }

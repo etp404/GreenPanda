@@ -15,6 +15,8 @@ struct DiaryEntry {
 
 protocol GreenPandaModel {
     var entries: [DiaryEntry] { get }
+    
+    func add(entry: DiaryEntry)
 }
 
 
