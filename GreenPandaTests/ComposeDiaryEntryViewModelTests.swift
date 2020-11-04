@@ -21,11 +21,11 @@ class ComposeDiaryEntryViewModel {
     }
     
     func composeButtonPressed(failedValidation:()->Void) {
-        guard let date = date else {
+        guard let date = date, let entryText = entryText else {
             failedValidation()
             return
         }
-        self.model.add(entry: DiaryEntry(timestamp: date, entryText: entryText!, score: score!))
+        self.model.add(entry: DiaryEntry(timestamp: date, entryText: entryText, score: score!))
     }
 }
 
@@ -66,5 +66,21 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         
         XCTAssertTrue(failedValidationInvoked)
     }
+    
+    func testThatGivenEntryIsNilWhenComposeIsPressedErrorCallbackIsInvoked() throws {
+        let mockGreenPandaModel = MockGreenPandaModel()
+        
+        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: mockGreenPandaModel)
+        composeDiaryEntryViewModel.date = someDate
+        composeDiaryEntryViewModel.score = someScore
 
+        composeDiaryEntryViewModel.composeButtonPressed(failedValidation: {})
+        
+        var failedValidationInvoked = false
+        composeDiaryEntryViewModel.composeButtonPressed {
+            failedValidationInvoked = true
+        }
+        
+        XCTAssertTrue(failedValidationInvoked)
+    }
 }
