@@ -20,16 +20,21 @@ class ComposeDiaryEntryViewModel {
         self.model = model
     }
     
-    func composeButtonPressed() {
-        self.model.add(entry: DiaryEntry(timestamp: date!, entryText: entryText!, score: score!))
+    func composeButtonPressed(failedValidation:()->Void) {
+        guard let date = date else {
+            failedValidation()
+            return
+        }
+        self.model.add(entry: DiaryEntry(timestamp: date, entryText: entryText!, score: score!))
     }
 }
 
 class ComposeDiaryEntryViewModelTests: XCTestCase {
+    let someEntryText = "Some example content"
+    let someDate = Date(timeIntervalSince1970: 123456)
+    let someScore = 4
+    
     func testThatWhenComposeIsPressedEntryIsAddedToModel() throws {
-        let someEntryText = "Some example content"
-        let someDate = Date(timeIntervalSince1970: 123456)
-        let someScore = 4
         let mockGreenPandaModel = MockGreenPandaModel()
         
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: mockGreenPandaModel)
@@ -37,13 +42,29 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         composeDiaryEntryViewModel.entryText = someEntryText
         composeDiaryEntryViewModel.score = someScore
 
-        composeDiaryEntryViewModel.composeButtonPressed()
+        composeDiaryEntryViewModel.composeButtonPressed(failedValidation: {})
         
         let lastEntryAdded = try XCTUnwrap(mockGreenPandaModel.entries.last)
         XCTAssertEqual(lastEntryAdded.timestamp, someDate)
         XCTAssertEqual(lastEntryAdded.entryText, someEntryText)
         XCTAssertEqual(lastEntryAdded.score, someScore)
+    }
+    
+    func testThatGivenDateIsNilWhenComposeIsPressedErrorCallbackIsInvoked() throws {
+        let someEntryText = "Some example content"
+        let someScore = 4
+        let mockGreenPandaModel = MockGreenPandaModel()
         
+        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: mockGreenPandaModel)
+        composeDiaryEntryViewModel.entryText = someEntryText
+        composeDiaryEntryViewModel.score = someScore
+
+        var failedValidationInvoked = false
+        composeDiaryEntryViewModel.composeButtonPressed {
+            failedValidationInvoked = true
+        }
+        
+        XCTAssertTrue(failedValidationInvoked)
     }
 
 }
