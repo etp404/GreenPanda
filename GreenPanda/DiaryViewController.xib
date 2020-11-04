@@ -35,7 +35,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="hhe-UU-Gzo">
                             <rect key="frame" x="0.0" y="818" width="414" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button"/>
+                            <state key="normal" title="Compose"/>
                             <connections>
                                 <action selector="composeButtonPRessed:" destination="-1" eventType="touchUpInside" id="ecj-8d-PzU"/>
                             </connections>
