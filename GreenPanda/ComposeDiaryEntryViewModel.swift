@@ -12,6 +12,8 @@ class ComposeDiaryEntryViewModel {
     var entryText:String?
     var date: Date?
     var score: Int?
+    private var moodScoreReps = ["😩", "😕", "😐", "🙂", "😁"]
+    
     
     private let model: GreenPandaModel
     
@@ -20,12 +22,12 @@ class ComposeDiaryEntryViewModel {
     }
     
     var numberOfMoodScores: Int { get {
-        5
+        moodScoreReps.count
     }
     }
     
     func moodScore(for pickerIndex: Int) -> String {
-        "😩"
+        moodScoreReps[pickerIndex]
     }
     
     func composeButtonPressed(failedValidation:()->Void) {

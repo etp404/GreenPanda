@@ -79,4 +79,20 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         
         XCTAssertTrue(failedValidationInvoked)
     }
+    
+    func testThatExpectedNumberOfMoodScoresIsReturned() {
+        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel())
+        XCTAssertEqual(composeDiaryEntryViewModel.numberOfMoodScores, 5)
+    }
+    
+    func testThatExpectedMoodScoreEmojiIsReturned() {
+        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel())
+        
+        XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 0), "😩")
+        XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 1), "😕")
+        XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 2), "😐")
+        XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 3), "🙂")
+        XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 4), "😁")
+
+    }
 }
