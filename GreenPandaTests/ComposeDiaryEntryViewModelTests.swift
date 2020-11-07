@@ -8,29 +8,6 @@
 import XCTest
 @testable import GreenPanda
 
-class ComposeDiaryEntryViewModel {
-    
-    var entryText:String?
-    var date: Date?
-    var score: Int?
-    
-    private let model: MockGreenPandaModel
-    
-    init(model: MockGreenPandaModel) {
-        self.model = model
-    }
-    
-    func composeButtonPressed(failedValidation:()->Void) {
-        guard let date = date,
-              let entryText = entryText,
-              let score = score else {
-            failedValidation()
-            return
-        }
-        self.model.add(entry: DiaryEntry(timestamp: date, entryText: entryText, score: score))
-    }
-}
-
 class ComposeDiaryEntryViewModelTests: XCTestCase {
     let someEntryText = "Some example content"
     let someDate = Date(timeIntervalSince1970: 123456)
