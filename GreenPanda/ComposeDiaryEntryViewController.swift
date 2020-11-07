@@ -21,6 +21,8 @@ class ComposeDiaryEntryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        moodScore.delegate = self
+        moodScore.dataSource = self
     }
     
     @IBAction func submit(_ sender: Any) {
@@ -28,5 +30,23 @@ class ComposeDiaryEntryViewController: UIViewController {
         viewModel?.date = entryDate.date
         viewModel?.composeButtonPressed {}
     }
+    
+}
+
+extension ComposeDiaryEntryViewController : UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        "row: \(row)"
+    }
+}
+
+extension ComposeDiaryEntryViewController : UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        4
+    }
+    
     
 }
