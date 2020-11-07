@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,8 +17,36 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VCW-UY-ARR">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Mv-n9-t6M">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="332"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oJI-Ye-7JP">
+                            <rect key="frame" x="0.0" y="340" width="414" height="216"/>
+                        </pickerView>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="qGV-mr-gNm">
+                            <rect key="frame" x="0.0" y="564" width="414" height="216"/>
+                        </datePicker>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXE-ml-1Pz">
+                            <rect key="frame" x="0.0" y="788" width="414" height="30"/>
+                            <state key="normal" title="Submit"/>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="VCW-UY-ARR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="32n-tq-KAZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="VCW-UY-ARR" secondAttribute="bottom" id="mbk-mu-LFE"/>
+                <constraint firstItem="VCW-UY-ARR" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="qkw-fg-wFm"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VCW-UY-ARR" secondAttribute="trailing" id="v3r-vI-cKm"/>
+            </constraints>
             <point key="canvasLocation" x="139" y="98"/>
         </view>
     </objects>
