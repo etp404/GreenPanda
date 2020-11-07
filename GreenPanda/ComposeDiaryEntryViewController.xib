@@ -10,6 +10,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposeDiaryEntryViewController" customModule="GreenPanda" customModuleProvider="target">
             <connections>
+                <outlet property="bodyText" destination="4Mv-n9-t6M" id="L81-jh-Ahw"/>
+                <outlet property="entryDate" destination="qGV-mr-gNm" id="Rkz-AG-Fsy"/>
+                <outlet property="moodScore" destination="oJI-Ye-7JP" id="YtC-ht-aQe"/>
                 <outlet property="view" destination="iN0-l3-epB" id="wny-9Y-cnK"/>
             </connections>
         </placeholder>
@@ -35,6 +38,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXE-ml-1Pz">
                             <rect key="frame" x="0.0" y="788" width="414" height="30"/>
                             <state key="normal" title="Submit"/>
+                            <connections>
+                                <action selector="submit:" destination="-1" eventType="touchUpInside" id="0Cp-8B-XOf"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>

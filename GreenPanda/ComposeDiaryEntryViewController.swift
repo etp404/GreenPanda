@@ -9,9 +9,24 @@ import UIKit
 
 class ComposeDiaryEntryViewController: UIViewController {
 
+    @IBOutlet weak var bodyText: UITextField!
+    @IBOutlet weak var moodScore: UIPickerView!
+    @IBOutlet weak var entryDate: UIDatePicker!
+    
+    private var viewModel: ComposeDiaryEntryViewModel?
+    
+    func configure(with viewModel: ComposeDiaryEntryViewModel) {
+        self.viewModel = viewModel
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-
+    @IBAction func submit(_ sender: Any) {
+        viewModel?.entryText = bodyText?.text
+        viewModel?.date = entryDate.date
+        viewModel?.composeButtonPressed {}
+    }
+    
 }
