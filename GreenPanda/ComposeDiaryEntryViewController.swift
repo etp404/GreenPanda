@@ -35,7 +35,7 @@ class ComposeDiaryEntryViewController: UIViewController {
 
 extension ComposeDiaryEntryViewController : UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        "row: \(row)"
+        return viewModel?.moodScore(for: row)
     }
 }
 
@@ -45,7 +45,10 @@ extension ComposeDiaryEntryViewController : UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        4
+        if let viewModel = viewModel {
+            return viewModel.numberOfMoodScores
+        }
+        return 0
     }
     
     

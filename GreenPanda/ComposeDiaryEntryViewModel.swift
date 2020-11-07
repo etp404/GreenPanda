@@ -19,6 +19,15 @@ class ComposeDiaryEntryViewModel {
         self.model = model
     }
     
+    var numberOfMoodScores: Int { get {
+        5
+    }
+    }
+    
+    func moodScore(for pickerIndex: Int) -> String {
+        "😩"
+    }
+    
     func composeButtonPressed(failedValidation:()->Void) {
         guard let date = date,
               let entryText = entryText,
