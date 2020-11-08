@@ -9,12 +9,15 @@ import UIKit
 
 class MainCoordinator: Coordinator {
     private var navigationController: UINavigationController
-
-    init(navigationController: UINavigationController) {
+    private var model: GreenPandaModel
+    
+    init(navigationController: UINavigationController,
+         model: GreenPandaModel) {
         self.navigationController = navigationController
+        self.model = model
     }
 
     func start() {
-        DiaryEntriesCoordinator(navigationController: navigationController).start()
+        DiaryEntriesCoordinator(navigationController: navigationController, model:model).start()
     }
 }

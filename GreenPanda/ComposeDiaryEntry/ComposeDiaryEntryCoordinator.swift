@@ -9,14 +9,16 @@ import UIKit
 
 class ComposeDiaryEntryCoordinator: Coordinator {
     private var navigationController: UINavigationController
+    private var model: GreenPandaModel
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, model: GreenPandaModel) {
         self.navigationController = navigationController
+        self.model = model
     }
     
     func start() {
         let vc = ComposeDiaryEntryViewController(nibName: "ComposeDiaryEntryViewController", bundle: nil)
-        vc.configure(with: ComposeDiaryEntryViewModel(model: StubbedGreenPandaModel()))
+        vc.configure(with: ComposeDiaryEntryViewModel(model: model))
         navigationController.pushViewController(vc, animated: false)
     }
 }
