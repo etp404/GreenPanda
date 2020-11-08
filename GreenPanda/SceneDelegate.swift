@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navController = UINavigationController()
         
         // Creates the Main Coordinator with the Navigation Controller, and starts it.
-        coordinator = MainCoordinator(navigationController: navController)
+        coordinator = MainCoordinator(navigationController: navController,
+                                      model: StubbedGreenPandaModel())
         coordinator?.start()
         
         // Creates the window and adds the navigation controller as the root view.

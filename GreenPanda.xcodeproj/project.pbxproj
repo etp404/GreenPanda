@@ -133,6 +133,8 @@
 		C97C09AD25409A30001E1E5A /* GreenPanda */ = {
 			isa = PBXGroup;
 			children = (
+				C99A8CA12557FA6A00067BB3 /* DiaryEntries */,
+				C99A8CA02557FA5100067BB3 /* ComposeDiaryEntry */,
 				C97C09AE25409A30001E1E5A /* AppDelegate.swift */,
 				C97C09B025409A30001E1E5A /* SceneDelegate.swift */,
 				C97C09B225409A30001E1E5A /* ViewController.swift */,
@@ -141,20 +143,9 @@
 				C97C09B925409A31001E1E5A /* LaunchScreen.storyboard */,
 				C97C09BC25409A31001E1E5A /* Info.plist */,
 				C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */,
-				C9B4F47725437E550077DE2A /* DiaryViewModel.swift */,
 				C9E069CD25443B1100B5978B /* Coordinator.swift */,
 				C9E069D225443CAF00B5978B /* MainCoordinator.swift */,
-				C9E069E42544431100B5978B /* DiaryViewController.xib */,
-				C9E069EC2544475700B5978B /* DiaryViewController.swift */,
-				C9CB0E3D2544845600D7C2B3 /* DiaryEntryCell.swift */,
-				C9CB0E3E2544845600D7C2B3 /* DiaryEntryCell.xib */,
 				C98052BF2548A0890071B64C /* StubbedGreenPandaModel.swift */,
-				C98052C42548A1590071B64C /* DiaryEntriesCoordinator.swift */,
-				C98052C92548A31D0071B64C /* DiaryViewModelCoordinatorDelegate.swift */,
-				C98052CE2548A72C0071B64C /* ComposeDiaryEntryViewController.xib */,
-				C98052D32548A7420071B64C /* ComposeDiaryEntryViewController.swift */,
-				C98052D82548A78E0071B64C /* ComposeDiaryEntryCoordinator.swift */,
-				C9D836B82556D42400E68F65 /* ComposeDiaryEntryViewModel.swift */,
 			);
 			path = GreenPanda;
 			sourceTree = "<group>";
@@ -177,6 +168,31 @@
 				C97C09D225409A31001E1E5A /* Info.plist */,
 			);
 			path = GreenPandaUITests;
+			sourceTree = "<group>";
+		};
+		C99A8CA02557FA5100067BB3 /* ComposeDiaryEntry */ = {
+			isa = PBXGroup;
+			children = (
+				C98052CE2548A72C0071B64C /* ComposeDiaryEntryViewController.xib */,
+				C98052D32548A7420071B64C /* ComposeDiaryEntryViewController.swift */,
+				C98052D82548A78E0071B64C /* ComposeDiaryEntryCoordinator.swift */,
+				C9D836B82556D42400E68F65 /* ComposeDiaryEntryViewModel.swift */,
+			);
+			path = ComposeDiaryEntry;
+			sourceTree = "<group>";
+		};
+		C99A8CA12557FA6A00067BB3 /* DiaryEntries */ = {
+			isa = PBXGroup;
+			children = (
+				C9E069E42544431100B5978B /* DiaryViewController.xib */,
+				C9E069EC2544475700B5978B /* DiaryViewController.swift */,
+				C9B4F47725437E550077DE2A /* DiaryViewModel.swift */,
+				C9CB0E3D2544845600D7C2B3 /* DiaryEntryCell.swift */,
+				C9CB0E3E2544845600D7C2B3 /* DiaryEntryCell.xib */,
+				C98052C42548A1590071B64C /* DiaryEntriesCoordinator.swift */,
+				C98052C92548A31D0071B64C /* DiaryViewModelCoordinatorDelegate.swift */,
+			);
+			path = DiaryEntries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
