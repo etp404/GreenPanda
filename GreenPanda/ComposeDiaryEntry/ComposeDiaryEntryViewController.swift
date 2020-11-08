@@ -26,8 +26,9 @@ class ComposeDiaryEntryViewController: UIViewController {
     }
     
     @IBAction func submit(_ sender: Any) {
-        viewModel?.entryText = bodyText?.text
+        viewModel?.entryText = bodyText.text
         viewModel?.date = entryDate.date
+        viewModel?.score = moodScore.selectedRow(inComponent: 0)
         viewModel?.composeButtonPressed {}
     }
     
@@ -37,6 +38,7 @@ extension ComposeDiaryEntryViewController : UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return viewModel?.moodScore(for: row)
     }
+
 }
 
 extension ComposeDiaryEntryViewController : UIPickerViewDataSource {
@@ -50,6 +52,5 @@ extension ComposeDiaryEntryViewController : UIPickerViewDataSource {
         }
         return 0
     }
-    
     
 }
