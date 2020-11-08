@@ -19,6 +19,6 @@ class ComposeDiaryEntryCoordinator: Coordinator {
     func start() {
         let vc = ComposeDiaryEntryViewController(nibName: "ComposeDiaryEntryViewController", bundle: nil)
         vc.configure(with: ComposeDiaryEntryViewModel(model: model))
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.present(vc, animated: true)
     }
 }

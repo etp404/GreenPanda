@@ -10,9 +10,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposeDiaryEntryViewController" customModule="GreenPanda" customModuleProvider="target">
             <connections>
-                <outlet property="bodyText" destination="4Mv-n9-t6M" id="L81-jh-Ahw"/>
                 <outlet property="entryDate" destination="qGV-mr-gNm" id="Rkz-AG-Fsy"/>
-                <outlet property="moodScore" destination="oJI-Ye-7JP" id="YtC-ht-aQe"/>
+                <outlet property="entryText" destination="4Mv-n9-t6M" id="L81-jh-Ahw"/>
+                <outlet property="moodScorePicker" destination="oJI-Ye-7JP" id="YtC-ht-aQe"/>
                 <outlet property="view" destination="iN0-l3-epB" id="wny-9Y-cnK"/>
             </connections>
         </placeholder>

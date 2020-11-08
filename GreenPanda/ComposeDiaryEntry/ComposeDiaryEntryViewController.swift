@@ -9,8 +9,8 @@ import UIKit
 
 class ComposeDiaryEntryViewController: UIViewController {
 
-    @IBOutlet weak var bodyText: UITextField!
-    @IBOutlet weak var moodScore: UIPickerView!
+    @IBOutlet weak var entryText: UITextField!
+    @IBOutlet weak var moodScorePicker: UIPickerView!
     @IBOutlet weak var entryDate: UIDatePicker!
     
     private var viewModel: ComposeDiaryEntryViewModel?
@@ -21,14 +21,14 @@ class ComposeDiaryEntryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        moodScore.delegate = self
-        moodScore.dataSource = self
+        moodScorePicker.delegate = self
+        moodScorePicker.dataSource = self
     }
     
     @IBAction func submit(_ sender: Any) {
-        viewModel?.entryText = bodyText.text
+        viewModel?.entryText = entryText.text
         viewModel?.date = entryDate.date
-        viewModel?.score = moodScore.selectedRow(inComponent: 0)
+        viewModel?.score = moodScorePicker.selectedRow(inComponent: 0)
         viewModel?.composeButtonPressed {}
     }
     
