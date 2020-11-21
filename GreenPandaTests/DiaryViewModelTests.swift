@@ -65,7 +65,7 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertTrue(mockDiaryViewModelCoordinatorDelegate.openComposeViewInvoked)
     }
     
-    func testThatVAluesOnTheViewModelCanBeSubscribedTo() {
+    func testThatValuesOnTheViewModelCanBeSubscribedTo() {
         var receivedValue: [EntryViewModel]? = nil
         cancellable = diaryViewModel.$entries.sink { value in
             receivedValue = value
@@ -73,6 +73,18 @@ class DiaryViewModelTests: XCTestCase {
         
         XCTAssertEqual(receivedValue?.count, 5)
     }
+    
+    func testThatUpdatesToTheModelArePickedUpAndPropagatedByTheViewModel() {
+        var receivedValue: [EntryViewModel]? = nil
+        cancellable = diaryViewModel.$entries.sink { value in
+            receivedValue = value
+        }
+        
+        mockGreenPandaModel.addAnEntry()
+        
+        XCTAssertEqual(receivedValue?.count, 6)
+    }
+
 
 }
 
