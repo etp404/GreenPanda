@@ -5,14 +5,19 @@
 //  Created by Matthew Mould on 27/10/2020.
 //
 
+import Combine
 import UIKit
 
 class StubbedGreenPandaModel : GreenPandaModel {
+    var entries: Published<[DiaryEntry]>.Publisher {
+        return $entriesBackingValue
+    }
+    
     func add(entry: DiaryEntry) {
         entriesBackingValue.append(entry)
     }
     
-    var entriesBackingValue: [DiaryEntry] = [DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
+    @Published var entriesBackingValue: [DiaryEntry] = [DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
                                  DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
                                  DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
                                  DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
