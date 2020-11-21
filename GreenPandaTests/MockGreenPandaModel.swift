@@ -10,8 +10,8 @@ import UIKit
 
 class MockGreenPandaModel : GreenPandaModel {
     func add(entry: DiaryEntry) {
-        entries.append(entry)
+        entriesBackingValue.append(entry)
     }
     
-    var entries: [DiaryEntry] = []
+    var entriesBackingValue: [DiaryEntry] = []
 }

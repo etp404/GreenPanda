@@ -9,10 +9,10 @@ import UIKit
 
 class StubbedGreenPandaModel : GreenPandaModel {
     func add(entry: DiaryEntry) {
-        entries.append(entry)
+        entriesBackingValue.append(entry)
     }
     
-    var entries: [DiaryEntry] = [DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
+    var entriesBackingValue: [DiaryEntry] = [DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
                                  DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
                                  DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
                                  DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),

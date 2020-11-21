@@ -28,14 +28,14 @@ class DiaryViewModel {
     }
     
     var numberOfEntries:Int {
-        greenPandaModel.entries.count
+        greenPandaModel.entriesBackingValue.count
     }
     
     var entryViewModels: [EntryViewModel] {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
         dateFormatter.timeZone = timezone
-        return greenPandaModel.entries.map {entry in
+        return greenPandaModel.entriesBackingValue.map {entry in
             EntryViewModel(date: dateFormatter.string(from:entry.timestamp),
                            entryText: entry.entryText,
                            score: scoreSmiley(for: entry.score))
