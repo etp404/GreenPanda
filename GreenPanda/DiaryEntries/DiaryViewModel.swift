@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 struct EntryViewModel {
     let date: String
@@ -13,11 +14,12 @@ struct EntryViewModel {
     let score: String
 }
 
-class DiaryViewModel {
+class DiaryViewModel: NSObject {
     
     private let greenPandaModel: GreenPandaModel
     private let timezone: TimeZone
     private let coordinatorDelegate: DiaryViewModelCoordinatorDelegate
+    private var cancellable: AnyCancellable? = nil
     
     init(model greenPandaModel: GreenPandaModel,
          timezone: TimeZone,
@@ -25,11 +27,19 @@ class DiaryViewModel {
         self.greenPandaModel = greenPandaModel
         self.timezone = timezone
         self.coordinatorDelegate = coordinatorDelegate
+        
+        super.init()
+        
+        cancellable = greenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
+            self.entries = newEntries.map { $0.toViewModel() }
+        } )
     }
     
     var numberOfEntries:Int {
         greenPandaModel.entriesBackingValue.count
     }
+    
+    @Published var entries: [EntryViewModel] = []
     
     var entryViewModels: [EntryViewModel] {
         let dateFormatter = DateFormatter()
@@ -56,5 +66,11 @@ class DiaryViewModel {
         default: return ""
         }
     }
-    
+
+}
+
+extension DiaryEntry {
+    func toViewModel() -> EntryViewModel {
+        EntryViewModel(date: "", entryText: "", score: "")
+    }
 }

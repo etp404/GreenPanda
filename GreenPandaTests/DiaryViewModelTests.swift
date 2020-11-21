@@ -6,6 +6,8 @@
 //
 
 import XCTest
+import Combine
+
 @testable import GreenPanda
 
 class DiaryViewModelTests: XCTestCase {
@@ -15,15 +17,17 @@ class DiaryViewModelTests: XCTestCase {
     var mockGreenPandaModel: MockGreenPandaModel!
     var diaryViewModel: DiaryViewModel!
     var mockDiaryViewModelCoordinatorDelegate: MockDiaryViewModelCoordinatorDelegate!
-
+    var cancellable: AnyCancellable?
+    
     override func setUp() {
         self.continueAfterFailure = false;
         mockGreenPandaModel = MockGreenPandaModel()
-        mockGreenPandaModel.entriesBackingValue = [DiaryEntry(timestamp: Date(timeIntervalSince1970: 1603645316), entryText: entry1Text, score: 1),
-                                       DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 2),
-                                       DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 3),
-                                       DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 4),
-                                       DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 5)]
+        mockGreenPandaModel.entriesBackingValue = [
+            DiaryEntry(timestamp: Date(timeIntervalSince1970: 1603645316), entryText: entry1Text, score: 1),
+            DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 2),
+            DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 3),
+            DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 4),
+            DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 5)]
         mockDiaryViewModelCoordinatorDelegate = MockDiaryViewModelCoordinatorDelegate()
 
         diaryViewModel = DiaryViewModel(model: mockGreenPandaModel,
@@ -59,6 +63,15 @@ class DiaryViewModelTests: XCTestCase {
         diaryViewModel.composeButtonPressed()
         
         XCTAssertTrue(mockDiaryViewModelCoordinatorDelegate.openComposeViewInvoked)
+    }
+    
+    func testThatVAluesOnTheViewModelCanBeSubscribedTo() {
+        var receivedValue: [EntryViewModel]? = nil
+        cancellable = diaryViewModel.$entries.sink { value in
+            receivedValue = value
+        }
+        
+        XCTAssertEqual(receivedValue?.count, 5)
     }
 
 }
