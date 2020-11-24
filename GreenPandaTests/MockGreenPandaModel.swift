@@ -18,8 +18,4 @@ class MockGreenPandaModel : GreenPandaModel {
     }
     
     @Published var entriesBackingValue: [DiaryEntry] = []
-    
-    func addAnEntry() {
-        entriesBackingValue.append(DiaryEntry(timestamp: Date(), entryText: "abc", score: 0))
-    }
 }

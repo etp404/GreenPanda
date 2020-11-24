@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 struct EntryViewModel {
+    let id: UUID
     let date: String
     let entryText: String
     let score: String
@@ -46,7 +47,8 @@ class DiaryViewModel: NSObject {
         dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
         dateFormatter.timeZone = timezone
         return greenPandaModel.entriesBackingValue.map {entry in
-            EntryViewModel(date: dateFormatter.string(from:entry.timestamp),
+            EntryViewModel(id: UUID(),
+                           date: dateFormatter.string(from:entry.timestamp),
                            entryText: entry.entryText,
                            score: scoreSmiley(for: entry.score))
         }
@@ -71,7 +73,8 @@ class DiaryViewModel: NSObject {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
         dateFormatter.timeZone = timezone
-        return EntryViewModel(date: dateFormatter.string(from:entry.timestamp),
+        return EntryViewModel(id: entry.id,
+                              date: dateFormatter.string(from:entry.timestamp),
                               entryText: entry.entryText,
                               score: scoreSmiley(for: entry.score))
     }

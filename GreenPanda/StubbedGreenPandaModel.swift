@@ -17,13 +17,14 @@ class StubbedGreenPandaModel : GreenPandaModel {
         entriesBackingValue.append(entry)
     }
     
-    @Published var entriesBackingValue: [DiaryEntry] = [DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4),
-                                 DiaryEntry(timestamp: Date(), entryText: "Blah blah", score: 4)]
+    @Published var entriesBackingValue: [DiaryEntry] = [
+        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah", score: 4),
+        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah", score: 4),
+        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah", score: 4),
+        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah", score: 4),
+        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah", score: 4),
+        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah", score: 4),
+        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah", score: 4)]
 
     
 }

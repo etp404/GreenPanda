@@ -37,6 +37,6 @@ class ComposeDiaryEntryViewModel {
             failedValidation()
             return
         }
-        self.model.add(entry: DiaryEntry(timestamp: date, entryText: entryText, score: score))
+        self.model.add(entry: DiaryEntry(id: UUID(), timestamp: date, entryText: entryText, score: score))
     }
 }

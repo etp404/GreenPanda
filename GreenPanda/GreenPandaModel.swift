@@ -8,6 +8,7 @@
 import Foundation
 
 struct DiaryEntry {
+    let id: UUID
     let timestamp: Date
     let entryText: String
     let score:Int

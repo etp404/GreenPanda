@@ -23,11 +23,11 @@ class DiaryViewModelTests: XCTestCase {
         self.continueAfterFailure = false;
         mockGreenPandaModel = MockGreenPandaModel()
         mockGreenPandaModel.entriesBackingValue = [
-            DiaryEntry(timestamp: Date(timeIntervalSince1970: 1603645316), entryText: entry1Text, score: 1),
-            DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 2),
-            DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 3),
-            DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 4),
-            DiaryEntry(timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 5)]
+            DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 1603645316), entryText: entry1Text, score: 1),
+            DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 2),
+            DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 3),
+            DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 4),
+            DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 5)]
         mockDiaryViewModelCoordinatorDelegate = MockDiaryViewModelCoordinatorDelegate()
 
         diaryViewModel = DiaryViewModel(model: mockGreenPandaModel,
@@ -38,6 +38,12 @@ class DiaryViewModelTests: XCTestCase {
     
     func testThatExpectedNNumberEntriesAreReturned() throws {
         XCTAssertEqual(diaryViewModel.entries.count, 5)
+    }
+    
+    func testThatExpectedIdsAreReturned() throws {
+        
+        XCTAssertEqual(diaryViewModel.entries[0].id, mockGreenPandaModel.entriesBackingValue[0].id)
+        XCTAssertEqual(diaryViewModel.entries[1].id, mockGreenPandaModel.entriesBackingValue[1].id)
     }
     
     func testThatExpectedEntryTextsAreReturned() throws {
@@ -80,7 +86,7 @@ class DiaryViewModelTests: XCTestCase {
             receivedValue = value
         }
         
-        mockGreenPandaModel.addAnEntry()
+        mockGreenPandaModel.add(entry: DiaryEntry(id: UUID(), timestamp: Date(), entryText: "abc", score: 0))
         
         XCTAssertEqual(receivedValue?.count, 6)
     }
