@@ -31,7 +31,7 @@ class DiaryViewModel: NSObject {
         super.init()
         
         cancellable = greenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
-            self.entries = newEntries.map { $0.toViewModel() }
+            self.entries = newEntries.map { self.convertToViewModel(entry: $0) }
         } )
     }
     
@@ -66,11 +66,14 @@ class DiaryViewModel: NSObject {
         default: return ""
         }
     }
-
-}
-
-extension DiaryEntry {
-    func toViewModel() -> EntryViewModel {
-        EntryViewModel(date: "", entryText: "", score: "")
+    
+    private func convertToViewModel(entry: DiaryEntry) -> EntryViewModel {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
+        dateFormatter.timeZone = timezone
+        return EntryViewModel(date: dateFormatter.string(from:entry.timestamp),
+                              entryText: entry.entryText,
+                              score: scoreSmiley(for: entry.score))
     }
+
 }

@@ -37,26 +37,26 @@ class DiaryViewModelTests: XCTestCase {
     }
     
     func testThatExpectedNNumberEntriesAreReturned() throws {
-        XCTAssertEqual(diaryViewModel.numberOfEntries, 5)
+        XCTAssertEqual(diaryViewModel.entries.count, 5)
     }
     
     func testThatExpectedEntryTextsAreReturned() throws {
         
-        XCTAssertEqual(diaryViewModel.entryViewModels[0].entryText, entry1Text)
-        XCTAssertEqual(diaryViewModel.entryViewModels[1].entryText, entry2Text)
+        XCTAssertEqual(diaryViewModel.entries[0].entryText, entry1Text)
+        XCTAssertEqual(diaryViewModel.entries[1].entryText, entry2Text)
     }
     
     func testThatExpectedEntryDatesAreReturned() throws {
-        XCTAssertEqual(diaryViewModel.entryViewModels[0].date, "Sun, 25 Oct 2020 18:01")
-        XCTAssertEqual(diaryViewModel.entryViewModels[1].date, "Mon, 21 Sep 2020 00:51")
+        XCTAssertEqual(diaryViewModel.entries[0].date, "Sun, 25 Oct 2020 18:01")
+        XCTAssertEqual(diaryViewModel.entries[1].date, "Mon, 21 Sep 2020 00:51")
     }
     
     func testThatExpectedScoreIsReturnedAsEpected() throws {
-        XCTAssertEqual(diaryViewModel.entryViewModels[0].score, "😩")
-        XCTAssertEqual(diaryViewModel.entryViewModels[1].score, "😕")
-        XCTAssertEqual(diaryViewModel.entryViewModels[2].score, "😐")
-        XCTAssertEqual(diaryViewModel.entryViewModels[3].score, "🙂")
-        XCTAssertEqual(diaryViewModel.entryViewModels[4].score, "😁")
+        XCTAssertEqual(diaryViewModel.entries[0].score, "😩")
+        XCTAssertEqual(diaryViewModel.entries[1].score, "😕")
+        XCTAssertEqual(diaryViewModel.entries[2].score, "😐")
+        XCTAssertEqual(diaryViewModel.entries[3].score, "🙂")
+        XCTAssertEqual(diaryViewModel.entries[4].score, "😁")
     }
     
     func testThatPressingTheComposeButtonOpensTheComposeView() {
