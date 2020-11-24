@@ -15,7 +15,7 @@ class DiaryViewController: ViewController {
     }
     
     private var viewModel:DiaryViewModel?
-    
+    private var dataSource:UICollectionViewDiffableDataSource<Int, EntryViewModel>?
     func configure(with viewModel: DiaryViewModel) {
         self.viewModel = viewModel
     }
@@ -28,7 +28,27 @@ class DiaryViewController: ViewController {
         collectionView.collectionViewLayout = layout
         collectionView.register(UINib(nibName: "DiaryEntryCell", bundle: nil),
                                 forCellWithReuseIdentifier: DiaryEntryCell.reuseIdentifier)
-        collectionView.dataSource = self
+        
+        dataSource = UICollectionViewDiffableDataSource<Int, EntryViewModel>(collectionView: collectionView) { collectionView, indexPath, item in
+            let diaryEntry = collectionView.dequeueReusableCell(withReuseIdentifier: DiaryEntryCell.reuseIdentifier, for: indexPath) as! DiaryEntryCell
+            diaryEntry.bodyText.text = item.entryText
+            diaryEntry.date.text = item.date
+            diaryEntry.score.text = item.score
+
+            return diaryEntry
+        }
+        
+        collectionView.dataSource = dataSource
+        applySnapshot()
+
+    }
+    
+    func applySnapshot(animatingDifferences: Bool = true) {
+        guard let entries = viewModel?.entries, let dataSource = dataSource else { return }
+        var snapshot = NSDiffableDataSourceSnapshot<Int, EntryViewModel>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(entries)
+        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
 
 }

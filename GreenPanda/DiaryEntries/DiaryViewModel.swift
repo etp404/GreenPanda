@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-struct EntryViewModel {
+struct EntryViewModel: Hashable {
     let id: UUID
     let date: String
     let entryText: String
