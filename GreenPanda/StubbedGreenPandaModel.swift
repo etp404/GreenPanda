@@ -17,24 +17,6 @@ class StubbedGreenPandaModel : GreenPandaModel {
         entriesBackingValue.append(entry)
     }
     
-    @Published var entriesBackingValue: [DiaryEntry] = [DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah1", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah2", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah3", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah4", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah5", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah6", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah1", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah2", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah3", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah4", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah5", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah6", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah1", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah2", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah3", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah4", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah5", score: 4),
-                                                        DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Blah blah6", score: 4)]
+    @Published var entriesBackingValue: [DiaryEntry] = [DiaryEntry(id: UUID(), timestamp: Date(), entryText: "Stubbed entry", score: 4)]
 
 }

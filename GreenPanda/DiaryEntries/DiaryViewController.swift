@@ -6,9 +6,10 @@
 //
 
 import UIKit
-
+import Combine
 class DiaryViewController: ViewController {
 
+    private var someCancellable: AnyCancellable?
     @IBOutlet weak var collectionView: UICollectionView!
     @IBAction func composeButtonPRessed(_ sender: Any) {
         viewModel?.composeButtonPressed()
@@ -39,36 +40,18 @@ class DiaryViewController: ViewController {
         }
         
         collectionView.dataSource = dataSource
-        applySnapshot()
+        someCancellable = viewModel?.$entries.sink{entries in
+            self.applySnapshot(entries:entries)
+        }
 
     }
     
-    func applySnapshot(animatingDifferences: Bool = true) {
-        guard let entries = viewModel?.entries, let dataSource = dataSource else { return }
+    func applySnapshot(entries:[EntryViewModel]?, animatingDifferences: Bool = true) {
+        guard let entries = entries, let dataSource = dataSource else { return }
         var snapshot = NSDiffableDataSourceSnapshot<Int, EntryViewModel>()
         snapshot.appendSections([0])
         snapshot.appendItems(entries)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
 
-}
-
-extension DiaryViewController : UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.viewModel?.numberOfEntries ?? 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let diaryEntry = collectionView.dequeueReusableCell(withReuseIdentifier: DiaryEntryCell.reuseIdentifier, for: indexPath) as! DiaryEntryCell
-        
-        if let entry = viewModel?.entryViewModels[indexPath.row] {
-            diaryEntry.bodyText.text = entry.entryText
-            diaryEntry.date.text = entry.date
-            diaryEntry.score.text = entry.score
-            
-        }
-        return diaryEntry
-    }
-    
-    
 }
