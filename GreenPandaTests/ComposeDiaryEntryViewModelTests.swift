@@ -93,6 +93,25 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 2), "😐")
         XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 3), "🙂")
         XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 4), "😁")
-
     }
+    
+    func testThatGivenComposeIsTapped_ViewIsDismissed() {
+        let mockComposeDiaryEntryCoordinatorDelegate = MockComposeDiaryEntryCoordinatorDelegate()
+        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: mockComposeDiaryEntryCoordinatorDelegate)
+        composeDiaryEntryViewModel.entryText = ""
+        composeDiaryEntryViewModel.date = someDate
+        composeDiaryEntryViewModel.score = someScore
+        
+        composeDiaryEntryViewModel.composeButtonPressed{}
+        XCTAssertTrue(mockComposeDiaryEntryCoordinatorDelegate.composeFinishedInvoked)
+    }
+}
+
+class MockComposeDiaryEntryCoordinatorDelegate: ComposeDiaryEntryCoordinatorDelegate {
+    var composeFinishedInvoked = false
+    func composeFinished() {
+        composeFinishedInvoked = true
+    }
+    
+    
 }
