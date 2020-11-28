@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ComposeDiaryEntryCoordinatorDelegate {
+    func composeFinished()
+}
+
 class ComposeDiaryEntryCoordinator: Coordinator {
     private var navigationController: UINavigationController
     private var model: GreenPandaModel

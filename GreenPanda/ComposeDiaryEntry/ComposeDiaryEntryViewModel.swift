@@ -13,12 +13,13 @@ class ComposeDiaryEntryViewModel {
     var date: Date?
     var score: Int?
     private var moodScoreReps = ["😩", "😕", "😐", "🙂", "😁"]
-    
-    
+    private let coordinatorDelegate: ComposeDiaryEntryCoordinatorDelegate?
     private let model: GreenPandaModel
     
-    init(model: GreenPandaModel) {
+    init(model: GreenPandaModel,
+         coordinatorDelegate: ComposeDiaryEntryCoordinatorDelegate? = nil) {
         self.model = model
+        self.coordinatorDelegate = coordinatorDelegate
     }
     
     var numberOfMoodScores: Int { get {
@@ -38,5 +39,6 @@ class ComposeDiaryEntryViewModel {
             return
         }
         self.model.add(entry: DiaryEntry(id: UUID(), timestamp: date, entryText: entryText, score: score))
+        coordinatorDelegate?.composeFinished()
     }
 }
