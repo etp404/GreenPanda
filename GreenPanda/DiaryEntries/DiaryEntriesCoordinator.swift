@@ -30,10 +30,3 @@ class DiaryEntriesCoordinator: Coordinator, DiaryViewModelCoordinatorDelegate {
     }
     
 }
-
-
-extension DiaryEntriesCoordinator: ComposeDiaryEntryCoordinatorDelegate {
-    func composeFinished() {
-        
-    }
-}
