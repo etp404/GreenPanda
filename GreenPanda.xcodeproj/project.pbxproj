@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C92E646E257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C92E646C257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld */; };
+		C92E6473257BD81600723239 /* GreenPandaCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */; };
 		C97C09AF25409A30001E1E5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09AE25409A30001E1E5A /* AppDelegate.swift */; };
 		C97C09B125409A30001E1E5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09B025409A30001E1E5A /* SceneDelegate.swift */; };
 		C97C09B325409A30001E1E5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09B225409A30001E1E5A /* ViewController.swift */; };
@@ -53,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C92E646D257BD78C00723239 /* GreenPandaDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreenPandaDataModel.xcdatamodel; sourceTree = "<group>"; };
+		C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaCoreDataTests.swift; sourceTree = "<group>"; };
 		C97C09AB25409A30001E1E5A /* GreenPanda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenPanda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97C09AE25409A30001E1E5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C97C09B025409A30001E1E5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 				C9E069CD25443B1100B5978B /* Coordinator.swift */,
 				C9E069D225443CAF00B5978B /* MainCoordinator.swift */,
 				C98052BF2548A0890071B64C /* StubbedGreenPandaModel.swift */,
+				C92E646C257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld */,
 			);
 			path = GreenPanda;
 			sourceTree = "<group>";
@@ -160,6 +165,7 @@
 				C9BCF99F25531BB500F2232E /* ComposeDiaryEntryViewModelTests.swift */,
 				C9BCF9A425531D3E00F2232E /* MockGreenPandaModel.swift */,
 				C9B26431256939BE0089A1BB /* MockupOfCombineVersion.swift */,
+				C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */,
 			);
 			path = GreenPandaTests;
 			sourceTree = "<group>";
@@ -331,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C92E646E257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld in Sources */,
 				C97C09B325409A30001E1E5A /* ViewController.swift in Sources */,
 				C9E069D325443CAF00B5978B /* MainCoordinator.swift in Sources */,
 				C98052CA2548A31D0071B64C /* DiaryViewModelCoordinatorDelegate.swift in Sources */,
@@ -357,6 +364,7 @@
 				C9BCF9A025531BB500F2232E /* ComposeDiaryEntryViewModelTests.swift in Sources */,
 				C9B26432256939BE0089A1BB /* MockupOfCombineVersion.swift in Sources */,
 				C97C09C625409A31001E1E5A /* DiaryViewModelTests.swift in Sources */,
+				C92E6473257BD81600723239 /* GreenPandaCoreDataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +691,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C92E646C257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C92E646D257BD78C00723239 /* GreenPandaDataModel.xcdatamodel */,
+			);
+			currentVersion = C92E646D257BD78C00723239 /* GreenPandaDataModel.xcdatamodel */;
+			path = GreenPandaDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C97C09A325409A30001E1E5A /* Project object */;
 }

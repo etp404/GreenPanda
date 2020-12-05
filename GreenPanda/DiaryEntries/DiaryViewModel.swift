@@ -36,23 +36,7 @@ class DiaryViewModel: NSObject {
         } )
     }
     
-    var numberOfEntries:Int {
-        greenPandaModel.entriesBackingValue.count
-    }
-    
     @Published var entries: [EntryViewModel] = []
-    
-    var entryViewModels: [EntryViewModel] {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
-        dateFormatter.timeZone = timezone
-        return greenPandaModel.entriesBackingValue.map {entry in
-            EntryViewModel(id: UUID(),
-                           date: dateFormatter.string(from:entry.timestamp),
-                           entryText: entry.entryText,
-                           score: scoreSmiley(for: entry.score))
-        }
-    }
     
     func composeButtonPressed() {
         coordinatorDelegate.openComposeView()

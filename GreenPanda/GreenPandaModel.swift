@@ -17,9 +17,7 @@ struct DiaryEntry {
 protocol GreenPandaModel {
     
     var entries: Published<[DiaryEntry]>.Publisher { get }
-    
-    var entriesBackingValue: [DiaryEntry] { get }
-    
+        
     func add(entry: DiaryEntry)
 }
 
