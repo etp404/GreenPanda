@@ -22,16 +22,6 @@ class CoreDataGreenPandaModel: GreenPandaModel {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: context)
     }
-    func entriesForGranularTestToGetItStarted()->[DiaryEntry] {
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "DiaryEntryEntity")
-        
-        guard let diaryEntries: [NSManagedObject] = try? context.fetch(fetchRequest) else {
-            return []
-        }
-        
-        return diaryEntries.compactMap{$0.toDiaryEntry()}
-    }
     
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
         let fetchRequest =
