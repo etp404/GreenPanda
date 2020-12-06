@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C9034521257CF7D1002A76C5 /* CoreDataGreenPandaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9034520257CF7D1002A76C5 /* CoreDataGreenPandaModel.swift */; };
 		C92E646E257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C92E646C257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld */; };
 		C92E6473257BD81600723239 /* GreenPandaCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */; };
 		C97C09AF25409A30001E1E5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09AE25409A30001E1E5A /* AppDelegate.swift */; };
@@ -55,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C9034520257CF7D1002A76C5 /* CoreDataGreenPandaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataGreenPandaModel.swift; sourceTree = "<group>"; };
 		C92E646D257BD78C00723239 /* GreenPandaDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreenPandaDataModel.xcdatamodel; sourceTree = "<group>"; };
 		C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaCoreDataTests.swift; sourceTree = "<group>"; };
 		C97C09AB25409A30001E1E5A /* GreenPanda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenPanda.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +155,7 @@
 				C9E069D225443CAF00B5978B /* MainCoordinator.swift */,
 				C98052BF2548A0890071B64C /* StubbedGreenPandaModel.swift */,
 				C92E646C257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld */,
+				C9034520257CF7D1002A76C5 /* CoreDataGreenPandaModel.swift */,
 			);
 			path = GreenPanda;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				C9E069D325443CAF00B5978B /* MainCoordinator.swift in Sources */,
 				C98052CA2548A31D0071B64C /* DiaryViewModelCoordinatorDelegate.swift in Sources */,
 				C97C09AF25409A30001E1E5A /* AppDelegate.swift in Sources */,
+				C9034521257CF7D1002A76C5 /* CoreDataGreenPandaModel.swift in Sources */,
 				C9E069CE25443B1100B5978B /* Coordinator.swift in Sources */,
 				C9D836B92556D42400E68F65 /* ComposeDiaryEntryViewModel.swift in Sources */,
 				C9E069ED2544475700B5978B /* DiaryViewController.swift in Sources */,
