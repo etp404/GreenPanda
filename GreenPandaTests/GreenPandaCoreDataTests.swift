@@ -11,13 +11,20 @@ import Combine
 @testable import GreenPanda
 
 
-class CoreDataGreenPandaModel {
-    private let context: NSManagedObjectContext
+class CoreDataGreenPandaModel: GreenPandaModel {
     
-    init(context: NSManagedObjectContext) {
-        self.context = context
+    var entries: Published<[DiaryEntry]>.Publisher {
+        return $entriesBackingValue
     }
     
+    @Published private var entriesBackingValue: [DiaryEntry] = []
+    
+    private let context: NSManagedObjectContext
+    init(context: NSManagedObjectContext) {
+        self.context = context
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: context)
+    }
     func entriesForGranularTestToGetItStarted()->[DiaryEntry] {
         let fetchRequest =
             NSFetchRequest<NSManagedObject>(entityName: "DiaryEntryEntity")
@@ -28,10 +35,19 @@ class CoreDataGreenPandaModel {
         
         return diaryEntries.compactMap{$0.toDiaryEntry()}
     }
+    
+    @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "DiaryEntryEntity")
         
+        if let diaryEntries: [NSManagedObject] = try? context.fetch(fetchRequest) {
+            entriesBackingValue = diaryEntries.compactMap{$0.toDiaryEntry()}
+        }
+    }
+    
     func add(entry: DiaryEntry) {
         let diaryEntryEntity = NSEntityDescription.entity(forEntityName: "DiaryEntryEntity",
-                                       in: context)!
+                                                          in: context)!
         
         let diaryManagedObject = NSManagedObject(entity: diaryEntryEntity,
                                                  insertInto: context)
@@ -73,11 +89,18 @@ fileprivate extension NSManagedObject {
 
 class GreenPandaCoreDataTests: XCTestCase {
     
+    private var cancellable: AnyCancellable? = nil
+
     func testThatDiaryEntryCanBeStoredAndReturnedByTheModel() {
+    
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.persistentContainer.viewContext
         let coreDataGreenPandaModel = CoreDataGreenPandaModel(context: managedContext)
         coreDataGreenPandaModel.clear()
+        var retrievedEntries = [DiaryEntry]()
+        cancellable = coreDataGreenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
+            retrievedEntries = newEntries
+        })
         XCTAssertEqual(0, coreDataGreenPandaModel.entriesForGranularTestToGetItStarted().count)
 
         let diaryEntryToSave1 = DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 40), entryText: "diaryEntryToSave1", score: 2)
@@ -85,8 +108,8 @@ class GreenPandaCoreDataTests: XCTestCase {
         
         coreDataGreenPandaModel.add(entry: diaryEntryToSave1)
         coreDataGreenPandaModel.add(entry: diaryEntryToSave2)
+        
 
-        let retrievedEntries = coreDataGreenPandaModel.entriesForGranularTestToGetItStarted()
         let retrievedEntry1 = retrievedEntries.filter{ $0.id == diaryEntryToSave1.id}.first
         let retrievedEntry2 = retrievedEntries.filter{ $0.id == diaryEntryToSave2.id}.first
         XCTAssertEqual(2, retrievedEntries.count)
@@ -97,25 +120,6 @@ class GreenPandaCoreDataTests: XCTestCase {
         XCTAssertEqual(diaryEntryToSave2.entryText, retrievedEntry2?.entryText)
         XCTAssertEqual(diaryEntryToSave2.score, retrievedEntry2?.score)
 
-        
-//
-//
-//
-//
-//
-//
-//
-//
-//        let fetchRequest =
-//            NSFetchRequest<NSManagedObject>(entityName: "DiaryEntryEntity")
-//
-//        do {
-//            let diaryEntries: [NSManagedObject] = try managedContext.fetch(fetchRequest)
-//            print(diaryEntries)
-//          } catch let error as NSError {
-//            print("Could not fetch. \(error), \(error.userInfo)")
-//          }
-//
     }
 
 
