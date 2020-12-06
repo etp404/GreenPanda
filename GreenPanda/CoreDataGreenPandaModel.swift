@@ -21,15 +21,11 @@ class CoreDataGreenPandaModel: GreenPandaModel {
         self.context = context
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: context)
+        updateEntries()
     }
     
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "DiaryEntryEntity")
-        
-        if let diaryEntries: [NSManagedObject] = try? context.fetch(fetchRequest) {
-            entriesBackingValue = diaryEntries.compactMap{$0.toDiaryEntry()}
-        }
+        updateEntries()
     }
     
     func add(entry: DiaryEntry) {
@@ -51,12 +47,22 @@ class CoreDataGreenPandaModel: GreenPandaModel {
     }
     
     func clear() {
+        entriesBackingValue = []
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "DiaryEntryEntity")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         do {
             try context.execute(deleteRequest)
         } catch let error as NSError {
             print("Could not delete all the entries. \(error), \(error.userInfo)")
+        }
+    }
+    
+    private func updateEntries() {
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "DiaryEntryEntity")
+        
+        if let diaryEntries: [NSManagedObject] = try? context.fetch(fetchRequest) {
+            entriesBackingValue = diaryEntries.compactMap{$0.toDiaryEntry()}
         }
     }
     
