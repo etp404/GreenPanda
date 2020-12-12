@@ -12,6 +12,8 @@ class ComposeDiaryEntryViewModel {
     var entryText:String?
     var date: Date?
     var score: Int?
+    @Published var moodLabel: String?
+    
     private var moodScoreReps = ["😩", "😕", "😐", "🙂", "😁"]
     private let coordinatorDelegate: ComposeDiaryEntryCoordinatorDelegate?
     private let model: GreenPandaModel
@@ -29,6 +31,10 @@ class ComposeDiaryEntryViewModel {
     
     func moodScore(for pickerIndex: Int) -> String {
         moodScoreReps[pickerIndex]
+    }
+    
+    func moodSliderUpdated(to moodValue: Float) {
+        moodLabel = "Mood: \(moodScoreReps[Int(round(moodValue))])"
     }
     
     func composeButtonPressed(failedValidation:()->Void) {

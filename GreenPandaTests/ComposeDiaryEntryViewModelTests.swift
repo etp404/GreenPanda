@@ -6,9 +6,11 @@
 //
 
 import XCTest
+import Combine
 @testable import GreenPanda
 
 class ComposeDiaryEntryViewModelTests: XCTestCase {
+    var anyCancellable: AnyCancellable?
     let someEntryText = "Some example content"
     let someDate = Date(timeIntervalSince1970: 123456)
     let someScore = 4
@@ -93,6 +95,26 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 2), "😐")
         XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 3), "🙂")
         XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 4), "😁")
+    }
+    
+    func testThatWhenSliderChanges_MoodLabelIsUpdated() {
+        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel())
+        var capturedLabel: String?
+        anyCancellable = composeDiaryEntryViewModel.$moodLabel.sink(receiveValue: { newLabel in
+            capturedLabel = newLabel
+        })
+        
+        composeDiaryEntryViewModel.moodSliderUpdated(to: 0)
+        XCTAssertEqual(capturedLabel, "Mood: 😩")
+        composeDiaryEntryViewModel.moodSliderUpdated(to: 1.4)
+        XCTAssertEqual(capturedLabel, "Mood: 😕")
+        composeDiaryEntryViewModel.moodSliderUpdated(to: 1.7)
+        XCTAssertEqual(capturedLabel, "Mood: 😐")
+        composeDiaryEntryViewModel.moodSliderUpdated(to: 3)
+        XCTAssertEqual(capturedLabel, "Mood: 🙂")
+        composeDiaryEntryViewModel.moodSliderUpdated(to: 4)
+        XCTAssertEqual(capturedLabel, "Mood: 😁")
+        
     }
     
     func testThatGivenComposeIsTapped_ViewIsDismissed() {

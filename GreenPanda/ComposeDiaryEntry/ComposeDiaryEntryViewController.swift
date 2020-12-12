@@ -12,6 +12,11 @@ class ComposeDiaryEntryViewController: UIViewController {
     @IBOutlet weak var entryText: UITextField!
     @IBOutlet weak var moodScorePicker: UIPickerView!
     @IBOutlet weak var entryDate: UIDatePicker!
+    @IBOutlet weak var moodLabel: UILabel!
+    
+    @IBAction func moodSliderChanged(_ sender: UISlider) {
+        //sender.value
+    }
     
     private var viewModel: ComposeDiaryEntryViewModel?
     
