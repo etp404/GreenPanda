@@ -46,17 +46,6 @@ class CoreDataGreenPandaModel: GreenPandaModel {
         }
     }
     
-    func clear() {
-        entriesBackingValue = []
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "DiaryEntryEntity")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        do {
-            try context.execute(deleteRequest)
-        } catch let error as NSError {
-            print("Could not delete all the entries. \(error), \(error.userInfo)")
-        }
-    }
-    
     private func updateEntries() {
         let fetchRequest =
             NSFetchRequest<NSManagedObject>(entityName: "DiaryEntryEntity")
