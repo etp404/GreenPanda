@@ -13,7 +13,6 @@
                 <outlet property="entryDate" destination="qGV-mr-gNm" id="Rkz-AG-Fsy"/>
                 <outlet property="entryText" destination="4Mv-n9-t6M" id="L81-jh-Ahw"/>
                 <outlet property="moodLabel" destination="3sB-1U-hFw" id="Z5a-Qj-nVJ"/>
-                <outlet property="moodScorePicker" destination="oJI-Ye-7JP" id="YtC-ht-aQe"/>
                 <outlet property="moodSlider" destination="ONo-US-YRS" id="DkK-aV-p6C"/>
                 <outlet property="view" destination="iN0-l3-epB" id="wny-9Y-cnK"/>
             </connections>
@@ -48,10 +47,7 @@
                         <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="qGV-mr-gNm">
                             <rect key="frame" x="20" y="112.5" width="374" height="216"/>
                         </datePicker>
-                        <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oJI-Ye-7JP">
-                            <rect key="frame" x="20" y="332.5" width="374" height="0.0"/>
-                        </pickerView>
-                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Mv-n9-t6M">
+                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Mv-n9-t6M">
                             <rect key="frame" x="20" y="336.5" width="374" height="473.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>

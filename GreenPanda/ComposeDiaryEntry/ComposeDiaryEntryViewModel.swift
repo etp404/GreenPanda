@@ -11,7 +11,13 @@ class ComposeDiaryEntryViewModel {
     
     var entryText:String?
     var date: Date?
-    var score: Int?
+    var score: Float? {
+        didSet {
+            guard let score = score else { return }
+            moodLabel = "Mood: \(moodScoreReps[score.roundToInt()])"
+        }
+    }
+    
     @Published var moodLabel: String?
     
     private var moodScoreReps = ["😩", "😕", "😐", "🙂", "😁"]
@@ -33,10 +39,6 @@ class ComposeDiaryEntryViewModel {
         moodScoreReps[pickerIndex]
     }
     
-    func moodSliderUpdated(to moodValue: Float) {
-        moodLabel = "Mood: \(moodScoreReps[Int(round(moodValue))])"
-    }
-    
     func composeButtonPressed(failedValidation:()->Void) {
         guard let date = date,
               let entryText = entryText,
@@ -44,7 +46,14 @@ class ComposeDiaryEntryViewModel {
             failedValidation()
             return
         }
-        self.model.add(entry: DiaryEntry(id: UUID(), timestamp: date, entryText: entryText, score: score))
+        self.model.add(entry: DiaryEntry(id: UUID(), timestamp: date, entryText: entryText, score: score.roundToInt()))
         coordinatorDelegate?.composeFinished()
+    }
+    
+}
+
+private extension Float {
+    func roundToInt() -> Int {
+        Int(self.rounded())
     }
 }
