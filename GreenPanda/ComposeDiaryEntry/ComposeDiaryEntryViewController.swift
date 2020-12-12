@@ -6,16 +6,20 @@
 //
 
 import UIKit
+import Combine
 
 class ComposeDiaryEntryViewController: UIViewController {
 
+    private var anyCancellable: AnyCancellable?
+    
     @IBOutlet weak var entryText: UITextField!
     @IBOutlet weak var moodScorePicker: UIPickerView!
     @IBOutlet weak var entryDate: UIDatePicker!
     @IBOutlet weak var moodLabel: UILabel!
+    @IBOutlet weak var moodSlider: UISlider!
     
     @IBAction func moodSliderChanged(_ sender: UISlider) {
-        //sender.value
+        viewModel?.moodSliderUpdated(to: sender.value)
     }
     
     private var viewModel: ComposeDiaryEntryViewModel?
@@ -28,6 +32,11 @@ class ComposeDiaryEntryViewController: UIViewController {
         super.viewDidLoad()
         moodScorePicker.delegate = self
         moodScorePicker.dataSource = self
+        moodSlider.value = 2.0
+        viewModel?.moodSliderUpdated(to: moodSlider.value)
+        anyCancellable = viewModel?.$moodLabel.sink(receiveValue: {moodLabelValue in
+            self.moodLabel.text = moodLabelValue
+        })
     }
     
     @IBAction func submit(_ sender: Any) {

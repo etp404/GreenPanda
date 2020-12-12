@@ -14,6 +14,7 @@
                 <outlet property="entryText" destination="4Mv-n9-t6M" id="L81-jh-Ahw"/>
                 <outlet property="moodLabel" destination="3sB-1U-hFw" id="Z5a-Qj-nVJ"/>
                 <outlet property="moodScorePicker" destination="oJI-Ye-7JP" id="YtC-ht-aQe"/>
+                <outlet property="moodSlider" destination="ONo-US-YRS" id="DkK-aV-p6C"/>
                 <outlet property="view" destination="iN0-l3-epB" id="wny-9Y-cnK"/>
             </connections>
         </placeholder>
@@ -38,7 +39,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="ONo-US-YRS">
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="ONo-US-YRS">
                             <rect key="frame" x="18" y="74.5" width="378" height="31"/>
                             <connections>
                                 <action selector="moodSliderChanged:" destination="-1" eventType="valueChanged" id="Wbx-wC-obf"/>
