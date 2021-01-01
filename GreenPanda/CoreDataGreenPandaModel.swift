@@ -17,8 +17,12 @@ class CoreDataGreenPandaModel: GreenPandaModel {
     @Published private var entriesBackingValue: [DiaryEntry] = []
     
     private let context: NSManagedObjectContext
-    init(context: NSManagedObjectContext) {
+    private let clock: Clock
+    
+    init(context: NSManagedObjectContext,
+         clock: Clock = DateClock()) {
         self.context = context
+        self.clock = clock
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: context)
         updateEntries()
@@ -36,7 +40,7 @@ class CoreDataGreenPandaModel: GreenPandaModel {
                                                  insertInto: context)
         diaryManagedObject.setValue(entry.id, forKeyPath: "id")
         diaryManagedObject.setValue(entry.entryText, forKeyPath: "entryText")
-        diaryManagedObject.setValue(entry.timestamp, forKeyPath: "timestamp")
+        diaryManagedObject.setValue(clock.date, forKeyPath: "timestamp")
         diaryManagedObject.setValue(entry.score, forKeyPath: "score")
         
         do {
