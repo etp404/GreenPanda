@@ -86,7 +86,7 @@ class DiaryViewModelTests: XCTestCase {
             receivedValue = value
         }
         
-        mockGreenPandaModel.add(entry: DiaryEntry(id: UUID(), timestamp: Date(), entryText: "abc", score: 0))
+        mockGreenPandaModel.add(entry: NewDiaryEntry(id: UUID(), entryText: "abc", score: 0))
         
         XCTAssertEqual(receivedValue?.count, 6)
     }

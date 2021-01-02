@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,7 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposeDiaryEntryViewController" customModule="GreenPanda" customModuleProvider="target">
             <connections>
-                <outlet property="entryDate" destination="qGV-mr-gNm" id="Rkz-AG-Fsy"/>
                 <outlet property="entryText" destination="4Mv-n9-t6M" id="L81-jh-Ahw"/>
                 <outlet property="moodLabel" destination="3sB-1U-hFw" id="Z5a-Qj-nVJ"/>
                 <outlet property="moodSlider" destination="ONo-US-YRS" id="DkK-aV-p6C"/>
@@ -44,11 +43,8 @@
                                 <action selector="moodSliderChanged:" destination="-1" eventType="valueChanged" id="Wbx-wC-obf"/>
                             </connections>
                         </slider>
-                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="qGV-mr-gNm">
-                            <rect key="frame" x="20" y="112.5" width="374" height="216"/>
-                        </datePicker>
                         <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Mv-n9-t6M">
-                            <rect key="frame" x="20" y="336.5" width="374" height="473.5"/>
+                            <rect key="frame" x="20" y="112.5" width="374" height="697.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>

@@ -47,8 +47,8 @@ class GreenPandaCoreDataTests: XCTestCase {
         
         XCTAssertEqual(0, retrievedEntries.count)
 
-        let diaryEntryToSave1 = DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 40), entryText: "diaryEntryToSave9", score: 2)
-        let diaryEntryToSave2 = DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 40), entryText: "diaryEntryToSave20", score: 2)
+        let diaryEntryToSave1 = NewDiaryEntry(id: UUID(), entryText: "diaryEntryToSave9", score: 2)
+        let diaryEntryToSave2 = NewDiaryEntry(id: UUID(), entryText: "diaryEntryToSave20", score: 2)
 
         mockClock.date = date1
         coreDataGreenPandaModel.add(entry: diaryEntryToSave1)
@@ -68,8 +68,8 @@ class GreenPandaCoreDataTests: XCTestCase {
     }
     
     func testThatInitialValueOfTheModelIsGivenToTheSubscriberOnSubscribe() {
-        let diaryEntryToSave1 = DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 40), entryText: "diaryEntryToSave3", score: 2)
-        let diaryEntryToSave2 = DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 40), entryText: "diaryEntryToSave4", score: 2)
+        let diaryEntryToSave1 = NewDiaryEntry(id: UUID(), entryText: "diaryEntryToSave3", score: 2)
+        let diaryEntryToSave2 = NewDiaryEntry(id: UUID(), entryText: "diaryEntryToSave4", score: 2)
         
         mockClock.date = date1
         coreDataGreenPandaModel.add(entry: diaryEntryToSave1)

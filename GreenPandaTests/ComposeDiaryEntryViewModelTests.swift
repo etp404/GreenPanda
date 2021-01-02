@@ -18,9 +18,8 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
 
     func testThatWhenComposeIsPressedEntryIsAddedToModel() throws {
         let mockGreenPandaModel = MockGreenPandaModel()
-        
+        mockGreenPandaModel.date = someDate
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: mockGreenPandaModel)
-        composeDiaryEntryViewModel.date = someDate
         composeDiaryEntryViewModel.entryText = someEntryText
         composeDiaryEntryViewModel.score = somSliderValue
 
@@ -31,27 +30,11 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         XCTAssertEqual(lastEntryAdded.entryText, someEntryText)
         XCTAssertEqual(lastEntryAdded.score, Int(someScore))
     }
-    
-    func testThatGivenDateIsNilWhenComposeIsPressedErrorCallbackIsInvoked() throws {
-        let mockGreenPandaModel = MockGreenPandaModel()
-        
-        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: mockGreenPandaModel)
-        composeDiaryEntryViewModel.entryText = someEntryText
-        composeDiaryEntryViewModel.score = somSliderValue
 
-        var failedValidationInvoked = false
-        composeDiaryEntryViewModel.composeButtonPressed {
-            failedValidationInvoked = true
-        }
-        
-        XCTAssertTrue(failedValidationInvoked)
-    }
-    
     func testThatGivenEntryIsNilWhenComposeIsPressedErrorCallbackIsInvoked() throws {
         let mockGreenPandaModel = MockGreenPandaModel()
         
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: mockGreenPandaModel)
-        composeDiaryEntryViewModel.date = someDate
         composeDiaryEntryViewModel.score = somSliderValue
 
         composeDiaryEntryViewModel.composeButtonPressed(failedValidation: {})
@@ -68,7 +51,6 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         let mockGreenPandaModel = MockGreenPandaModel()
         
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: mockGreenPandaModel)
-        composeDiaryEntryViewModel.date = someDate
         composeDiaryEntryViewModel.entryText = someEntryText
 
         composeDiaryEntryViewModel.composeButtonPressed(failedValidation: {})
@@ -120,7 +102,6 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         let mockComposeDiaryEntryCoordinatorDelegate = MockComposeDiaryEntryCoordinatorDelegate()
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: mockComposeDiaryEntryCoordinatorDelegate)
         composeDiaryEntryViewModel.entryText = ""
-        composeDiaryEntryViewModel.date = someDate
         composeDiaryEntryViewModel.score = somSliderValue
         
         composeDiaryEntryViewModel.composeButtonPressed{}

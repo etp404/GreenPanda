@@ -10,6 +10,7 @@
 		C9034521257CF7D1002A76C5 /* CoreDataGreenPandaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9034520257CF7D1002A76C5 /* CoreDataGreenPandaModel.swift */; };
 		C92E646E257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C92E646C257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld */; };
 		C92E6473257BD81600723239 /* GreenPandaCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */; };
+		C93405C025A0A84C00B544F6 /* NewDiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93405BF25A0A84C00B544F6 /* NewDiaryEntry.swift */; };
 		C9384EFA259FB6B400DAF25A /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9384EF9259FB6B400DAF25A /* Clock.swift */; };
 		C97C09AF25409A30001E1E5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09AE25409A30001E1E5A /* AppDelegate.swift */; };
 		C97C09B125409A30001E1E5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09B025409A30001E1E5A /* SceneDelegate.swift */; };
@@ -20,7 +21,6 @@
 		C97C09C625409A31001E1E5A /* DiaryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09C525409A31001E1E5A /* DiaryViewModelTests.swift */; };
 		C97C09D125409A31001E1E5A /* GreenPandaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09D025409A31001E1E5A /* GreenPandaUITests.swift */; };
 		C97C09E225409A9B001E1E5A /* GreenPandaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */; };
-		C98052C02548A0890071B64C /* StubbedGreenPandaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98052BF2548A0890071B64C /* StubbedGreenPandaModel.swift */; };
 		C98052C52548A1590071B64C /* DiaryEntriesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98052C42548A1590071B64C /* DiaryEntriesCoordinator.swift */; };
 		C98052CA2548A31D0071B64C /* DiaryViewModelCoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98052C92548A31D0071B64C /* DiaryViewModelCoordinatorDelegate.swift */; };
 		C98052CF2548A72C0071B64C /* ComposeDiaryEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98052CE2548A72C0071B64C /* ComposeDiaryEntryViewController.xib */; };
@@ -60,6 +60,7 @@
 		C9034520257CF7D1002A76C5 /* CoreDataGreenPandaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataGreenPandaModel.swift; sourceTree = "<group>"; };
 		C92E646D257BD78C00723239 /* GreenPandaDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreenPandaDataModel.xcdatamodel; sourceTree = "<group>"; };
 		C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaCoreDataTests.swift; sourceTree = "<group>"; };
+		C93405BF25A0A84C00B544F6 /* NewDiaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryEntry.swift; sourceTree = "<group>"; };
 		C9384EF9259FB6B400DAF25A /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		C97C09AB25409A30001E1E5A /* GreenPanda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenPanda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97C09AE25409A30001E1E5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,7 +77,6 @@
 		C97C09D025409A31001E1E5A /* GreenPandaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaUITests.swift; sourceTree = "<group>"; };
 		C97C09D225409A31001E1E5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaModel.swift; sourceTree = "<group>"; };
-		C98052BF2548A0890071B64C /* StubbedGreenPandaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubbedGreenPandaModel.swift; sourceTree = "<group>"; };
 		C98052C42548A1590071B64C /* DiaryEntriesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEntriesCoordinator.swift; sourceTree = "<group>"; };
 		C98052C92548A31D0071B64C /* DiaryViewModelCoordinatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewModelCoordinatorDelegate.swift; sourceTree = "<group>"; };
 		C98052CE2548A72C0071B64C /* ComposeDiaryEntryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComposeDiaryEntryViewController.xib; sourceTree = "<group>"; };
@@ -155,7 +155,6 @@
 				C97C09E125409A9B001E1E5A /* GreenPandaModel.swift */,
 				C9E069CD25443B1100B5978B /* Coordinator.swift */,
 				C9E069D225443CAF00B5978B /* MainCoordinator.swift */,
-				C98052BF2548A0890071B64C /* StubbedGreenPandaModel.swift */,
 				C92E646C257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld */,
 				C9034520257CF7D1002A76C5 /* CoreDataGreenPandaModel.swift */,
 				C9384EF9259FB6B400DAF25A /* Clock.swift */,
@@ -192,6 +191,7 @@
 				C98052D32548A7420071B64C /* ComposeDiaryEntryViewController.swift */,
 				C98052D82548A78E0071B64C /* ComposeDiaryEntryCoordinator.swift */,
 				C9D836B82556D42400E68F65 /* ComposeDiaryEntryViewModel.swift */,
+				C93405BF25A0A84C00B544F6 /* NewDiaryEntry.swift */,
 			);
 			path = ComposeDiaryEntry;
 			sourceTree = "<group>";
@@ -345,6 +345,7 @@
 			files = (
 				C92E646E257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld in Sources */,
 				C97C09B325409A30001E1E5A /* ViewController.swift in Sources */,
+				C93405C025A0A84C00B544F6 /* NewDiaryEntry.swift in Sources */,
 				C9E069D325443CAF00B5978B /* MainCoordinator.swift in Sources */,
 				C98052CA2548A31D0071B64C /* DiaryViewModelCoordinatorDelegate.swift in Sources */,
 				C97C09AF25409A30001E1E5A /* AppDelegate.swift in Sources */,
@@ -358,7 +359,6 @@
 				C97C09E225409A9B001E1E5A /* GreenPandaModel.swift in Sources */,
 				C98052C52548A1590071B64C /* DiaryEntriesCoordinator.swift in Sources */,
 				C9B4F47825437E550077DE2A /* DiaryViewModel.swift in Sources */,
-				C98052C02548A0890071B64C /* StubbedGreenPandaModel.swift in Sources */,
 				C98052D92548A78E0071B64C /* ComposeDiaryEntryCoordinator.swift in Sources */,
 				C97C09B125409A30001E1E5A /* SceneDelegate.swift in Sources */,
 			);

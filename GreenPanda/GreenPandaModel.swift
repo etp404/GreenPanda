@@ -18,7 +18,7 @@ protocol GreenPandaModel {
     
     var entries: Published<[DiaryEntry]>.Publisher { get }
         
-    func add(entry: DiaryEntry)
+    func add(entry: NewDiaryEntry)
 }
 
 

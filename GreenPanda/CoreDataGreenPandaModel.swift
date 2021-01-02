@@ -32,7 +32,7 @@ class CoreDataGreenPandaModel: GreenPandaModel {
         updateEntries()
     }
     
-    func add(entry: DiaryEntry) {
+    func add(entry: NewDiaryEntry) {
         let diaryEntryEntity = NSEntityDescription.entity(forEntityName: "DiaryEntryEntity",
                                                           in: context)!
         

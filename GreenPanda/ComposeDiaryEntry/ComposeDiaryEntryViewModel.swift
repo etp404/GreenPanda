@@ -10,7 +10,6 @@ import UIKit
 class ComposeDiaryEntryViewModel {
     
     var entryText:String?
-    var date: Date?
     var score: Float? {
         didSet {
             guard let score = score else { return }
@@ -40,13 +39,12 @@ class ComposeDiaryEntryViewModel {
     }
     
     func composeButtonPressed(failedValidation:()->Void) {
-        guard let date = date,
-              let entryText = entryText,
+        guard let entryText = entryText,
               let score = score else {
             failedValidation()
             return
         }
-        self.model.add(entry: DiaryEntry(id: UUID(), timestamp: date, entryText: entryText, score: score.roundToInt()))
+        self.model.add(entry: NewDiaryEntry(id: UUID(), entryText: entryText, score: score.roundToInt()))
         coordinatorDelegate?.composeFinished()
     }
     
