@@ -12,7 +12,7 @@ class ComposeDiaryEntryViewController: UIViewController {
 
     private var anyCancellable: AnyCancellable?
     
-    @IBOutlet weak var entryText: UITextField!
+    @IBOutlet weak var entryTextInput: UITextView!
     @IBOutlet weak var moodLabel: UILabel!
     @IBOutlet weak var moodSlider: UISlider!
     
@@ -36,7 +36,7 @@ class ComposeDiaryEntryViewController: UIViewController {
     }
     
     @IBAction func submit(_ sender: Any) {
-        viewModel?.entryText = entryText.text
+        viewModel?.entryText = entryTextInput.text
         viewModel?.composeButtonPressed {}
     }
     
