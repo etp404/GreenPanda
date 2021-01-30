@@ -16,6 +16,7 @@ class ComposeDiaryEntryViewController: UIViewController {
     @IBOutlet weak var moodLabel: UILabel!
     @IBOutlet weak var moodSlider: UISlider!
     
+    @IBOutlet weak var stackViewBottomConstraint: NSLayoutConstraint!
     @IBAction func moodSliderChanged(_ sender: UISlider) {
         viewModel?.score = sender.value
     }
@@ -33,12 +34,39 @@ class ComposeDiaryEntryViewController: UIViewController {
         anyCancellable = viewModel?.$moodLabel.sink(receiveValue: {moodLabelValue in
             self.moodLabel.text = moodLabelValue
         })
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+
     }
     
     @IBAction func submit(_ sender: Any) {
         viewModel?.entryText = entryTextInput.text
         viewModel?.composeButtonPressed {}
     }
+ 
+    @objc
+    func keyboardDidShow(sender: NSNotification) {
+        guard let frame: CGRect = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect) else { return }
+       
+        stackViewBottomConstraint.constant = frame.height
+        self.view.layoutIfNeeded()
+
+        print("keyboard keyboardDidShow")
+
+    }
     
+    @objc
+    func keyboardWillHide(sender: NSNotification) {
+        
+        stackViewBottomConstraint.constant = 0
+        self.view.layoutIfNeeded()
+
+        guard let frame: CGRect = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect) else { return }
+       
+        
+        print("keyboard \(frame)")
+        print("keyboard keyboardWillHide")
+    }
 }
 

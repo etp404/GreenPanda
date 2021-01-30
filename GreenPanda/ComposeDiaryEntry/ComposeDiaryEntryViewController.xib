@@ -13,6 +13,7 @@
                 <outlet property="entryTextInput" destination="DfT-Ij-HRb" id="u9D-Q7-u0z"/>
                 <outlet property="moodLabel" destination="3sB-1U-hFw" id="Z5a-Qj-nVJ"/>
                 <outlet property="moodSlider" destination="ONo-US-YRS" id="DkK-aV-p6C"/>
+                <outlet property="stackViewBottomConstraint" destination="mbk-mu-LFE" id="uJg-yQ-FIj"/>
                 <outlet property="view" destination="iN0-l3-epB" id="wny-9Y-cnK"/>
             </connections>
         </placeholder>
