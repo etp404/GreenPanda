@@ -35,7 +35,7 @@ class ComposeDiaryEntryViewController: UIViewController {
         })
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         entryTextInput.backgroundColor = UIColor.gray
     }
     
@@ -45,16 +45,12 @@ class ComposeDiaryEntryViewController: UIViewController {
     }
  
     @objc
-    func keyboardDidShow(sender: NSNotification) {
+    func keyboardWillShow(sender: NSNotification) {
         guard let keyboardFrame: CGRect = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect) else { return }
         let keyboardFrameInView = view.convert(keyboardFrame, from: nil)
         let keyboardHeightInSafeArea = view.safeAreaLayoutGuide.layoutFrame.intersection(keyboardFrameInView).height
         entryTextInput.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeightInSafeArea, right: 0)
         entryTextInput.verticalScrollIndicatorInsets.bottom = keyboardHeightInSafeArea
-        if let textPosition = entryTextInput.selectedTextRange?.start {
-            let caret = entryTextInput.caretRect(for: textPosition)
-            entryTextInput.scrollRectToVisible(caret, animated: true)
-        }
         
         self.view.layoutIfNeeded()
     }
