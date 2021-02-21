@@ -16,7 +16,6 @@ class ComposeDiaryEntryViewController: UIViewController {
     @IBOutlet weak var moodLabel: UILabel!
     @IBOutlet weak var moodSlider: UISlider!
     
-    @IBOutlet weak var stackViewBottomConstraint: NSLayoutConstraint!
     @IBAction func moodSliderChanged(_ sender: UISlider) {
         viewModel?.score = sender.value
     }
@@ -37,7 +36,7 @@ class ComposeDiaryEntryViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-
+        entryTextInput.backgroundColor = UIColor.gray
     }
     
     @IBAction func submit(_ sender: Any) {
@@ -47,26 +46,19 @@ class ComposeDiaryEntryViewController: UIViewController {
  
     @objc
     func keyboardDidShow(sender: NSNotification) {
-        guard let frame: CGRect = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect) else { return }
-       
-        stackViewBottomConstraint.constant = frame.height
+        guard let keyboardFrame: CGRect = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect) else { return }
+        let keyboardFrameInView = view.convert(keyboardFrame, from: nil)
+        let keyboardHeightInSafeArea = view.safeAreaLayoutGuide.layoutFrame.intersection(keyboardFrameInView).height
+        entryTextInput.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeightInSafeArea, right: 0)
+        entryTextInput.verticalScrollIndicatorInsets.bottom = keyboardHeightInSafeArea
         self.view.layoutIfNeeded()
-
-        print("keyboard keyboardDidShow")
-
     }
     
     @objc
     func keyboardWillHide(sender: NSNotification) {
-        
-        stackViewBottomConstraint.constant = 0
+        entryTextInput.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        entryTextInput.verticalScrollIndicatorInsets.bottom = 0
         self.view.layoutIfNeeded()
-
-        guard let frame: CGRect = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect) else { return }
-       
-        
-        print("keyboard \(frame)")
-        print("keyboard keyboardWillHide")
     }
 }
 
