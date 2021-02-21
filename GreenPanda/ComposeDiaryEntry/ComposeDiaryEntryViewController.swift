@@ -51,6 +51,11 @@ class ComposeDiaryEntryViewController: UIViewController {
         let keyboardHeightInSafeArea = view.safeAreaLayoutGuide.layoutFrame.intersection(keyboardFrameInView).height
         entryTextInput.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeightInSafeArea, right: 0)
         entryTextInput.verticalScrollIndicatorInsets.bottom = keyboardHeightInSafeArea
+        if let textPosition = entryTextInput.selectedTextRange?.start {
+            let caret = entryTextInput.caretRect(for: textPosition)
+            entryTextInput.scrollRectToVisible(caret, animated: true)
+        }
+        
         self.view.layoutIfNeeded()
     }
     
