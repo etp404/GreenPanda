@@ -9,7 +9,11 @@ import UIKit
 
 class ComposeDiaryEntryViewModel {
     
-    var entryText:String?
+    var entryText:String? {
+        didSet {
+            canProceed = !(entryText ?? "").isEmpty && score != nil
+        }
+    }
     var score: Float? {
         didSet {
             guard let score = score else { return }
