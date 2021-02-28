@@ -30,7 +30,6 @@ class ComposeDiaryEntryViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        entryTextInput.backgroundColor = UIColor.gray
         moodPicker.removeAllSegments()
         viewModel?.moodScoreReps.enumerated().forEach {(index, label) in
             moodPicker.insertSegment(withTitle: label, at: index, animated: false)

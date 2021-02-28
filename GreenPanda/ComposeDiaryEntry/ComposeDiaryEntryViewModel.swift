@@ -19,7 +19,13 @@ class ComposeDiaryEntryViewModel {
     
     @Published var moodLabel: String?
     
-    let moodScoreReps = ["😩", "😕", "😐", "🙂", "😁"]
+    let moodScoreReps = ["☹️", "🙁", "😐", "🙂", "☺️"]
+    let moodScoreRepImages = [UIImage.init(systemName: "cloud.heavyrain"),
+                              UIImage.init(systemName: "cloud.drizzle"),
+                              UIImage.init(systemName: "cloud"),
+                              UIImage.init(systemName: "cloud.sun"),
+                              UIImage.init(systemName: "sun.max")]
+
     private let coordinatorDelegate: ComposeDiaryEntryCoordinatorDelegate?
     private let model: GreenPandaModel
     
