@@ -15,6 +15,7 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
     let someDate = Date(timeIntervalSince1970: 123456)
     let someScore:Int  = 4
     let somSliderValue:Float  = 3.7
+    var cancellable: AnyCancellable?
 
     func testThatWhenComposeIsPressedEntryIsAddedToModel() throws {
         let mockGreenPandaModel = MockGreenPandaModel()
@@ -108,6 +109,17 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         composeDiaryEntryViewModel.entryText = "some text"
         composeDiaryEntryViewModel.score = 4
         XCTAssertTrue(composeDiaryEntryViewModel.canProceed)
+    }
+    
+    func testCanSubscribeToCanProceed() {
+        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: MockComposeDiaryEntryCoordinatorDelegate())
+        var canProceed = false
+        cancellable = composeDiaryEntryViewModel.$canProceed.sink{
+            canProceed = $0
+        }
+        composeDiaryEntryViewModel.entryText = "some text"
+        composeDiaryEntryViewModel.score = 4
+        XCTAssertTrue(canProceed)
     }
 }
 

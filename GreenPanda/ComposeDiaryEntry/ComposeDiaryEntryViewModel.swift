@@ -27,7 +27,7 @@ class ComposeDiaryEntryViewModel {
                               UIImage.init(systemName: "cloud.sun"),
                               UIImage.init(systemName: "sun.max")]
     
-    private(set) var canProceed = false
+    @Published private(set) var canProceed = false
 
     private let coordinatorDelegate: ComposeDiaryEntryCoordinatorDelegate?
     private let model: GreenPandaModel
