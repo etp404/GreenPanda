@@ -66,7 +66,7 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
     func testThatExpectedMoodScoreEmojiIsReturned() {
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel())
         
-        XCTAssertEqual(composeDiaryEntryViewModel.moodScoreReps, ["😩", "😕", "😐", "🙂", "😁"])
+        XCTAssertEqual(composeDiaryEntryViewModel.moodScoreReps, ["☹️", "🙁", "😐", "🙂", "☺️"])
     }
     
     func testThatGivenComposeIsTapped_ViewIsDismissed() {
@@ -77,6 +77,11 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         
         composeDiaryEntryViewModel.composeButtonPressed{}
         XCTAssertTrue(mockComposeDiaryEntryCoordinatorDelegate.composeFinishedInvoked)
+    }
+    
+    func testThatCannotProceedWhenFieldsAreEmpty() {
+        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: MockComposeDiaryEntryCoordinatorDelegate())
+        XCTAssertFalse(composeDiaryEntryViewModel.canProceed)
     }
 }
 
