@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposeDiaryEntryViewController" customModule="GreenPanda" customModuleProvider="target">
             <connections>
+                <outlet property="doneButton" destination="OXE-ml-1Pz" id="dcQ-od-XJe"/>
                 <outlet property="entryTextInput" destination="DfT-Ij-HRb" id="u9D-Q7-u0z"/>
                 <outlet property="moodPicker" destination="cv6-nE-kwc" id="Ljl-iT-JyI"/>
                 <outlet property="view" destination="iN0-l3-epB" id="wny-9Y-cnK"/>

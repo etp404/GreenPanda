@@ -11,12 +11,12 @@ class ComposeDiaryEntryViewModel {
     
     var entryText:String? {
         didSet {
-            hideDoneButton = (entryText ?? "").isEmpty && score != nil
+            hideDoneButton = (entryText ?? "").isEmpty || score == nil
         }
     }
     var score: Float? {
         didSet {
-            hideDoneButton = (entryText ?? "").isEmpty && score != nil
+            hideDoneButton = (entryText ?? "").isEmpty || score == nil
         }
     }
         

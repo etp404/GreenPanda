@@ -12,6 +12,7 @@ class ComposeDiaryEntryViewController: UIViewController {
 
     private var anyCancellable: AnyCancellable?
     
+    @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var entryTextInput: UITextView!
     
     @IBOutlet weak var moodPicker: UISegmentedControl!
@@ -34,10 +35,14 @@ class ComposeDiaryEntryViewController: UIViewController {
         viewModel?.moodScoreReps.enumerated().forEach {(index, label) in
             moodPicker.insertSegment(withTitle: label, at: index, animated: false)
         }
+        anyCancellable = viewModel?.$hideDoneButton.sink {hidden in
+            self.doneButton.isHidden = hidden
+        }
+        entryTextInput.delegate = self
+        
     }
     
     @IBAction func submit(_ sender: Any) {
-        viewModel?.entryText = entryTextInput.text
         viewModel?.composeButtonPressed {}
     }
  
@@ -60,3 +65,8 @@ class ComposeDiaryEntryViewController: UIViewController {
     }
 }
 
+extension ComposeDiaryEntryViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        viewModel?.entryText = textView.text
+    }
+}
