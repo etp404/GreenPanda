@@ -63,39 +63,10 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         XCTAssertTrue(failedValidationInvoked)
     }
     
-    func testThatExpectedNumberOfMoodScoresIsReturned() {
-        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel())
-        XCTAssertEqual(composeDiaryEntryViewModel.numberOfMoodScores, 5)
-    }
-    
     func testThatExpectedMoodScoreEmojiIsReturned() {
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel())
         
-        XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 0), "😩")
-        XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 1), "😕")
-        XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 2), "😐")
-        XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 3), "🙂")
-        XCTAssertEqual(composeDiaryEntryViewModel.moodScore(for: 4), "😁")
-    }
-    
-    func testThatWhenSliderChanges_MoodLabelIsUpdated() {
-        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel())
-        var capturedLabel: String?
-        anyCancellable = composeDiaryEntryViewModel.$moodLabel.sink(receiveValue: { newLabel in
-            capturedLabel = newLabel
-        })
-        
-        composeDiaryEntryViewModel.score = 0
-        XCTAssertEqual(capturedLabel, "Mood: 😩")
-        composeDiaryEntryViewModel.score = 1.4
-        XCTAssertEqual(capturedLabel, "Mood: 😕")
-        composeDiaryEntryViewModel.score = 1.7
-        XCTAssertEqual(capturedLabel, "Mood: 😐")
-        composeDiaryEntryViewModel.score = 3
-        XCTAssertEqual(capturedLabel, "Mood: 🙂")
-        composeDiaryEntryViewModel.score = 4
-        XCTAssertEqual(capturedLabel, "Mood: 😁")
-        
+        XCTAssertEqual(composeDiaryEntryViewModel.moodScoreReps, ["😩", "😕", "😐", "🙂", "😁"])
     }
     
     func testThatGivenComposeIsTapped_ViewIsDismissed() {

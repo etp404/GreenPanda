@@ -29,15 +29,6 @@ class ComposeDiaryEntryViewModel {
         self.coordinatorDelegate = coordinatorDelegate
     }
     
-    var numberOfMoodScores: Int { get {
-        moodScoreReps.count
-    }
-    }
-    
-    func moodScore(for pickerIndex: Int) -> String {
-        moodScoreReps[pickerIndex]
-    }
-    
     func composeButtonPressed(failedValidation:()->Void) {
         guard let entryText = entryText,
               let score = score else {
