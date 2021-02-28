@@ -102,6 +102,13 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         composeDiaryEntryViewModel.entryText = "some text"
         XCTAssertTrue(composeDiaryEntryViewModel.canProceed)
     }
+    
+    func testThatCanProceedWhenTextThenScoreIsEntered() {
+        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: MockComposeDiaryEntryCoordinatorDelegate())
+        composeDiaryEntryViewModel.entryText = "some text"
+        composeDiaryEntryViewModel.score = 4
+        XCTAssertTrue(composeDiaryEntryViewModel.canProceed)
+    }
 }
 
 class MockComposeDiaryEntryCoordinatorDelegate: ComposeDiaryEntryCoordinatorDelegate {

@@ -16,13 +16,10 @@ class ComposeDiaryEntryViewModel {
     }
     var score: Float? {
         didSet {
-            guard let score = score else { return }
-            moodLabel = "Mood: \(moodScoreReps[score.roundToInt()])"
+            canProceed = !(entryText ?? "").isEmpty && score != nil
         }
     }
-    
-    @Published var moodLabel: String?
-    
+        
     let moodScoreReps = ["☹️", "🙁", "😐", "🙂", "☺️"]
     let moodScoreRepImages = [UIImage.init(systemName: "cloud.heavyrain"),
                               UIImage.init(systemName: "cloud.drizzle"),
