@@ -82,44 +82,44 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
     
     func testThatCannotProceedWhenFieldsAreEmpty() {
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: MockComposeDiaryEntryCoordinatorDelegate())
-        XCTAssertFalse(composeDiaryEntryViewModel.canProceed)
+        XCTAssertTrue(composeDiaryEntryViewModel.hideDoneButton)
     }
     
     func testThatCannotProceedWhenMoodScoreIsEmpty() {
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: MockComposeDiaryEntryCoordinatorDelegate())
         composeDiaryEntryViewModel.entryText = "some text"
-        XCTAssertFalse(composeDiaryEntryViewModel.canProceed)
+        XCTAssertTrue(composeDiaryEntryViewModel.hideDoneButton)
     }
     
     func testThatCannotProceedWhenTextEntryIsEmpty() {
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: MockComposeDiaryEntryCoordinatorDelegate())
         composeDiaryEntryViewModel.score = 4
-        XCTAssertFalse(composeDiaryEntryViewModel.canProceed)
+        XCTAssertTrue(composeDiaryEntryViewModel.hideDoneButton)
     }
     
     func testThatCanProceedWhenScoreThenTextIsEntered() {
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: MockComposeDiaryEntryCoordinatorDelegate())
         composeDiaryEntryViewModel.score = 4
         composeDiaryEntryViewModel.entryText = "some text"
-        XCTAssertTrue(composeDiaryEntryViewModel.canProceed)
+        XCTAssertFalse(composeDiaryEntryViewModel.hideDoneButton)
     }
     
     func testThatCanProceedWhenTextThenScoreIsEntered() {
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: MockComposeDiaryEntryCoordinatorDelegate())
         composeDiaryEntryViewModel.entryText = "some text"
         composeDiaryEntryViewModel.score = 4
-        XCTAssertTrue(composeDiaryEntryViewModel.canProceed)
+        XCTAssertFalse(composeDiaryEntryViewModel.hideDoneButton)
     }
     
     func testCanSubscribeToCanProceed() {
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: MockComposeDiaryEntryCoordinatorDelegate())
         var canProceed = false
-        cancellable = composeDiaryEntryViewModel.$canProceed.sink{
+        cancellable = composeDiaryEntryViewModel.$hideDoneButton.sink{
             canProceed = $0
         }
         composeDiaryEntryViewModel.entryText = "some text"
         composeDiaryEntryViewModel.score = 4
-        XCTAssertTrue(canProceed)
+        XCTAssertFalse(canProceed)
     }
 }
 

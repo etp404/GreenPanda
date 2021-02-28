@@ -11,12 +11,12 @@ class ComposeDiaryEntryViewModel {
     
     var entryText:String? {
         didSet {
-            canProceed = !(entryText ?? "").isEmpty && score != nil
+            hideDoneButton = (entryText ?? "").isEmpty && score != nil
         }
     }
     var score: Float? {
         didSet {
-            canProceed = !(entryText ?? "").isEmpty && score != nil
+            hideDoneButton = (entryText ?? "").isEmpty && score != nil
         }
     }
         
@@ -27,7 +27,7 @@ class ComposeDiaryEntryViewModel {
                               UIImage.init(systemName: "cloud.sun"),
                               UIImage.init(systemName: "sun.max")]
     
-    @Published private(set) var canProceed = false
+    @Published private(set) var hideDoneButton = true
 
     private let coordinatorDelegate: ComposeDiaryEntryCoordinatorDelegate?
     private let model: GreenPandaModel
