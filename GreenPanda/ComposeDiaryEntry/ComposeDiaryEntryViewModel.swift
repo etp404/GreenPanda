@@ -19,7 +19,7 @@ class ComposeDiaryEntryViewModel {
     
     @Published var moodLabel: String?
     
-    private var moodScoreReps = ["😩", "😕", "😐", "🙂", "😁"]
+    let moodScoreReps = ["😩", "😕", "😐", "🙂", "😁"]
     private let coordinatorDelegate: ComposeDiaryEntryCoordinatorDelegate?
     private let model: GreenPandaModel
     

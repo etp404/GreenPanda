@@ -13,11 +13,11 @@ class ComposeDiaryEntryViewController: UIViewController {
     private var anyCancellable: AnyCancellable?
     
     @IBOutlet weak var entryTextInput: UITextView!
-    @IBOutlet weak var moodLabel: UILabel!
-    @IBOutlet weak var moodSlider: UISlider!
     
-    @IBAction func moodSliderChanged(_ sender: UISlider) {
-        viewModel?.score = sender.value
+    @IBOutlet weak var moodPicker: UISegmentedControl!
+    
+    @IBAction func moodSliderChanged(_ sender: UISegmentedControl) {
+        viewModel?.score = Float(sender.selectedSegmentIndex)
     }
     
     private var viewModel: ComposeDiaryEntryViewModel?
@@ -28,15 +28,13 @@ class ComposeDiaryEntryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        moodSlider.value = 2.0
-        viewModel?.score = moodSlider.value
-        anyCancellable = viewModel?.$moodLabel.sink(receiveValue: {moodLabelValue in
-            self.moodLabel.text = moodLabelValue
-        })
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         entryTextInput.backgroundColor = UIColor.gray
+        moodPicker.removeAllSegments()
+        viewModel?.moodScoreReps.enumerated().forEach {(index, label) in
+            moodPicker.insertSegment(withTitle: label, at: index, animated: false)
+        }
     }
     
     @IBAction func submit(_ sender: Any) {
@@ -57,7 +55,7 @@ class ComposeDiaryEntryViewController: UIViewController {
     
     @objc
     func keyboardWillHide(sender: NSNotification) {
-        entryTextInput.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    entryTextInput.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         entryTextInput.verticalScrollIndicatorInsets.bottom = 0
         self.view.layoutIfNeeded()
     }
