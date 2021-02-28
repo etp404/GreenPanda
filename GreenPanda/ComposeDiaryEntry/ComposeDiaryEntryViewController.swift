@@ -36,7 +36,7 @@ class ComposeDiaryEntryViewController: UIViewController {
             moodPicker.insertSegment(withTitle: label, at: index, animated: false)
         }
         anyCancellable = viewModel?.$hideDoneButton.sink {hidden in
-            self.doneButton.isHidden = hidden
+            self.doneButton.alpha = hidden ? 0.5 : 1
         }
         entryTextInput.delegate = self
         

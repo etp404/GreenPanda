@@ -29,6 +29,9 @@
                             <state key="normal" title="Done">
                                 <color key="titleColor" systemColor="labelColor"/>
                             </state>
+                            <state key="disabled">
+                                <color key="titleColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
                             <connections>
                                 <action selector="submit:" destination="-1" eventType="touchUpInside" id="0Cp-8B-XOf"/>
                             </connections>
