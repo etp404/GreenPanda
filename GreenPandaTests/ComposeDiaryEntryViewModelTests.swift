@@ -83,6 +83,18 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: MockComposeDiaryEntryCoordinatorDelegate())
         XCTAssertFalse(composeDiaryEntryViewModel.canProceed)
     }
+    
+    func testThatCannotProceedWhenMoodScoreIsEmpty() {
+        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: MockComposeDiaryEntryCoordinatorDelegate())
+        composeDiaryEntryViewModel.entryText = "some text"
+        XCTAssertFalse(composeDiaryEntryViewModel.canProceed)
+    }
+    
+    func testThatCannotProceedWhenTextEntryIsEmpty() {
+        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: MockComposeDiaryEntryCoordinatorDelegate())
+        composeDiaryEntryViewModel.score = 4
+        XCTAssertFalse(composeDiaryEntryViewModel.canProceed)
+    }
 }
 
 class MockComposeDiaryEntryCoordinatorDelegate: ComposeDiaryEntryCoordinatorDelegate {
