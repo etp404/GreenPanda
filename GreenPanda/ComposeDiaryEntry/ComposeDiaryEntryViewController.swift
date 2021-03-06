@@ -39,6 +39,7 @@ class ComposeDiaryEntryViewController: UIViewController {
             self.doneButton.alpha = hidden ? 0.5 : 1
         }
         entryTextInput.delegate = self
+        viewModel?.entryText = entryTextInput.text
         
     }
     
