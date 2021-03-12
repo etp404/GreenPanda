@@ -18,16 +18,22 @@ class DiaryViewModelTests: XCTestCase {
     var diaryViewModel: DiaryViewModel!
     var mockDiaryViewModelCoordinatorDelegate: MockDiaryViewModelCoordinatorDelegate!
     var cancellable: AnyCancellable?
-    
+    let entry0Id = UUID()
+    let entry1Id = UUID()
+    let entry2Id = UUID()
+    let entry3Id = UUID()
+    let entry4Id = UUID()
+
+
     override func setUp() {
         self.continueAfterFailure = false;
         mockGreenPandaModel = MockGreenPandaModel()
         mockGreenPandaModel.entriesBackingValue = [
-            DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 1603645316), entryText: entry1Text, score: 1),
-            DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 2),
-            DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 3),
-            DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 4),
-            DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 1600642316), entryText: entry2Text, score: 5)]
+            DiaryEntry(id: entry4Id, timestamp: Date(timeIntervalSince1970: 1603645315), entryText: entry1Text, score: 5),
+            DiaryEntry(id: entry2Id, timestamp: Date(timeIntervalSince1970: 1600642313), entryText: entry2Text, score: 3),
+            DiaryEntry(id: entry1Id, timestamp: Date(timeIntervalSince1970: 1600642312), entryText: entry2Text, score: 2),
+            DiaryEntry(id: entry3Id, timestamp: Date(timeIntervalSince1970: 1600642314), entryText: entry2Text, score: 4),
+            DiaryEntry(id: entry0Id, timestamp: Date(timeIntervalSince1970: 1600642311), entryText: entry2Text, score: 1)]
         mockDiaryViewModelCoordinatorDelegate = MockDiaryViewModelCoordinatorDelegate()
 
         diaryViewModel = DiaryViewModel(model: mockGreenPandaModel,
@@ -40,10 +46,14 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertEqual(diaryViewModel.entries.count, 5)
     }
     
-    func testThatExpectedIdsAreReturned() throws {
+    func testThatExpectedIdsAreReturnedInOrder() throws {
         
-        XCTAssertEqual(diaryViewModel.entries[0].id, mockGreenPandaModel.entriesBackingValue[0].id)
-        XCTAssertEqual(diaryViewModel.entries[1].id, mockGreenPandaModel.entriesBackingValue[1].id)
+        XCTAssertEqual(entry4Id, diaryViewModel.entries[0].id)
+        XCTAssertEqual(entry3Id, diaryViewModel.entries[1].id)
+        XCTAssertEqual(entry2Id, diaryViewModel.entries[2].id)
+        XCTAssertEqual(entry1Id, diaryViewModel.entries[3].id)
+        XCTAssertEqual(entry0Id, diaryViewModel.entries[4].id)
+
     }
     
     func testThatExpectedEntryTextsAreReturned() throws {
@@ -58,11 +68,11 @@ class DiaryViewModelTests: XCTestCase {
     }
     
     func testThatExpectedScoreIsReturnedAsEpected() throws {
-        XCTAssertEqual(diaryViewModel.entries[0].score, "😩")
-        XCTAssertEqual(diaryViewModel.entries[1].score, "😕")
+        XCTAssertEqual(diaryViewModel.entries[0].score, "😁")
+        XCTAssertEqual(diaryViewModel.entries[1].score, "🙂")
         XCTAssertEqual(diaryViewModel.entries[2].score, "😐")
-        XCTAssertEqual(diaryViewModel.entries[3].score, "🙂")
-        XCTAssertEqual(diaryViewModel.entries[4].score, "😁")
+        XCTAssertEqual(diaryViewModel.entries[3].score, "😕")
+        XCTAssertEqual(diaryViewModel.entries[4].score, "😩")
     }
     
     func testThatPressingTheComposeButtonOpensTheComposeView() {

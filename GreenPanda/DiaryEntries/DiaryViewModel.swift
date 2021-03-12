@@ -32,7 +32,7 @@ class DiaryViewModel: NSObject {
         super.init()
         
         cancellable = greenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
-            self.entries = newEntries.map { self.convertToViewModel(entry: $0) }
+            self.entries = newEntries.sorted(by: {$0.timestamp > $1.timestamp}).map { self.convertToViewModel(entry: $0) }
         } )
     }
     
