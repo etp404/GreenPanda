@@ -20,10 +20,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nZB-oD-39r">
-                    <rect key="frame" x="0.0" y="44" width="414" height="848"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="VZH-sw-wcj">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="767.5"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AQY-zI-Vbo">
                                 <size key="itemSize" width="128" height="128"/>
@@ -32,12 +32,11 @@
                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </collectionViewFlowLayout>
                         </collectionView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="hhe-UU-Gzo">
-                            <rect key="frame" x="0.0" y="818" width="414" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9w-So-WDa">
+                            <rect key="frame" x="0.0" y="767.5" width="414" height="50.5"/>
                             <state key="normal" title="Compose"/>
                             <connections>
-                                <action selector="composeButtonPRessed:" destination="-1" eventType="touchUpInside" id="ecj-8d-PzU"/>
+                                <action selector="composeButtonPRessed:" destination="-1" eventType="touchUpInside" id="kgc-7f-lyl"/>
                             </connections>
                         </button>
                     </subviews>
