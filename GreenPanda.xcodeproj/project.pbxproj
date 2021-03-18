@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56941AFF2603514C00165A22 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 56941AFE2603514C00165A22 /* Charts */; };
 		C9034521257CF7D1002A76C5 /* CoreDataGreenPandaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9034520257CF7D1002A76C5 /* CoreDataGreenPandaModel.swift */; };
 		C92E646E257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C92E646C257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld */; };
 		C92E6473257BD81600723239 /* GreenPandaCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */; };
@@ -100,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56941AFF2603514C00165A22 /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +228,9 @@
 			dependencies = (
 			);
 			name = GreenPanda;
+			packageProductDependencies = (
+				56941AFE2603514C00165A22 /* Charts */,
+			);
 			productName = GreenPanda;
 			productReference = C97C09AB25409A30001E1E5A /* GreenPanda.app */;
 			productType = "com.apple.product-type.application";
@@ -297,6 +302,9 @@
 				Base,
 			);
 			mainGroup = C97C09A225409A30001E1E5A;
+			packageReferences = (
+				56941AFD2603514C00165A22 /* XCRemoteSwiftPackageReference "Charts" */,
+			);
 			productRefGroup = C97C09AC25409A30001E1E5A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -699,6 +707,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		56941AFD2603514C00165A22 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		56941AFE2603514C00165A22 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56941AFD2603514C00165A22 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C92E646C257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld */ = {
