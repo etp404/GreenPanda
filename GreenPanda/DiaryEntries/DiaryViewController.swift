@@ -64,7 +64,7 @@ class DiaryViewController: ViewController {
 //        let yse1 = ys1.enumerated().map { x, y in return ChartDataEntry(x: x, y: y) }
         
         let now = Date()
-        let yse1 = Array(0...10).reversed().map({(index: Int) -> ChartDataEntry in
+        let yse1 = Array(0...100).reversed().map({(index: Int) -> ChartDataEntry in
             let x = now.timeIntervalSince1970 - Double(index*24*60*60)
             return ChartDataEntry(x:x , y: Double(Array(1...5).randomElement()!))
         })
@@ -84,8 +84,26 @@ class DiaryViewController: ViewController {
         chart.legend.enabled = false
         chart.xAxis.drawGridLinesEnabled = false
         chart.xAxis.labelPosition = XAxis.LabelPosition.bottom
+        chart.xAxis.valueFormatter = DateValueFormatter()
+        chart.xAxis.labelRotationAngle = -45
+        chart.setVisibleXRange(minXRange: 7*24*60*60, maxXRange: 7*24*60)
+        chart.resetViewPortOffsets()
+        chart.moveViewToX(now.timeIntervalSince1970 + 93*24*60*60)
 
 
     }
-
 }
+
+public class DateValueFormatter: NSObject, AxisValueFormatter {
+    private let dateFormatter = DateFormatter()
+    
+    override init() {
+        super.init()
+        dateFormatter.dateFormat = "dd MMM"
+    }
+    
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
+    }
+}
+
