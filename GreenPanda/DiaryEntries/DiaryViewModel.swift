@@ -15,6 +15,11 @@ struct EntryViewModel: Hashable {
     let score: String
 }
 
+struct ChartDatum {
+    let timestamp: TimeInterval
+    let moodScore: Int
+}
+
 class DiaryViewModel: NSObject {
     
     private let greenPandaModel: GreenPandaModel
@@ -33,11 +38,14 @@ class DiaryViewModel: NSObject {
         
         cancellable = greenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
             self.entries = newEntries.sorted(by: {$0.timestamp > $1.timestamp}).map { self.convertToViewModel(entry: $0) }
+            self.chartData = newEntries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
         } )
     }
     
     @Published var entries: [EntryViewModel] = []
-    
+
+    var chartData: [ChartDatum] = []
+
     func composeButtonPressed() {
         coordinatorDelegate.openComposeView()
     }
@@ -61,6 +69,10 @@ class DiaryViewModel: NSObject {
                               date: dateFormatter.string(from:entry.timestamp),
                               entryText: entry.entryText,
                               score: scoreSmiley(for: entry.score))
+    }
+
+    private func convertToChartDatum(entry: DiaryEntry) -> ChartDatum {
+        return ChartDatum(timestamp: entry.timestamp.timeIntervalSince1970, moodScore: entry.score)
     }
 
 }

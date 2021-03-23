@@ -101,6 +101,15 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertEqual(receivedValue?.count, 6)
     }
 
+    func testThatChartDataAreReturned() {
+        XCTAssertEqual(diaryViewModel.chartData.count, 5)
+
+        XCTAssertEqual(diaryViewModel.chartData[0].timestamp,1600642311)
+        XCTAssertEqual(diaryViewModel.chartData[0].moodScore,1)
+
+        XCTAssertEqual(diaryViewModel.chartData[4].timestamp, 1603645315)
+        XCTAssertEqual(diaryViewModel.chartData[4].moodScore, 5)
+    }
 
 }
 
