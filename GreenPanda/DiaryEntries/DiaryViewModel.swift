@@ -45,7 +45,8 @@ class DiaryViewModel: NSObject {
     @Published var entries: [EntryViewModel] = []
 
     var chartData: [ChartDatum] = []
-
+    let chartVisibleRange = 7*24*60*60
+    
     func composeButtonPressed() {
         coordinatorDelegate.openComposeView()
     }

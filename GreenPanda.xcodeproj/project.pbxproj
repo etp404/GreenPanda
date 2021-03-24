@@ -58,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		562EBDBA260B306D00C5391F /* todo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = todo.txt; sourceTree = "<group>"; };
 		C9034520257CF7D1002A76C5 /* CoreDataGreenPandaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataGreenPandaModel.swift; sourceTree = "<group>"; };
 		C92E646D257BD78C00723239 /* GreenPandaDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreenPandaDataModel.xcdatamodel; sourceTree = "<group>"; };
 		C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaCoreDataTests.swift; sourceTree = "<group>"; };
@@ -125,6 +126,7 @@
 		C97C09A225409A30001E1E5A = {
 			isa = PBXGroup;
 			children = (
+				562EBDBA260B306D00C5391F /* todo.txt */,
 				C97C09AD25409A30001E1E5A /* GreenPanda */,
 				C97C09C425409A31001E1E5A /* GreenPandaTests */,
 				C97C09CF25409A31001E1E5A /* GreenPandaUITests */,

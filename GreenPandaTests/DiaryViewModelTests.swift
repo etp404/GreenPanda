@@ -111,6 +111,10 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertEqual(diaryViewModel.chartData[4].moodScore, 5)
     }
 
+    func testThatCorrectChartRangeIsReturnedFromViewModel() {
+        XCTAssertEqual(diaryViewModel.chartVisibleRange, 7*24*60*60)
+    }
+
 }
 
 class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {
