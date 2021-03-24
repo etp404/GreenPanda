@@ -115,6 +115,18 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertEqual(diaryViewModel.chartVisibleRange, 7*24*60*60)
     }
 
+    func testThatCorrectXPositionIsReturnedFromViewModel() {
+        mockGreenPandaModel.add(entry: NewDiaryEntry(id: UUID(), entryText: "abc", score: 0))
+        mockGreenPandaModel.add(entry: NewDiaryEntry(id: UUID(), entryText: "abc", score: 0))
+        mockGreenPandaModel.add(entry: NewDiaryEntry(id: UUID(), entryText: "abc", score: 0))
+        mockGreenPandaModel.add(entry: NewDiaryEntry(id: UUID(), entryText: "abc", score: 0))
+        mockGreenPandaModel.add(entry: NewDiaryEntry(id: UUID(), entryText: "abc", score: 0))
+        mockGreenPandaModel.add(entry: NewDiaryEntry(id: UUID(), entryText: "abc", score: 0))
+        mockGreenPandaModel.add(entry: NewDiaryEntry(id: UUID(), entryText: "abc", score: 0))
+
+        XCTAssertEqual(diaryViewModel.chartXOffset, 5*24*60*60)
+    }
+
 }
 
 class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {

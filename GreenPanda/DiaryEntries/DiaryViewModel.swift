@@ -46,6 +46,11 @@ class DiaryViewModel: NSObject {
 
     var chartData: [ChartDatum] = []
     let chartVisibleRange = 7*24*60*60
+    var chartXOffset: Double {
+        get {
+            Double((self.entries.count - 7)*24*60*60)
+        }
+    }
     
     func composeButtonPressed() {
         coordinatorDelegate.openComposeView()

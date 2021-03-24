@@ -1,4 +1,3 @@
-Emit visible range of chart from viewmodel.
 Emit chart x-position from view model.
 Emit showChart (only show if there is any data) from the viewmodel.
 Create custom chart view with all the config and ability to set data on it.
