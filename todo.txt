@@ -1,4 +1,3 @@
-Emit showChart (only show if there is any data) from the viewmodel.
 Create custom chart view with all the config and ability to set data on it.
 Have chart visibility react to changes in chart data.
 

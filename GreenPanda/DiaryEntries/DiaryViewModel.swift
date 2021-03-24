@@ -17,7 +17,7 @@ struct EntryViewModel: Hashable {
 
 struct ChartDatum {
     let timestamp: TimeInterval
-    let moodScore: Int
+    let moodScore: Double
 }
 
 class DiaryViewModel: NSObject {
@@ -45,7 +45,7 @@ class DiaryViewModel: NSObject {
     @Published var entries: [EntryViewModel] = []
 
     var chartData: [ChartDatum] = []
-    let chartVisibleRange = 7*24*60*60
+    let chartVisibleRange = Double(7*24*60*60)
     var chartXOffset: Double {
         get {
             Double((self.entries.count - 7)*24*60*60)
@@ -84,7 +84,7 @@ class DiaryViewModel: NSObject {
     }
 
     private func convertToChartDatum(entry: DiaryEntry) -> ChartDatum {
-        return ChartDatum(timestamp: entry.timestamp.timeIntervalSince1970, moodScore: entry.score)
+        return ChartDatum(timestamp: entry.timestamp.timeIntervalSince1970, moodScore: Double(entry.score))
     }
 
 }

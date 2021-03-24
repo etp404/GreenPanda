@@ -112,7 +112,7 @@ class DiaryViewModelTests: XCTestCase {
     }
 
     func testThatCorrectChartRangeIsReturnedFromViewModel() {
-        XCTAssertEqual(diaryViewModel.chartVisibleRange, 7*24*60*60)
+        XCTAssertEqual(diaryViewModel.chartVisibleRange, Double(7*24*60*60))
     }
 
     func testThatCorrectXPositionIsReturnedFromViewModel() {
@@ -124,7 +124,7 @@ class DiaryViewModelTests: XCTestCase {
         mockGreenPandaModel.add(entry: NewDiaryEntry(id: UUID(), entryText: "abc", score: 0))
         mockGreenPandaModel.add(entry: NewDiaryEntry(id: UUID(), entryText: "abc", score: 0))
 
-        XCTAssertEqual(diaryViewModel.chartXOffset, 5*24*60*60)
+        XCTAssertEqual(diaryViewModel.chartXOffset, Double(5*24*60*60))
     }
 
     func testReturnShowChartFromViewModel() {

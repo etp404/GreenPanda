@@ -7,8 +7,11 @@
 
 import UIKit
 import Combine
+import Charts
+
 class DiaryViewController: ViewController {
 
+    @IBOutlet weak var chart: LineChartView!
     private var someCancellable: AnyCancellable?
     @IBOutlet weak var collectionView: UICollectionView!
     @IBAction func composeButtonPRessed(_ sender: Any) {
@@ -44,6 +47,10 @@ class DiaryViewController: ViewController {
             self.applySnapshot(entries:entries)
         }
 
+        if let viewModel = viewModel, viewModel.showChart {
+            setUpChart()
+        }
+
     }
     
     func applySnapshot(entries:[EntryViewModel]?, animatingDifferences: Bool = true) {
@@ -54,4 +61,43 @@ class DiaryViewController: ViewController {
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
 
+    func setUpChart() {
+        guard let viewModel = viewModel else { return }
+        let data = LineChartData()
+        let dataset = LineChartDataSet(entries: viewModel.chartData.map{
+            ChartDataEntry(x: $0.timestamp, y: $0.moodScore)
+        })
+        dataset.drawFilledEnabled = true
+        dataset.drawCirclesEnabled = true
+        dataset.mode = .cubicBezier
+        data.append(dataset)
+        data.setDrawValues(false)
+
+        self.chart.data = data
+
+        chart.leftAxis.enabled = false
+        chart.rightAxis.enabled = false
+        chart.legend.enabled = false
+        chart.xAxis.drawGridLinesEnabled = false
+        chart.xAxis.labelPosition = XAxis.LabelPosition.bottom
+        chart.xAxis.valueFormatter = DateValueFormatter()
+        chart.xAxis.labelRotationAngle = -45
+//        chart.setVisibleXRange(minXRange: viewModel.chartVisibleRange, maxXRange: chartVisibleRange)
+        chart.resetViewPortOffsets()
+        chart.moveViewToX(viewModel.chartXOffset)
+    }
+
+}
+
+private class DateValueFormatter: NSObject, AxisValueFormatter {
+    private let dateFormatter = DateFormatter()
+
+    override init() {
+        super.init()
+        dateFormatter.dateFormat = "dd MMM"
+    }
+
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
+    }
 }
