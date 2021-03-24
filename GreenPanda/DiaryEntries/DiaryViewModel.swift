@@ -51,6 +51,12 @@ class DiaryViewModel: NSObject {
             Double((self.entries.count - 7)*24*60*60)
         }
     }
+
+    var showChart: Bool {
+        get {
+            !self.entries.isEmpty
+        }
+    }
     
     func composeButtonPressed() {
         coordinatorDelegate.openComposeView()

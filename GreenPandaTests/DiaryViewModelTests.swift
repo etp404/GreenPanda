@@ -127,6 +127,15 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertEqual(diaryViewModel.chartXOffset, 5*24*60*60)
     }
 
+    func testReturnShowChartFromViewModel() {
+        XCTAssertTrue(diaryViewModel.showChart)
+
+        let emptyViewModel = DiaryViewModel(model: MockGreenPandaModel(),
+                                        timezone: TimeZone.init(abbreviation: "CET")!,
+                                        coordinatorDelegate: mockDiaryViewModelCoordinatorDelegate)
+        XCTAssertFalse(emptyViewModel.showChart)
+    }
+
 }
 
 class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {
