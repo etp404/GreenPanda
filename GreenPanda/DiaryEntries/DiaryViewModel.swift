@@ -48,7 +48,8 @@ class DiaryViewModel: NSObject {
     let chartVisibleRange = Double(7*24*60*60)
     var chartXOffset: Double {
         get {
-            Double((self.entries.count - 7)*24*60*60)
+            guard let lastDatapoint = chartData.last else {return 0.0}
+            return Double(lastDatapoint.timestamp - 7*24*60*60)
         }
     }
 

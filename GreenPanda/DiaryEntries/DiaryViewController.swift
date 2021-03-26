@@ -82,7 +82,7 @@ class DiaryViewController: ViewController {
         chart.xAxis.labelPosition = XAxis.LabelPosition.bottom
         chart.xAxis.valueFormatter = DateValueFormatter()
         chart.xAxis.labelRotationAngle = -45
-//        chart.setVisibleXRange(minXRange: viewModel.chartVisibleRange, maxXRange: chartVisibleRange)
+        chart.setVisibleXRangeMaximum(viewModel.chartVisibleRange)
         chart.resetViewPortOffsets()
         chart.moveViewToX(viewModel.chartXOffset)
     }
