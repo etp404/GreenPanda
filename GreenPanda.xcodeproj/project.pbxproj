@@ -13,6 +13,7 @@
 		C92E6473257BD81600723239 /* GreenPandaCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */; };
 		C93405C025A0A84C00B544F6 /* NewDiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93405BF25A0A84C00B544F6 /* NewDiaryEntry.swift */; };
 		C9384EFA259FB6B400DAF25A /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9384EF9259FB6B400DAF25A /* Clock.swift */; };
+		C95CA0C72610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95CA0C62610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift */; };
 		C97C09AF25409A30001E1E5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09AE25409A30001E1E5A /* AppDelegate.swift */; };
 		C97C09B125409A30001E1E5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09B025409A30001E1E5A /* SceneDelegate.swift */; };
 		C97C09B325409A30001E1E5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09B225409A30001E1E5A /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 		C9B4F47825437E550077DE2A /* DiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B4F47725437E550077DE2A /* DiaryViewModel.swift */; };
 		C9BCF9A025531BB500F2232E /* ComposeDiaryEntryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BCF99F25531BB500F2232E /* ComposeDiaryEntryViewModelTests.swift */; };
 		C9BCF9A525531D3E00F2232E /* MockGreenPandaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BCF9A425531D3E00F2232E /* MockGreenPandaModel.swift */; };
+		C9C726F02610B12C004DD1C5 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = C9C726EF2610B12C004DD1C5 /* SnapshotTesting */; };
 		C9CB0E3F2544845600D7C2B3 /* DiaryEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CB0E3D2544845600D7C2B3 /* DiaryEntryCell.swift */; };
 		C9CB0E402544845600D7C2B3 /* DiaryEntryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9CB0E3E2544845600D7C2B3 /* DiaryEntryCell.xib */; };
 		C9D836B92556D42400E68F65 /* ComposeDiaryEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D836B82556D42400E68F65 /* ComposeDiaryEntryViewModel.swift */; };
@@ -64,6 +66,7 @@
 		C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaCoreDataTests.swift; sourceTree = "<group>"; };
 		C93405BF25A0A84C00B544F6 /* NewDiaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryEntry.swift; sourceTree = "<group>"; };
 		C9384EF9259FB6B400DAF25A /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
+		C95CA0C62610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEntriesSnapshotTests.swift; sourceTree = "<group>"; };
 		C97C09AB25409A30001E1E5A /* GreenPanda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenPanda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97C09AE25409A30001E1E5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C97C09B025409A30001E1E5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9C726F02610B12C004DD1C5 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +179,7 @@
 				C9BCF9A425531D3E00F2232E /* MockGreenPandaModel.swift */,
 				C9B26431256939BE0089A1BB /* MockupOfCombineVersion.swift */,
 				C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */,
+				C95CA0C62610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift */,
 			);
 			path = GreenPandaTests;
 			sourceTree = "<group>";
@@ -251,6 +256,9 @@
 				C97C09C325409A31001E1E5A /* PBXTargetDependency */,
 			);
 			name = GreenPandaTests;
+			packageProductDependencies = (
+				C9C726EF2610B12C004DD1C5 /* SnapshotTesting */,
+			);
 			productName = GreenPandaTests;
 			productReference = C97C09C125409A31001E1E5A /* GreenPandaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -306,6 +314,7 @@
 			mainGroup = C97C09A225409A30001E1E5A;
 			packageReferences = (
 				56941AFD2603514C00165A22 /* XCRemoteSwiftPackageReference "Charts" */,
+				C9C726EE2610B12C004DD1C5 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = C97C09AC25409A30001E1E5A /* Products */;
 			projectDirPath = "";
@@ -379,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9BCF9A525531D3E00F2232E /* MockGreenPandaModel.swift in Sources */,
+				C95CA0C72610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift in Sources */,
 				C9BCF9A025531BB500F2232E /* ComposeDiaryEntryViewModelTests.swift in Sources */,
 				C9B26432256939BE0089A1BB /* MockupOfCombineVersion.swift in Sources */,
 				C97C09C625409A31001E1E5A /* DiaryViewModelTests.swift in Sources */,
@@ -719,6 +729,14 @@
 				minimumVersion = 4.0.1;
 			};
 		};
+		C9C726EE2610B12C004DD1C5 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -726,6 +744,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 56941AFD2603514C00165A22 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
+		};
+		C9C726EF2610B12C004DD1C5 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C9C726EE2610B12C004DD1C5 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 

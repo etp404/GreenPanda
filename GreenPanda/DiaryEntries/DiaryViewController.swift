@@ -18,9 +18,9 @@ class DiaryViewController: ViewController {
         viewModel?.composeButtonPressed()
     }
     
-    private var viewModel:DiaryViewModel?
+    private var viewModel:DiaryViewModelInterface?
     private var dataSource:UICollectionViewDiffableDataSource<Int, EntryViewModel>?
-    func configure(with viewModel: DiaryViewModel) {
+    func configure(with viewModel: DiaryViewModelInterface) {
         self.viewModel = viewModel
     }
     
@@ -43,7 +43,7 @@ class DiaryViewController: ViewController {
         }
         
         collectionView.dataSource = dataSource
-        someCancellable = viewModel?.$entries.sink{entries in
+        someCancellable = viewModel?.entriesPublisher.sink{entries in
             self.applySnapshot(entries:entries)
         }
 

@@ -20,7 +20,16 @@ struct ChartDatum {
     let moodScore: Double
 }
 
-class DiaryViewModel: NSObject {
+protocol DiaryViewModelInterface {
+    func composeButtonPressed()
+    var chartData: [ChartDatum] { get }
+    var showChart: Bool { get }
+    var chartXOffset: Double { get }
+    var chartVisibleRange: Double { get }
+    var entriesPublisher: Published<[EntryViewModel] >.Publisher { get }
+}
+
+class DiaryViewModel: NSObject, DiaryViewModelInterface {
     
     private let greenPandaModel: GreenPandaModel
     private let timezone: TimeZone
@@ -43,7 +52,8 @@ class DiaryViewModel: NSObject {
     }
     
     @Published var entries: [EntryViewModel] = []
-
+    var entriesPublisher: Published<[EntryViewModel]>.Publisher { $entries }
+    
     var chartData: [ChartDatum] = []
     let chartVisibleRange = Double(7*24*60*60)
     var chartXOffset: Double {
