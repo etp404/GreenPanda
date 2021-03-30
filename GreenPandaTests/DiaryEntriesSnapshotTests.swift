@@ -25,6 +25,44 @@ class DiaryEntriesSnapshotTests: XCTestCase {
         assertSnapshot(matching: diaryEntriesViewController, as: .image)
     }
 
+    func testEntryViewWithMultipleEntriesLessThanSeven() throws {
+        let fakeEntries = [FakeEntry(id: UUID(),
+                                     date: "some date as string 1",
+                                     entryText: "Some entry text 1",
+                                     timestamp: Date().timeIntervalSince1970,
+                                     moodScore: 4,
+                                     score: "🙂"),
+                           FakeEntry(id: UUID(),
+                                     date: "some date as string 2",
+                                     entryText: "Some entry text 2",
+                                     timestamp: Date().timeIntervalSince1970 + 24*60*60,
+                                     moodScore: 4,
+                                     score: "🙁"),
+                           FakeEntry(id: UUID(),
+                                     date: "some date as string 3",
+                                     entryText: "Some entry text 3",
+                                     timestamp: Date().timeIntervalSince1970 + 2*24*60*60,
+                                     moodScore: 4,
+                                     score: "🙂"),
+                           FakeEntry(id: UUID(),
+                                     date: "some date as string 4",
+                                     entryText: "Some entry text 4",
+                                     timestamp: Date().timeIntervalSince1970 + 3*24*60*60,
+                                     moodScore: 4,
+                                     score: "🥪"),
+                           FakeEntry(id: UUID(),
+                                     date: "some date as string 5",
+                                     entryText: "Some entry text 5",
+                                     timestamp: Date().timeIntervalSince1970 + 4*24*60*60,
+                                     moodScore: 4,
+                                     score: "🙂")]
+        let fakeDiaryViewModel = FakeDiaryViewModel()
+        fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries)
+        let diaryEntriesViewController = DiaryViewController()
+        diaryEntriesViewController.configure(with: fakeDiaryViewModel)
+        assertSnapshot(matching: diaryEntriesViewController, as: .image)
+    }
+
 }
 
 struct FakeEntry {
