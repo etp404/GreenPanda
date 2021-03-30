@@ -17,9 +17,35 @@ class DiaryEntriesSnapshotTests: XCTestCase {
         assertSnapshot(matching: diaryEntriesViewController, as: .image)
     }
 
+    func testOneDiaryEntryView() throws {
+        let fakeDiaryViewModel = FakeDiaryViewModel()
+        fakeDiaryViewModel.setFakeEntries(fakeEntries: [FakeEntry(id: UUID(), date: "some date as string", entryText: "Some entry text", timestamp: Date().timeIntervalSince1970, moodScore: 4, score: "🙂")])
+        let diaryEntriesViewController = DiaryViewController()
+        diaryEntriesViewController.configure(with: fakeDiaryViewModel)
+        assertSnapshot(matching: diaryEntriesViewController, as: .image)
+    }
+
+}
+
+struct FakeEntry {
+    let id: UUID
+    let date: String
+    let entryText: String
+    let timestamp: TimeInterval
+    let moodScore: Double
+    let score: String
 }
 
 class FakeDiaryViewModel: DiaryViewModelInterface {
+    func setFakeEntries(fakeEntries: [FakeEntry]) {
+        chartData = fakeEntries.map({
+            ChartDatum(timestamp: $0.timestamp, moodScore: $0.moodScore)
+        })
+        entries = fakeEntries.map({
+            EntryViewModel(id: $0.id, date: $0.date, entryText: $0.entryText, score: $0.score)
+        })
+    }
+
     func composeButtonPressed() {}
     
     var chartData: [ChartDatum] = [ChartDatum]()
@@ -34,7 +60,7 @@ class FakeDiaryViewModel: DiaryViewModelInterface {
         get { $entries }
     }
     
-    @Published private var entries: [EntryViewModel] = []
+    @Published var entries: [EntryViewModel] = []
     
     
 }
