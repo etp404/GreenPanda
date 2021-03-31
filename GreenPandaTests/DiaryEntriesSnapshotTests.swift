@@ -26,19 +26,29 @@ class DiaryEntriesSnapshotTests: XCTestCase {
     }
 
     func testEntryViewWithMultipleEntriesLessThanSeven() throws {
-        let fakeEntries  = [Int](1...5).map({
-            FakeEntry(id: UUID(),
-            date: "some date as string \($0)",
-            entryText: "Some entry text \($0)",
-            timestamp: Date().timeIntervalSince1970 + Double($0*24*60*60),
-            moodScore: Double($0),
-            score: "🙂")
-        })
         let fakeDiaryViewModel = FakeDiaryViewModel()
-        fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries)
+        fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 4))
         let diaryEntriesViewController = DiaryViewController()
         diaryEntriesViewController.configure(with: fakeDiaryViewModel)
         assertSnapshot(matching: diaryEntriesViewController, as: .image)
+    }
+
+    func testEntryViewWithMultipleEntriesMoreThanSeven() throws {
+        let fakeDiaryViewModel = FakeDiaryViewModel()
+        fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 12))
+        let diaryEntriesViewController = DiaryViewController()
+        diaryEntriesViewController.configure(with: fakeDiaryViewModel)
+        assertSnapshot(matching: diaryEntriesViewController, as: .image)
+    }
+
+    func fakeEntries(n: Int) -> [FakeEntry] {
+        [Int](0...n).map({
+                            FakeEntry(id: UUID(),
+                                      date: "some date as string \($0)",
+                                      entryText: "Some entry text \($0)",
+                                      timestamp: Date().timeIntervalSince1970 + Double($0*24*60*60),
+                                      moodScore: Double($0),
+                                      score: "🙂")})
     }
 
 }
