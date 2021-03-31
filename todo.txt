@@ -1,3 +1,4 @@
+Snapshot tests are showing no graph.
 Have chart visibility react to changes in chart data.
 Rename score in entry view model to indicate that it's a string representation.
 
