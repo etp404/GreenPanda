@@ -11,6 +11,8 @@ import SnapshotTesting
 
 class DiaryEntriesSnapshotTests: XCTestCase {
 
+    let recordMode = false
+    
     func testEmptyDiaryEntriesView() throws {
         let diaryEntriesViewController = DiaryViewController()
         diaryEntriesViewController.configure(with: FakeDiaryViewModel())
@@ -19,10 +21,10 @@ class DiaryEntriesSnapshotTests: XCTestCase {
 
     func testOneDiaryEntryView() throws {
         let fakeDiaryViewModel = FakeDiaryViewModel()
-        fakeDiaryViewModel.setFakeEntries(fakeEntries: [FakeEntry(id: UUID(), date: "some date as string", entryText: "Some entry text", timestamp: Date().timeIntervalSince1970, moodScore: 4, score: "🙂")])
+        fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 1))
         let diaryEntriesViewController = DiaryViewController()
         diaryEntriesViewController.configure(with: fakeDiaryViewModel)
-        assertSnapshot(matching: diaryEntriesViewController, as: .image)
+        assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
     }
 
     func testEntryViewWithMultipleEntriesLessThanSeven() throws {
@@ -30,7 +32,7 @@ class DiaryEntriesSnapshotTests: XCTestCase {
         fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 4))
         let diaryEntriesViewController = DiaryViewController()
         diaryEntriesViewController.configure(with: fakeDiaryViewModel)
-        assertSnapshot(matching: diaryEntriesViewController, as: .image)
+        assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
     }
 
     func testEntryViewWithMultipleEntriesMoreThanSeven() throws {
@@ -38,7 +40,7 @@ class DiaryEntriesSnapshotTests: XCTestCase {
         fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 12))
         let diaryEntriesViewController = DiaryViewController()
         diaryEntriesViewController.configure(with: fakeDiaryViewModel)
-        assertSnapshot(matching: diaryEntriesViewController, as: .image)
+        assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
     }
 
     func fakeEntries(n: Int) -> [FakeEntry] {
@@ -46,7 +48,7 @@ class DiaryEntriesSnapshotTests: XCTestCase {
                             FakeEntry(id: UUID(),
                                       date: "some date as string \($0)",
                                       entryText: "Some entry text \($0)",
-                                      timestamp: Date().timeIntervalSince1970 + Double($0*24*60*60),
+                                      timestamp: 1617440087 + Double($0*24*60*60),
                                       moodScore: Double($0),
                                       score: "🙂")})
     }
@@ -70,6 +72,9 @@ class FakeDiaryViewModel: DiaryViewModel {
         entries = fakeEntries.map({
             EntryViewModel(id: $0.id, date: $0.date, entryText: $0.entryText, score: $0.score)
         })
+        if !fakeEntries.isEmpty {
+            showChart = true
+        }
     }
 
     func composeButtonPressed() {}
@@ -80,7 +85,7 @@ class FakeDiaryViewModel: DiaryViewModel {
     
     var chartXOffset: Double = 0.0
     
-    var chartVisibleRange: Double = 0.0
+    let chartVisibleRange = Double(7*24*60*60)
     
     var entriesPublisher: Published<[EntryViewModel]>.Publisher {
         get { $entries }
