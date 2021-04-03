@@ -62,7 +62,7 @@ struct FakeEntry {
     let score: String
 }
 
-class FakeDiaryViewModel: DiaryViewModelInterface {
+class FakeDiaryViewModel: DiaryViewModel {
     func setFakeEntries(fakeEntries: [FakeEntry]) {
         chartData = fakeEntries.map({
             ChartDatum(timestamp: $0.timestamp, moodScore: $0.moodScore)

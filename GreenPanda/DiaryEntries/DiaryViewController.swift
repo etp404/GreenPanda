@@ -18,9 +18,9 @@ class DiaryViewController: ViewController {
         viewModel?.composeButtonPressed()
     }
     
-    private var viewModel:DiaryViewModelInterface?
+    private var viewModel:DiaryViewModel?
     private var dataSource:UICollectionViewDiffableDataSource<Int, EntryViewModel>?
-    func configure(with viewModel: DiaryViewModelInterface) {
+    func configure(with viewModel: DiaryViewModel) {
         self.viewModel = viewModel
     }
     

@@ -19,7 +19,7 @@ class DiaryEntriesCoordinator: Coordinator, DiaryViewModelCoordinatorDelegate {
     
     func start() {
         let vc = DiaryViewController(nibName: "DiaryViewController", bundle: nil)
-        vc.configure(with: DiaryViewModel(model: model,
+        vc.configure(with: ModelBackedDiaryViewModel(model: model,
                                           timezone: TimeZone.current,
                                           coordinatorDelegate: self))
         navigationController.pushViewController(vc, animated: false)

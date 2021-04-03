@@ -15,7 +15,7 @@ class DiaryViewModelTests: XCTestCase {
     let entry1Text = "entry1Text"
     let entry2Text = "entry2Text"
     var mockGreenPandaModel: MockGreenPandaModel!
-    var diaryViewModel: DiaryViewModel!
+    var diaryViewModel: ModelBackedDiaryViewModel!
     var mockDiaryViewModelCoordinatorDelegate: MockDiaryViewModelCoordinatorDelegate!
     var cancellable: AnyCancellable?
     let entry0Id = UUID()
@@ -36,7 +36,7 @@ class DiaryViewModelTests: XCTestCase {
             DiaryEntry(id: entry0Id, timestamp: Date(timeIntervalSince1970: 1600642311), entryText: entry2Text, score: 1)]
         mockDiaryViewModelCoordinatorDelegate = MockDiaryViewModelCoordinatorDelegate()
 
-        diaryViewModel = DiaryViewModel(model: mockGreenPandaModel,
+        diaryViewModel = ModelBackedDiaryViewModel(model: mockGreenPandaModel,
                                         timezone: TimeZone.init(abbreviation: "CET")!,
                                         coordinatorDelegate: mockDiaryViewModelCoordinatorDelegate)
         
@@ -130,7 +130,7 @@ class DiaryViewModelTests: XCTestCase {
     func testReturnShowChartFromViewModel() {
         XCTAssertTrue(diaryViewModel.showChart)
 
-        let emptyViewModel = DiaryViewModel(model: MockGreenPandaModel(),
+        let emptyViewModel = ModelBackedDiaryViewModel(model: MockGreenPandaModel(),
                                         timezone: TimeZone.init(abbreviation: "CET")!,
                                         coordinatorDelegate: mockDiaryViewModelCoordinatorDelegate)
         XCTAssertFalse(emptyViewModel.showChart)

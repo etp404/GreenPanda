@@ -20,7 +20,7 @@ struct ChartDatum {
     let moodScore: Double
 }
 
-protocol DiaryViewModelInterface {
+protocol DiaryViewModel {
     func composeButtonPressed()
     var chartData: [ChartDatum] { get }
     var showChart: Bool { get }
@@ -29,7 +29,7 @@ protocol DiaryViewModelInterface {
     var entriesPublisher: Published<[EntryViewModel] >.Publisher { get }
 }
 
-class DiaryViewModel: NSObject, DiaryViewModelInterface {
+class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     
     private let greenPandaModel: GreenPandaModel
     private let timezone: TimeZone
