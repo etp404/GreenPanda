@@ -72,16 +72,17 @@ class DiaryViewController: ViewController {
         dataset.mode = .cubicBezier
         data.append(dataset)
         data.setDrawValues(false)
-
-        self.chart.data = data
-
-        chart.leftAxis.enabled = false
-        chart.rightAxis.enabled = false
-        chart.legend.enabled = false
         chart.xAxis.drawGridLinesEnabled = false
         chart.xAxis.labelPosition = XAxis.LabelPosition.bottom
         chart.xAxis.valueFormatter = DateValueFormatter()
         chart.xAxis.labelRotationAngle = -45
+        
+        chart.leftAxis.enabled = false
+        chart.rightAxis.enabled = false
+        chart.legend.enabled = false
+        
+        self.chart.data = data
+
         chart.setVisibleXRangeMaximum(viewModel.chartVisibleRange)
         chart.resetViewPortOffsets()
         chart.moveViewToX(viewModel.chartXOffset)
