@@ -17,13 +17,14 @@ class DiaryViewModelTests: XCTestCase {
     var mockGreenPandaModel: MockGreenPandaModel!
     var diaryViewModel: DiaryViewModel!
     var mockDiaryViewModelCoordinatorDelegate: MockDiaryViewModelCoordinatorDelegate!
-    var cancellable: AnyCancellable?
+    var bag = Set<AnyCancellable>()
     let entry0Id = UUID()
     let entry1Id = UUID()
     let entry2Id = UUID()
     let entry3Id = UUID()
     let entry4Id = UUID()
     var capturedEntries: [EntryViewModel]!
+    var capturedChartData: [ChartDatum]!
 
     override func setUp() {
         self.continueAfterFailure = false;
@@ -39,9 +40,12 @@ class DiaryViewModelTests: XCTestCase {
         diaryViewModel = ModelBackedDiaryViewModel(model: mockGreenPandaModel,
                                         timezone: TimeZone.init(abbreviation: "CET")!,
                                         coordinatorDelegate: mockDiaryViewModelCoordinatorDelegate)
-        cancellable = diaryViewModel.entriesPublisher.sink(receiveValue: {
+        diaryViewModel.entriesPublisher.sink(receiveValue: {
             self.capturedEntries = $0
-        })
+        }).store(in: &bag)
+        diaryViewModel.chartDataPublisher.sink(receiveValue: {
+            self.capturedChartData = $0
+        }).store(in: &bag)
         
     }
     
@@ -90,13 +94,13 @@ class DiaryViewModelTests: XCTestCase {
     }
 
     func testThatChartDataAreReturned() {
-        XCTAssertEqual(diaryViewModel.chartData.count, 5)
+        XCTAssertEqual(capturedChartData.count, 5)
 
-        XCTAssertEqual(diaryViewModel.chartData[0].timestamp,1600642311)
-        XCTAssertEqual(diaryViewModel.chartData[0].moodScore,1)
+        XCTAssertEqual(capturedChartData[0].timestamp,1600642311)
+        XCTAssertEqual(capturedChartData[0].moodScore,1)
 
-        XCTAssertEqual(diaryViewModel.chartData[4].timestamp, 1603645315)
-        XCTAssertEqual(diaryViewModel.chartData[4].moodScore, 5)
+        XCTAssertEqual(capturedChartData[4].timestamp, 1603645315)
+        XCTAssertEqual(capturedChartData[4].moodScore, 5)
     }
 
     func testThatCorrectChartRangeIsReturnedFromViewModel() {
