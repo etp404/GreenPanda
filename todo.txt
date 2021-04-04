@@ -1,4 +1,5 @@
-Snapshot tests are showing no graph.
+Make ChartDatum publishable: viewmodel tests first. Add it to the DiaryViewModelInterface. Migrate and delete the non-published property. Add a snapshot test to show data changing.
 Have chart visibility react to changes in chart data.
 Rename score in entry view model to indicate that it's a string representation.
+
 

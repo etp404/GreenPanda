@@ -15,7 +15,7 @@ class DiaryViewModelTests: XCTestCase {
     let entry1Text = "entry1Text"
     let entry2Text = "entry2Text"
     var mockGreenPandaModel: MockGreenPandaModel!
-    var diaryViewModel: ModelBackedDiaryViewModel!
+    var diaryViewModel: DiaryViewModel!
     var mockDiaryViewModelCoordinatorDelegate: MockDiaryViewModelCoordinatorDelegate!
     var cancellable: AnyCancellable?
     let entry0Id = UUID()
@@ -23,7 +23,7 @@ class DiaryViewModelTests: XCTestCase {
     let entry2Id = UUID()
     let entry3Id = UUID()
     let entry4Id = UUID()
-
+    var capturedEntries: [EntryViewModel]!
 
     override func setUp() {
         self.continueAfterFailure = false;
@@ -39,40 +39,42 @@ class DiaryViewModelTests: XCTestCase {
         diaryViewModel = ModelBackedDiaryViewModel(model: mockGreenPandaModel,
                                         timezone: TimeZone.init(abbreviation: "CET")!,
                                         coordinatorDelegate: mockDiaryViewModelCoordinatorDelegate)
+        cancellable = diaryViewModel.entriesPublisher.sink(receiveValue: {
+            self.capturedEntries = $0
+        })
         
     }
     
     func testThatExpectedNNumberEntriesAreReturned() throws {
-        XCTAssertEqual(diaryViewModel.entries.count, 5)
+        XCTAssertEqual(capturedEntries?.count, 5)
     }
     
     func testThatExpectedIdsAreReturnedInOrder() throws {
-        
-        XCTAssertEqual(entry4Id, diaryViewModel.entries[0].id)
-        XCTAssertEqual(entry3Id, diaryViewModel.entries[1].id)
-        XCTAssertEqual(entry2Id, diaryViewModel.entries[2].id)
-        XCTAssertEqual(entry1Id, diaryViewModel.entries[3].id)
-        XCTAssertEqual(entry0Id, diaryViewModel.entries[4].id)
+        XCTAssertEqual(entry4Id, capturedEntries?[0].id)
+        XCTAssertEqual(entry3Id, capturedEntries?[1].id)
+        XCTAssertEqual(entry2Id, capturedEntries?[2].id)
+        XCTAssertEqual(entry1Id, capturedEntries?[3].id)
+        XCTAssertEqual(entry0Id, capturedEntries?[4].id)
 
     }
     
     func testThatExpectedEntryTextsAreReturned() throws {
         
-        XCTAssertEqual(diaryViewModel.entries[0].entryText, entry1Text)
-        XCTAssertEqual(diaryViewModel.entries[1].entryText, entry2Text)
+        XCTAssertEqual(capturedEntries?[0].entryText, entry1Text)
+        XCTAssertEqual(capturedEntries?[1].entryText, entry2Text)
     }
     
     func testThatExpectedEntryDatesAreReturned() throws {
-        XCTAssertEqual(diaryViewModel.entries[0].date, "Sun, 25 Oct 2020 18:01")
-        XCTAssertEqual(diaryViewModel.entries[1].date, "Mon, 21 Sep 2020 00:51")
+        XCTAssertEqual(capturedEntries?[0].date, "Sun, 25 Oct 2020 18:01")
+        XCTAssertEqual(capturedEntries?[1].date, "Mon, 21 Sep 2020 00:51")
     }
     
     func testThatExpectedScoreIsReturnedAsEpected() throws {
-        XCTAssertEqual(diaryViewModel.entries[0].score, "😁")
-        XCTAssertEqual(diaryViewModel.entries[1].score, "🙂")
-        XCTAssertEqual(diaryViewModel.entries[2].score, "😐")
-        XCTAssertEqual(diaryViewModel.entries[3].score, "😕")
-        XCTAssertEqual(diaryViewModel.entries[4].score, "😩")
+        XCTAssertEqual(capturedEntries?[0].score, "😁")
+        XCTAssertEqual(capturedEntries?[1].score, "🙂")
+        XCTAssertEqual(capturedEntries?[2].score, "😐")
+        XCTAssertEqual(capturedEntries?[3].score, "😕")
+        XCTAssertEqual(capturedEntries?[4].score, "😩")
     }
     
     func testThatPressingTheComposeButtonOpensTheComposeView() {
@@ -81,24 +83,10 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertTrue(mockDiaryViewModelCoordinatorDelegate.openComposeViewInvoked)
     }
     
-    func testThatValuesOnTheViewModelCanBeSubscribedTo() {
-        var receivedValue: [EntryViewModel]? = nil
-        cancellable = diaryViewModel.$entries.sink { value in
-            receivedValue = value
-        }
-        
-        XCTAssertEqual(receivedValue?.count, 5)
-    }
-    
     func testThatUpdatesToTheModelArePickedUpAndPropagatedByTheViewModel() {
-        var receivedValue: [EntryViewModel]? = nil
-        cancellable = diaryViewModel.$entries.sink { value in
-            receivedValue = value
-        }
-        
         mockGreenPandaModel.add(entry: NewDiaryEntry(id: UUID(), entryText: "abc", score: 0))
         
-        XCTAssertEqual(receivedValue?.count, 6)
+        XCTAssertEqual(capturedEntries.count, 6)
     }
 
     func testThatChartDataAreReturned() {
