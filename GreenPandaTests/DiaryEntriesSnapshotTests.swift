@@ -40,15 +40,18 @@ class DiaryEntriesSnapshotTests: XCTestCase {
         fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 12))
         let diaryEntriesViewController = DiaryViewController()
         diaryEntriesViewController.configure(with: fakeDiaryViewModel)
-        assertSnapshot(matching: diaryEntriesViewController, as: .image, record: false)
+        assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
     }
 
     func fakeEntries(n: Int) -> [FakeEntry] {
         [Int](0...n).map({
-                            FakeEntry(id: UUID(),
-                                      date: "some date as string \($0)",
+                            let timestamp = 1617440087 + Double($0*24*60*60)
+                            let debugFormatter = DateFormatter()
+                            debugFormatter.dateFormat = "HH:mm E, d MMM yyyy"
+                            return FakeEntry(id: UUID(),
+                                      date: debugFormatter.string(from: Date(timeIntervalSince1970: timestamp)),
                                       entryText: "Some entry text \($0)",
-                                      timestamp: 1617440087 + Double($0*24*60*60),
+                                      timestamp: timestamp,
                                       moodScore: Double($0),
                                       score: "🙂")})
     }
