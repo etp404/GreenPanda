@@ -12,7 +12,7 @@ import Charts
 class DiaryViewController: ViewController {
 
     @IBOutlet weak var chart: LineChartView!
-    private var someCancellable: AnyCancellable?
+    private var bag = Set<AnyCancellable>()
     @IBOutlet weak var collectionView: UICollectionView!
     @IBAction func composeButtonPRessed(_ sender: Any) {
         viewModel?.composeButtonPressed()
@@ -43,9 +43,12 @@ class DiaryViewController: ViewController {
         }
         
         collectionView.dataSource = dataSource
-        someCancellable = viewModel?.entriesPublisher.sink{entries in
+        viewModel?.entriesPublisher.sink{entries in
             self.applySnapshot(entries:entries)
-        }
+        }.store(in: &bag)
+        
+        viewModel?.chartDataPublisher.sink{entries in
+        }.store(in: &bag)
 
         if let viewModel = viewModel, viewModel.showChart {
             setUpChart()
@@ -63,14 +66,13 @@ class DiaryViewController: ViewController {
 
     func setUpChart() {
         guard let viewModel = viewModel else { return }
-        let data = LineChartData()
         let dataset = LineChartDataSet(entries: viewModel.chartData.map{
             ChartDataEntry(x: $0.timestamp, y: $0.moodScore)
         })
         dataset.drawFilledEnabled = true
         dataset.drawCirclesEnabled = true
         dataset.mode = .cubicBezier
-        data.append(dataset)
+        let data = LineChartData(dataSet: dataset)
         data.setDrawValues(false)
         chart.xAxis.drawGridLinesEnabled = false
         chart.xAxis.labelPosition = XAxis.LabelPosition.bottom
