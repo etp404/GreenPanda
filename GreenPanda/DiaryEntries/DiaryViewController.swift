@@ -47,13 +47,15 @@ class DiaryViewController: ViewController {
             self.applySnapshot(entries:entries)
         }.store(in: &bag)
         
-        viewModel?.chartDataPublisher.sink{entries in
-        }.store(in: &bag)
-
         if let viewModel = viewModel, viewModel.showChart {
             setUpChart()
         }
-
+        
+        viewModel?.chartDataPublisher.sink{entries in
+            if let viewModel = self.viewModel, viewModel.showChart {
+                self.updateChart(viewModel)
+            }
+        }.store(in: &bag)
     }
     
     func applySnapshot(entries:[EntryViewModel]?, animatingDifferences: Bool = true) {
@@ -62,6 +64,20 @@ class DiaryViewController: ViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(entries)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+    }
+    
+    func setUpChart() {
+        guard let viewModel = viewModel else { return }
+        chart.xAxis.drawGridLinesEnabled = false
+        chart.xAxis.labelPosition = XAxis.LabelPosition.bottom
+        chart.xAxis.valueFormatter = DateValueFormatter()
+        chart.xAxis.labelRotationAngle = -45
+        
+        chart.leftAxis.enabled = false
+        chart.rightAxis.enabled = false
+        chart.legend.enabled = false
+        
+        updateChart(viewModel)
     }
 
     private func updateChart(_ viewModel: DiaryViewModel) {
@@ -78,20 +94,6 @@ class DiaryViewController: ViewController {
         chart.setVisibleXRangeMaximum(viewModel.chartVisibleRange)
         chart.resetViewPortOffsets()
         chart.moveViewToX(viewModel.chartXOffset)
-    }
-    
-    func setUpChart() {
-        guard let viewModel = viewModel else { return }
-        chart.xAxis.drawGridLinesEnabled = false
-        chart.xAxis.labelPosition = XAxis.LabelPosition.bottom
-        chart.xAxis.valueFormatter = DateValueFormatter()
-        chart.xAxis.labelRotationAngle = -45
-        
-        chart.leftAxis.enabled = false
-        chart.rightAxis.enabled = false
-        chart.legend.enabled = false
-        
-        updateChart(viewModel)
     }
 
 }
