@@ -8,7 +8,7 @@ on:
 jobs:
   build:
 
-    runs-on: macOS-10.15
+    runs-on: macOS-11.2.3
     
     steps:
     - name: Checkout codebase
@@ -16,10 +16,3 @@ jobs:
       
     - name: Start xcodebuild test
       run: /Applications/Xcode_12.app/Contents/Developer/usr/bin/xcodebuild -project GreenPanda.xcodeproj -scheme GreenPanda -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 11,OS=14.0" clean test
-    
-    - name: 'Upload Artifact'
-      uses: actions/upload-artifact@v2
-      with:
-        name: my-artifact
-        path: .
-        retention-days: 5
