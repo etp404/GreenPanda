@@ -23,6 +23,8 @@ struct ChartDatum {
 protocol DiaryViewModel {
     func composeButtonPressed()
     var chartData: [ChartDatum] { get }
+    var chartDataPublisher: Published<[ChartDatum] >.Publisher { get }
+
     var showChart: Bool { get }
     var chartXOffset: Double { get }
     var chartVisibleRange: Double { get }
@@ -30,7 +32,6 @@ protocol DiaryViewModel {
 }
 
 class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
-    
     private let greenPandaModel: GreenPandaModel
     private let timezone: TimeZone
     private let coordinatorDelegate: DiaryViewModelCoordinatorDelegate
@@ -54,7 +55,11 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     @Published var entries: [EntryViewModel] = []
     var entriesPublisher: Published<[EntryViewModel]>.Publisher { $entries }
     
-    var chartData: [ChartDatum] = []
+    @Published var chartData: [ChartDatum] = []
+    var chartDataPublisher: Published<[ChartDatum]>.Publisher {
+        $chartData
+    }
+    
     let chartVisibleRange = Double(7*24*60*60)
     var chartXOffset: Double {
         get {

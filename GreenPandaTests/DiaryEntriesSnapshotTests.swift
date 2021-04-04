@@ -65,6 +65,7 @@ struct FakeEntry {
 }
 
 class FakeDiaryViewModel: DiaryViewModel {
+    
     func setFakeEntries(fakeEntries: [FakeEntry]) {
         chartData = fakeEntries.map({
             ChartDatum(timestamp: $0.timestamp, moodScore: $0.moodScore)
@@ -79,7 +80,12 @@ class FakeDiaryViewModel: DiaryViewModel {
 
     func composeButtonPressed() {}
     
-    var chartData: [ChartDatum] = [ChartDatum]()
+    
+    var chartDataPublisher: Published<[ChartDatum]>.Publisher {
+        $chartData
+    }
+
+    @Published var chartData: [ChartDatum] = [ChartDatum]()
     
     var showChart: Bool = false
     
