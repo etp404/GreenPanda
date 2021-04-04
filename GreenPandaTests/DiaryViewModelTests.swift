@@ -103,6 +103,12 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertEqual(capturedChartData[4].moodScore, 5)
     }
 
+    func testThatChartDataArePublished() {
+        mockGreenPandaModel.add(entry: NewDiaryEntry(id: UUID(), entryText: "abc", score: 0))
+
+        XCTAssertEqual(capturedChartData.count, 6)
+    }
+    
     func testThatCorrectChartRangeIsReturnedFromViewModel() {
         XCTAssertEqual(diaryViewModel.chartVisibleRange, Double(7*24*60*60))
     }
