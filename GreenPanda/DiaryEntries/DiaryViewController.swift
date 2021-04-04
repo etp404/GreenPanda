@@ -64,6 +64,22 @@ class DiaryViewController: ViewController {
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
 
+    private func updateChart(_ viewModel: DiaryViewModel) {
+        let dataset = LineChartDataSet(entries: viewModel.chartData.map{
+            ChartDataEntry(x: $0.timestamp, y: $0.moodScore)
+        })
+        dataset.drawFilledEnabled = true
+        dataset.drawCirclesEnabled = true
+        dataset.mode = .cubicBezier
+        let data = LineChartData(dataSet: dataset)
+        data.setDrawValues(false)
+        self.chart.data = data
+        
+        chart.setVisibleXRangeMaximum(viewModel.chartVisibleRange)
+        chart.resetViewPortOffsets()
+        chart.moveViewToX(viewModel.chartXOffset)
+    }
+    
     func setUpChart() {
         guard let viewModel = viewModel else { return }
         chart.xAxis.drawGridLinesEnabled = false
@@ -75,19 +91,7 @@ class DiaryViewController: ViewController {
         chart.rightAxis.enabled = false
         chart.legend.enabled = false
         
-        let dataset = LineChartDataSet(entries: viewModel.chartData.map{
-            ChartDataEntry(x: $0.timestamp, y: $0.moodScore)
-        })
-        dataset.drawFilledEnabled = true
-        dataset.drawCirclesEnabled = true
-        dataset.mode = .cubicBezier
-        let data = LineChartData(dataSet: dataset)
-        data.setDrawValues(false)
-        self.chart.data = data
-
-        chart.setVisibleXRangeMaximum(viewModel.chartVisibleRange)
-        chart.resetViewPortOffsets()
-        chart.moveViewToX(viewModel.chartXOffset)
+        updateChart(viewModel)
     }
 
 }
