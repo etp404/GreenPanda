@@ -11,7 +11,7 @@ import SnapshotTesting
 
 class DiaryEntriesSnapshotTests: XCTestCase {
 
-    let recordMode = true
+    let recordMode = false
     
     func testEmptyDiaryEntriesView() throws {
         let diaryEntriesViewController = DiaryViewController()
@@ -46,10 +46,8 @@ class DiaryEntriesSnapshotTests: XCTestCase {
     func fakeEntries(n: Int) -> [FakeEntry] {
         [Int](0...n).map({
                             let timestamp = 1617440087 + Double($0*24*60*60)
-                            let debugFormatter = DateFormatter()
-                            debugFormatter.dateFormat = "HH:mm E, d MMM yyyy"
                             return FakeEntry(id: UUID(),
-                                      date: debugFormatter.string(from: Date(timeIntervalSince1970: timestamp)),
+                                      date: "Some date \($0)",
                                       entryText: "Some entry text \($0)",
                                       timestamp: timestamp,
                                       moodScore: Double($0),
