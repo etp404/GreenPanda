@@ -73,12 +73,12 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertEqual(capturedEntries?[1].date, "Mon, 21 Sep 2020 00:51")
     }
     
-    func testThatExpectedScoreIsReturnedAsEpected() throws {
+    func testThatExpectedScoreIsReturnedAsExpected() throws {
         XCTAssertEqual(capturedEntries?[0].score, "😁")
         XCTAssertEqual(capturedEntries?[1].score, "🙂")
         XCTAssertEqual(capturedEntries?[2].score, "😐")
         XCTAssertEqual(capturedEntries?[3].score, "😕")
-        XCTAssertEqual(capturedEntries?[4].score, "")
+        XCTAssertEqual(capturedEntries?[4].score, "😩")
     }
     
     func testThatPressingTheComposeButtonOpensTheComposeView() {

@@ -19,7 +19,7 @@ class DiaryEntriesSnapshotTests: XCTestCase {
         assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
     }
 
-    func xtestOneDiaryEntryView() throws {
+    func testOneDiaryEntryView() throws {
         let fakeDiaryViewModel = FakeDiaryViewModel()
         fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 1))
         let diaryEntriesViewController = DiaryViewController()
@@ -27,7 +27,7 @@ class DiaryEntriesSnapshotTests: XCTestCase {
         assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
     }
 
-    func xtestEntryViewWithMultipleEntriesLessThanSeven() throws {
+    func testEntryViewWithMultipleEntriesLessThanSeven() throws {
         let fakeDiaryViewModel = FakeDiaryViewModel()
         fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 4))
         let diaryEntriesViewController = DiaryViewController()
@@ -35,7 +35,7 @@ class DiaryEntriesSnapshotTests: XCTestCase {
         assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
     }
 
-    func xtestEntryViewWithMultipleEntriesMoreThanSeven() throws {
+    func testEntryViewWithMultipleEntriesMoreThanSeven() throws {
         let fakeDiaryViewModel = FakeDiaryViewModel()
         fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 12))
         let diaryEntriesViewController = DiaryViewController()
