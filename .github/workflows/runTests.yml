@@ -14,16 +14,14 @@ jobs:
     - name: Checkout codebase
       id: checkout
       uses: actions/checkout@master
-      
-    - name: Log line 1
-      id: log-line-1
-      run: echo "Log line 1"
         
     - name: Start xcodebuild test
       id: xcodebuild
       run: /Applications/Xcode_12.app/Contents/Developer/usr/bin/xcodebuild -project GreenPanda.xcodeproj -scheme GreenPanda -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 11,OS=14.0" clean test
 
-    - name: Log line 2
+    - name: Archive production artifacts
       if: ${{ failure() }}
-      id: log-line-2
-      run: echo "Log line 2"
+      uses: actions/upload-artifact@v2
+      with:
+        name: failure_archive
+        path: .
