@@ -11,7 +11,7 @@ import SnapshotTesting
 
 class DiaryEntriesSnapshotTests: XCTestCase {
 
-    let recordMode = false
+    let recordMode = true
     
     func testEmptyDiaryEntriesView() throws {
         let diaryEntriesViewController = DiaryViewController()

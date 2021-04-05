@@ -17,7 +17,7 @@ jobs:
         
     - name: Start xcodebuild test
       id: xcodebuild
-      run: /Applications/Xcode_12.app/Contents/Developer/usr/bin/xcodebuild -project GreenPanda.xcodeproj -scheme GreenPanda -sdk iphonesimulator -derivedDataPath build -destination "platform=iOS Simulator,name=iPhone 11,OS=14.0" clean test
+      run: /Applications/Xcode_12.app/Contents/Developer/usr/bin/xcodebuild -project GreenPanda.xcodeproj -scheme GreenPanda -sdk iphonesimulator -derivedDataPath DerivedData -destination "platform=iOS Simulator,name=iPhone 11,OS=14.0" clean test
 
     - name: Archive production artifacts
       if: ${{ failure() }}
