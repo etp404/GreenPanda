@@ -18,7 +18,9 @@ jobs:
       run: echo "Log line 1"
         
     - name: Start xcodebuild test
+      id: xcodebuild
       run: /Applications/Xcode_12.app/Contents/Developer/usr/bin/xcodebuild -project GreenPanda.xcodeproj -scheme GreenPanda -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 11,OS=14.0" clean test
 
     - name: Get color
+      id: Step after xcodebuild
       run: echo "Log line 2"
