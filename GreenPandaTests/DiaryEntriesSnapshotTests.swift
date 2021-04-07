@@ -24,13 +24,13 @@ class DiaryEntriesSnapshotTests: XCTestCase {
         let diaryEntriesViewController = DiaryViewController()
         diaryEntriesViewController.configure(with: fakeDiaryViewModel)
         assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
-        fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 1))
+        fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 2))
         assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
     }
 
-    func testOneDiaryEntryView() throws {
+    func testTwoDiaryEntryView() throws {
         let fakeDiaryViewModel = FakeDiaryViewModel()
-        fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 1))
+        fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 2))
         let diaryEntriesViewController = DiaryViewController()
         diaryEntriesViewController.configure(with: fakeDiaryViewModel)
         assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
