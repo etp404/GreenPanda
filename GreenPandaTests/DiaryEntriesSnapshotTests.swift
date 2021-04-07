@@ -53,7 +53,7 @@ class DiaryEntriesSnapshotTests: XCTestCase {
     }
 
     func fakeEntries(n: Int) -> [FakeEntry] {
-        [Int](0...n).map({
+        [Int](0..<n).map({
                             let timestamp = 1617440087 + Double($0*24*60*60)
                             return FakeEntry(id: UUID(),
                                       date: "Some date \($0)",
