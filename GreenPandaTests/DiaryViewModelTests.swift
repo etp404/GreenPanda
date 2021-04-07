@@ -127,15 +127,19 @@ class DiaryViewModelTests: XCTestCase {
     }
 
     func testReturnShowChartFromViewModel() {
-        XCTAssertTrue(capturedChartViewModel.showChart)
+        let mockGreenPandaModel = MockGreenPandaModel()
 
-        let emptyViewModel = ModelBackedDiaryViewModel(model: MockGreenPandaModel(),
+        let someViewModel = ModelBackedDiaryViewModel(model: mockGreenPandaModel,
                                         timezone: TimeZone.init(abbreviation: "CET")!,
                                         coordinatorDelegate: mockDiaryViewModelCoordinatorDelegate)
-        _ = emptyViewModel.chartViewModelPublisher.sink{chartViewModel in
+        someViewModel.chartViewModelPublisher.sink{chartViewModel in
             self.capturedChartViewModel = chartViewModel
-        }
+        }.store(in: &bag)
         XCTAssertFalse(capturedChartViewModel.showChart)
+        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 2003645315), entryText: "abc", score: 0))
+        XCTAssertFalse(capturedChartViewModel.showChart)
+        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 2003645315), entryText: "abc", score: 0))
+        XCTAssertTrue(capturedChartViewModel.showChart)
     }
 
 }

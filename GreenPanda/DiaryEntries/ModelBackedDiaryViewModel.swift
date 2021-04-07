@@ -54,7 +54,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
             self.chartData = newEntries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
             self.chartViewModel.chartData = newEntries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
             self.chartViewModel.chartData = newEntries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
-            self.chartViewModel.showChart = !newEntries.isEmpty
+            self.chartViewModel.showChart = newEntries.count > 1
 
             if let lastDatapoint = self.chartData.last {
                 self.chartViewModel.chartXOffset = Double(lastDatapoint.timestamp - 7*24*60*60)
