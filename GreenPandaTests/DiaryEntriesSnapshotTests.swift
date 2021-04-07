@@ -74,15 +74,18 @@ class FakeDiaryViewModel: DiaryViewModel {
     }
     
     func setFakeEntries(fakeEntries: [FakeEntry]) {
-        chartData = fakeEntries.map({
-            ChartDatum(timestamp: $0.timestamp, moodScore: $0.moodScore)
-        })
         entries = fakeEntries.map({
             EntryViewModel(id: $0.id, date: $0.date, entryText: $0.entryText, score: $0.score)
         })
-        if !fakeEntries.isEmpty {
-            showChart = true
-        }
+
+        let chartData = fakeEntries.map({
+            ChartDatum(timestamp: $0.timestamp, moodScore: $0.moodScore)
+        })
+
+        let showChart = !fakeEntries.isEmpty
+
+        chartViewModel = ChartViewModel(chartData: chartData, showChart: showChart, chartXOffset: 0.0, chartVisibleRange: chartVisibleRange)
+
     }
 
     func composeButtonPressed() {}

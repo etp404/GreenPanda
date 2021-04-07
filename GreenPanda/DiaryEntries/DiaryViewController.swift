@@ -46,15 +46,10 @@ class DiaryViewController: ViewController {
         viewModel?.entriesPublisher.sink{entries in
             self.applySnapshot(entries:entries)
         }.store(in: &bag)
-        
-        if let viewModel = viewModel, viewModel.showChart {
-            setUpChart()
-        }
-        
-        viewModel?.chartDataPublisher.sink{entries in
-            if let viewModel = self.viewModel, viewModel.showChart {
-                self.updateChart(viewModel)
-            }
+
+        setUpChart()
+        viewModel?.chartViewModelPublisher.sink{chartViewModel in
+            self.updateChart(chartViewModel)
         }.store(in: &bag)
     }
     
@@ -67,7 +62,6 @@ class DiaryViewController: ViewController {
     }
     
     func setUpChart() {
-        guard let viewModel = viewModel else { return }
         chart.xAxis.drawGridLinesEnabled = false
         chart.xAxis.labelPosition = XAxis.LabelPosition.bottom
         chart.xAxis.valueFormatter = DateValueFormatter()
@@ -76,12 +70,15 @@ class DiaryViewController: ViewController {
         chart.leftAxis.enabled = false
         chart.rightAxis.enabled = false
         chart.legend.enabled = false
-        
-        updateChart(viewModel)
     }
 
-    private func updateChart(_ viewModel: DiaryViewModel) {
-        let dataset = LineChartDataSet(entries: viewModel.chartData.map{
+    private func updateChart(_ chartViewModel: ChartViewModel) {
+        if !chartViewModel.showChart {
+            chart.isHidden = true
+            return
+        }
+        chart.isHidden = false
+        let dataset = LineChartDataSet(entries: chartViewModel.chartData.map{
             ChartDataEntry(x: $0.timestamp, y: $0.moodScore)
         })
         dataset.drawFilledEnabled = true
@@ -91,9 +88,9 @@ class DiaryViewController: ViewController {
         data.setDrawValues(false)
         self.chart.data = data
         
-        chart.setVisibleXRangeMaximum(viewModel.chartVisibleRange)
+        chart.setVisibleXRangeMaximum(chartViewModel.chartVisibleRange)
         chart.resetViewPortOffsets()
-        chart.moveViewToX(viewModel.chartXOffset)
+        chart.moveViewToX(chartViewModel.chartXOffset)
     }
 
 }
