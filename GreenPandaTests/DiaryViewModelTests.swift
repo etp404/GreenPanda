@@ -24,7 +24,7 @@ class DiaryViewModelTests: XCTestCase {
     let entry3Id = UUID()
     let entry4Id = UUID()
     var capturedEntries: [EntryViewModel]!
-    var capturedChartData: [ChartDatum]!
+    var capturedChartViewModel: ChartViewModel!
 
     override func setUp() {
         self.continueAfterFailure = false;
@@ -43,8 +43,9 @@ class DiaryViewModelTests: XCTestCase {
         diaryViewModel.entriesPublisher.sink(receiveValue: {
             self.capturedEntries = $0
         }).store(in: &bag)
-        diaryViewModel.chartDataPublisher.sink(receiveValue: {
-            self.capturedChartData = $0
+
+        diaryViewModel.chartViewModelPublisher.sink(receiveValue: {
+            self.capturedChartViewModel = $0
         }).store(in: &bag)
         
     }
@@ -94,19 +95,19 @@ class DiaryViewModelTests: XCTestCase {
     }
 
     func testThatChartDataAreReturned() {
-        XCTAssertEqual(capturedChartData.count, 5)
+        XCTAssertEqual(capturedChartViewModel.chartData.count, 5)
 
-        XCTAssertEqual(capturedChartData[0].timestamp,1600642311)
-        XCTAssertEqual(capturedChartData[0].moodScore,1)
+        XCTAssertEqual(capturedChartViewModel.chartData[0].timestamp,1600642311)
+        XCTAssertEqual(capturedChartViewModel.chartData[0].moodScore,1)
 
-        XCTAssertEqual(capturedChartData[4].timestamp, 1603645315)
-        XCTAssertEqual(capturedChartData[4].moodScore, 5)
+        XCTAssertEqual(capturedChartViewModel.chartData[4].timestamp, 1603645315)
+        XCTAssertEqual(capturedChartViewModel.chartData[4].moodScore, 5)
     }
 
     func testThatChartDataArePublished() {
         mockGreenPandaModel.add(entry: NewDiaryEntry(id: UUID(), entryText: "abc", score: 0))
 
-        XCTAssertEqual(capturedChartData.count, 6)
+        XCTAssertEqual(capturedChartViewModel.chartData.count, 6)
     }
     
     func testThatCorrectChartRangeIsReturnedFromViewModel() {
@@ -122,16 +123,19 @@ class DiaryViewModelTests: XCTestCase {
         mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 1603645315), entryText: "abc", score: 0))
         mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 2003645315), entryText: "abc", score: 0))
 
-        XCTAssertEqual(diaryViewModel.chartXOffset, Double(2003040515))
+        XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(2003040515))
     }
 
     func testReturnShowChartFromViewModel() {
-        XCTAssertTrue(diaryViewModel.showChart)
+        XCTAssertTrue(capturedChartViewModel.showChart)
 
         let emptyViewModel = ModelBackedDiaryViewModel(model: MockGreenPandaModel(),
                                         timezone: TimeZone.init(abbreviation: "CET")!,
                                         coordinatorDelegate: mockDiaryViewModelCoordinatorDelegate)
-        XCTAssertFalse(emptyViewModel.showChart)
+        _ = emptyViewModel.chartViewModelPublisher.sink{chartViewModel in
+            self.capturedChartViewModel = chartViewModel
+        }
+        XCTAssertFalse(capturedChartViewModel.showChart)
     }
 
 }

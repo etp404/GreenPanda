@@ -66,6 +66,12 @@ struct FakeEntry {
 }
 
 class FakeDiaryViewModel: DiaryViewModel {
+
+    @Published var chartViewModel: ChartViewModel = ChartViewModel(chartData: [], showChart: false)
+
+    var chartViewModelPublisher: Published<ChartViewModel>.Publisher {
+        $chartViewModel
+    }
     
     func setFakeEntries(fakeEntries: [FakeEntry]) {
         chartData = fakeEntries.map({

@@ -20,10 +20,18 @@ struct ChartDatum {
     let moodScore: Double
 }
 
+struct ChartViewModel {
+    var chartData: [ChartDatum]
+    var showChart: Bool
+    var chartXOffset: Double = 0.0
+}
+
 protocol DiaryViewModel {
     func composeButtonPressed()
     var chartData: [ChartDatum] { get }
     var chartDataPublisher: Published<[ChartDatum] >.Publisher { get }
+
+    var chartViewModelPublisher: Published<ChartViewModel>.Publisher { get }
 
     var showChart: Bool { get }
     var chartXOffset: Double { get }
@@ -43,23 +51,36 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         self.greenPandaModel = greenPandaModel
         self.timezone = timezone
         self.coordinatorDelegate = coordinatorDelegate
-        
+        chartViewModel = ChartViewModel(chartData: [], showChart: false)
+
         super.init()
         
         cancellable = greenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
             self.entries = newEntries.sorted(by: {$0.timestamp > $1.timestamp}).map { self.convertToViewModel(entry: $0) }
             self.chartData = newEntries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
+            self.chartViewModel.chartData = newEntries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
+            self.chartViewModel.chartData = newEntries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
+            self.chartViewModel.showChart = !newEntries.isEmpty
+
+            if let lastDatapoint = self.chartData.last {
+                self.chartViewModel.chartXOffset = Double(lastDatapoint.timestamp - 7*24*60*60)
+            }
         } )
+
     }
     
     @Published var entries: [EntryViewModel] = []
     var entriesPublisher: Published<[EntryViewModel]>.Publisher { $entries }
-    
+
+    @Published var chartViewModel: ChartViewModel
+    var chartViewModelPublisher: Published<ChartViewModel>.Publisher { $chartViewModel }
+
     @Published var chartData: [ChartDatum] = []
     var chartDataPublisher: Published<[ChartDatum]>.Publisher {
         $chartData
     }
-    
+
+
     let chartVisibleRange = Double(7*24*60*60)
     var chartXOffset: Double {
         get {
