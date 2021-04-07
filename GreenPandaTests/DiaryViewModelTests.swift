@@ -111,7 +111,7 @@ class DiaryViewModelTests: XCTestCase {
     }
     
     func testThatCorrectChartRangeIsReturnedFromViewModel() {
-        XCTAssertEqual(diaryViewModel.chartVisibleRange, Double(7*24*60*60))
+        XCTAssertEqual(capturedChartViewModel.chartVisibleRange, Double(7*24*60*60))
     }
 
     func testThatCorrectXPositionIsReturnedFromViewModel() {

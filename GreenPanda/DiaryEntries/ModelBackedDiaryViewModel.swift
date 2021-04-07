@@ -24,6 +24,7 @@ struct ChartViewModel {
     var chartData: [ChartDatum]
     var showChart: Bool
     var chartXOffset: Double = 0.0
+    var chartVisibleRange: Double = Double(7*24*60*60)
 }
 
 protocol DiaryViewModel {
