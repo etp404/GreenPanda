@@ -29,14 +29,7 @@ struct ChartViewModel {
 
 protocol DiaryViewModel {
     func composeButtonPressed()
-    var chartData: [ChartDatum] { get }
-    var chartDataPublisher: Published<[ChartDatum] >.Publisher { get }
-
     var chartViewModelPublisher: Published<ChartViewModel>.Publisher { get }
-
-    var showChart: Bool { get }
-    var chartXOffset: Double { get }
-    var chartVisibleRange: Double { get }
     var entriesPublisher: Published<[EntryViewModel] >.Publisher { get }
 }
 
