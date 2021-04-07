@@ -67,12 +67,6 @@ struct FakeEntry {
 
 class FakeDiaryViewModel: DiaryViewModel {
 
-    @Published var chartViewModel: ChartViewModel = ChartViewModel(chartData: [], showChart: false)
-
-    var chartViewModelPublisher: Published<ChartViewModel>.Publisher {
-        $chartViewModel
-    }
-    
     func setFakeEntries(fakeEntries: [FakeEntry]) {
         entries = fakeEntries.map({
             EntryViewModel(id: $0.id, date: $0.date, entryText: $0.entryText, score: $0.score)
@@ -84,30 +78,22 @@ class FakeDiaryViewModel: DiaryViewModel {
 
         let showChart = !fakeEntries.isEmpty
 
-        chartViewModel = ChartViewModel(chartData: chartData, showChart: showChart, chartXOffset: 0.0, chartVisibleRange: chartVisibleRange)
+        chartViewModel = ChartViewModel(chartData: chartData, showChart: showChart, chartXOffset: 0.0, chartVisibleRange: Double(7*24*60*60))
 
     }
 
     func composeButtonPressed() {}
-    
-    
-    var chartDataPublisher: Published<[ChartDatum]>.Publisher {
-        $chartData
-    }
 
-    @Published var chartData: [ChartDatum] = [ChartDatum]()
-    
-    var showChart: Bool = false
-    
-    var chartXOffset: Double = 0.0
-    
-    let chartVisibleRange = Double(7*24*60*60)
-    
     var entriesPublisher: Published<[EntryViewModel]>.Publisher {
         get { $entries }
     }
-    
-    @Published var entries: [EntryViewModel] = []
+
+    var chartViewModelPublisher: Published<ChartViewModel>.Publisher {
+        $chartViewModel
+    }
+
+    @Published private var chartViewModel: ChartViewModel = ChartViewModel(chartData: [], showChart: false)
+    @Published private var entries: [EntryViewModel] = []
     
     
 }
