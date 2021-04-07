@@ -19,6 +19,15 @@ class DiaryEntriesSnapshotTests: XCTestCase {
         assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
     }
 
+    func testViewChangesInResponseToDataChange() throws {
+        let fakeDiaryViewModel = FakeDiaryViewModel()
+        let diaryEntriesViewController = DiaryViewController()
+        diaryEntriesViewController.configure(with: fakeDiaryViewModel)
+        assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
+        fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 1))
+        assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
+    }
+
     func testOneDiaryEntryView() throws {
         let fakeDiaryViewModel = FakeDiaryViewModel()
         fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 1))
