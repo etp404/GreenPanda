@@ -141,6 +141,12 @@ class DiaryViewModelTests: XCTestCase {
         mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 2003645315), entryText: "abc", score: 0))
         XCTAssertTrue(capturedChartViewModel.showChart)
     }
+    
+    func testThatDeletionByIdIsPassedToCore() throws {
+        diaryViewModel.deleteEntry(at: 2)
+        let capturedIdToDelete = try XCTUnwrap(mockGreenPandaModel.capturedIdToDelete)
+        XCTAssertEqual(capturedIdToDelete, entry2Id)
+    }
 
 }
 

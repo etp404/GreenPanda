@@ -50,6 +50,9 @@ class CoreDataGreenPandaModel: GreenPandaModel {
         }
     }
     
+    func deleteEntry(with id:UUID) {
+    }
+    
     private func updateEntries() {
         let fetchRequest =
             NSFetchRequest<NSManagedObject>(entityName: "DiaryEntryEntity")

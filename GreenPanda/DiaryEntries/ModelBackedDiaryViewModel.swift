@@ -95,6 +95,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func deleteEntry(at row:Int) {
+        greenPandaModel.deleteEntry(with: entries[row].id)
     }
     
     private func scoreSmiley(for score:Int) -> String {
