@@ -87,6 +87,7 @@
 		C98052CE2548A72C0071B64C /* ComposeDiaryEntryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComposeDiaryEntryViewController.xib; sourceTree = "<group>"; };
 		C98052D32548A7420071B64C /* ComposeDiaryEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeDiaryEntryViewController.swift; sourceTree = "<group>"; };
 		C98052D82548A78E0071B64C /* ComposeDiaryEntryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeDiaryEntryCoordinator.swift; sourceTree = "<group>"; };
+		C98CBD2A275BA4B30012610A /* GreenPanda.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GreenPanda.entitlements; sourceTree = "<group>"; };
 		C9B26431256939BE0089A1BB /* MockupOfCombineVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupOfCombineVersion.swift; sourceTree = "<group>"; };
 		C9B4F47725437E550077DE2A /* ModelBackedDiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBackedDiaryViewModel.swift; sourceTree = "<group>"; };
 		C9BCF99F25531BB500F2232E /* ComposeDiaryEntryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeDiaryEntryViewModelTests.swift; sourceTree = "<group>"; };
@@ -151,6 +152,7 @@
 		C97C09AD25409A30001E1E5A /* GreenPanda */ = {
 			isa = PBXGroup;
 			children = (
+				C98CBD2A275BA4B30012610A /* GreenPanda.entitlements */,
 				C99A8CA12557FA6A00067BB3 /* DiaryEntries */,
 				C99A8CA02557FA5100067BB3 /* ComposeDiaryEntry */,
 				C97C09AE25409A30001E1E5A /* AppDelegate.swift */,
@@ -560,6 +562,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GreenPanda/GreenPanda.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8UGJ8D8V94;
 				INFOPLIST_FILE = GreenPanda/Info.plist;
@@ -570,6 +573,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.matt.GreenPanda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -580,6 +584,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GreenPanda/GreenPanda.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8UGJ8D8V94;
 				INFOPLIST_FILE = GreenPanda/Info.plist;
@@ -590,6 +595,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.matt.GreenPanda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
