@@ -31,7 +31,6 @@ protocol DiaryViewModel {
     func composeButtonPressed()
     var chartViewModelPublisher: Published<ChartViewModel>.Publisher { get }
     var entriesPublisher: Published<[EntryViewModel] >.Publisher { get }
-    func deleteEntry(at row:Int)
 }
 
 class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
@@ -74,10 +73,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     var chartDataPublisher: Published<[ChartDatum]>.Publisher {
         $chartData
     }
-    
-    func deleteEntry(at row:Int) {
-        greenPandaModel.remove(id: entries[row].id)
-    }
+
 
     let chartVisibleRange = Double(7*24*60*60)
     var chartXOffset: Double {
