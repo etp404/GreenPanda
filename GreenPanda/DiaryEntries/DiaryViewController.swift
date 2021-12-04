@@ -83,7 +83,7 @@ class DiaryViewController: ViewController {
         })
         dataset.drawFilledEnabled = true
         dataset.drawCirclesEnabled = true
-        dataset.mode = .cubicBezier
+        dataset.mode = .horizontalBezier
         let data = LineChartData(dataSet: dataset)
         data.setDrawValues(false)
         self.chart.data = data
