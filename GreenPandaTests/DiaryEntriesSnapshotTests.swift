@@ -75,6 +75,9 @@ struct FakeEntry {
 }
 
 class FakeDiaryViewModel: DiaryViewModel {
+    func deleteEntry(at row: Int) {
+        
+    }
 
     func setFakeEntries(fakeEntries: [FakeEntry]) {
         entries = fakeEntries.map({

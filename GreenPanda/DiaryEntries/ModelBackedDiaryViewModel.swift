@@ -31,6 +31,7 @@ protocol DiaryViewModel {
     func composeButtonPressed()
     var chartViewModelPublisher: Published<ChartViewModel>.Publisher { get }
     var entriesPublisher: Published<[EntryViewModel] >.Publisher { get }
+    func deleteEntry(at row:Int)
 }
 
 class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
@@ -91,6 +92,9 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     
     func composeButtonPressed() {
         coordinatorDelegate.openComposeView()
+    }
+    
+    func deleteEntry(at row:Int) {
     }
     
     private func scoreSmiley(for score:Int) -> String {
