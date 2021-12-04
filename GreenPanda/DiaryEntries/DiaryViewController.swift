@@ -27,7 +27,16 @@ class DiaryViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        configuration.trailingSwipeActionsConfigurationProvider = { indexPath in
+            return UISwipeActionsConfiguration(actions: [
+                UIContextualAction(style: .destructive, title: "Delete", handler: {[weak self] _, _, completion in
+                    self?.deleteAt(indexPath: indexPath)
+                    completion(true)
+                })
+            ])
+        }
+        
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)
         collectionView.collectionViewLayout = layout
         collectionView.register(UINib(nibName: "DiaryEntryCell", bundle: nil),
@@ -51,6 +60,10 @@ class DiaryViewController: ViewController {
         viewModel?.chartViewModelPublisher.sink{chartViewModel in
             self.updateChart(chartViewModel)
         }.store(in: &bag)
+    }
+    
+    func deleteAt(indexPath: IndexPath) {
+        viewModel?.deleteEntry(at: indexPath.row)
     }
     
     func applySnapshot(entries:[EntryViewModel]?, animatingDifferences: Bool = true) {

@@ -9,6 +9,14 @@ import Foundation
 import CoreData
 
 class CoreDataGreenPandaModel: GreenPandaModel {
+    func remove(id: UUID) {
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "DiaryEntryEntity")
+        
+        guard let diaryEntries: [NSManagedObject] = try? context.fetch(fetchRequest) else {return}
+        context.delete(diaryEntries.first(where: { $0.value(forKey: "id") as! UUID == id })!)
+    }
+    
     
     var entries: Published<[DiaryEntry]>.Publisher {
         return $entriesBackingValue
