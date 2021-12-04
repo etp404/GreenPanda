@@ -8,7 +8,7 @@ on:
 jobs:
   build:
 
-    runs-on: macos-10.15
+    runs-on: macos-11
     
     steps:
     - name: Checkout codebase
@@ -17,7 +17,7 @@ jobs:
         
     - name: Start xcodebuild test
       id: xcodebuild
-      run: /Applications/Xcode_12.app/Contents/Developer/usr/bin/xcodebuild -project GreenPanda.xcodeproj -scheme GreenPanda -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 11,OS=14.0" clean test
+      run: /Applications/Xcode_13.1.app/Contents/Developer/usr/bin/xcodebuild -project GreenPanda.xcodeproj -scheme GreenPanda -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 11,OS=14.0.1" clean test
 
     - name: Archive production artifacts
       if: ${{ failure() }}
