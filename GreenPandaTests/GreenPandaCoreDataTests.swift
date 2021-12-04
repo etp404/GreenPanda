@@ -91,4 +91,25 @@ class GreenPandaCoreDataTests: XCTestCase {
         XCTAssertEqual(diaryEntryToSave2.score, retrievedEntry2?.score)
     }
     
+    func testCanDeleteAnEntryById() {
+        let id1 = UUID()
+        let id2 = UUID()
+        let id3 = UUID()
+        coreDataGreenPandaModel.add(entry: NewDiaryEntry(id: id1, entryText: "some diary entry 1", score: 2))
+        coreDataGreenPandaModel.add(entry: NewDiaryEntry(id: id2, entryText: "some diary entry 2", score: 2))
+        coreDataGreenPandaModel.add(entry: NewDiaryEntry(id: id3, entryText: "some diary entry 3", score: 2))
+
+        coreDataGreenPandaModel.deleteEntry(with: id2)
+        
+        var retrievedEntries = [DiaryEntry]()
+        cancellable = coreDataGreenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
+            retrievedEntries = newEntries
+        })
+        XCTAssertEqual(2, retrievedEntries.count)
+        XCTAssertTrue(retrievedEntries.map({$0.id}).contains(id1))
+        XCTAssertTrue(retrievedEntries.map({$0.id}).contains(id3))
+    }
+    
+    //Cover deletion of id that isn't saved.
+    
 }

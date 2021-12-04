@@ -51,7 +51,15 @@ class CoreDataGreenPandaModel: GreenPandaModel {
     }
     
     func deleteEntry(with id:UUID) {
-    }
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "DiaryEntryEntity")
+        
+        guard let diaryEntries: [NSManagedObject] = try? context.fetch(fetchRequest) else {return}
+        context.delete(diaryEntries.first(where: { $0.value(forKey: "id") as! UUID == id })!)
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }    }
     
     private func updateEntries() {
         let fetchRequest =
