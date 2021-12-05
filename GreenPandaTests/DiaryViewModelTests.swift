@@ -157,23 +157,23 @@ class DiaryViewModelTests: XCTestCase {
     }
 
     func testThatCollectionViewIsHiddenWhenThereAreNoEntries() throws {
-        var capturedEntriesTableVisible = true
-        diaryViewModel.entriesTableVisiblePublisher.sink{entriesTableVisible in
-            capturedEntriesTableVisible = entriesTableVisible
+        var capturedEntriesTableHidden = false
+        diaryViewModel.entriesTableHiddenPublisher.sink{entriesTableHidden in
+            capturedEntriesTableHidden = entriesTableHidden
         }.store(in: &bag)
         mockGreenPandaModel.entriesBackingValue = []
 
-        XCTAssertFalse(capturedEntriesTableVisible)
+        XCTAssertTrue(capturedEntriesTableHidden)
     }
     
     func testThatCollectionViewIsVisibleWhenThereAreEntries() throws {
-        var capturedEntriesTableVisible = false
-        diaryViewModel.entriesTableVisiblePublisher.sink{entriesTableVisible in
-            capturedEntriesTableVisible = entriesTableVisible
+        var capturedEntriesTableHidden = false
+        diaryViewModel.entriesTableHiddenPublisher.sink{entriesTableHidden in
+            capturedEntriesTableHidden = entriesTableHidden
         }.store(in: &bag)
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 1603645315), entryText: "abc", score: 0))
+        mockGreenPandaModel.entriesBackingValue = []
 
-        XCTAssertTrue(capturedEntriesTableVisible)
+        XCTAssertFalse(capturedEntriesTableHidden)
     }
     
 }

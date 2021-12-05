@@ -109,13 +109,13 @@ class FakeDiaryViewModel: DiaryViewModel {
     }
     
     
-    var entriesTableVisiblePublisher: Published<Bool>.Publisher {
-        $entriesTableVisible
+    var entriesTableHiddenPublisher: Published<Bool>.Publisher {
+        $entriesTableHidden
     }
 
 
     @Published private var chartViewModel: ChartViewModel = ChartViewModel(chartData: [], showChart: false)
     @Published private var entries: [EntryViewModel] = []
-    @Published private var entriesTableVisible = false
+    @Published private var entriesTableHidden = false
     
 }

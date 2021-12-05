@@ -59,6 +59,10 @@ class DiaryViewController: ViewController {
             self.applySnapshot(entries:entries)
         }.store(in: &bag)
 
+        viewModel?.entriesTableHiddenPublisher.sink{hideTable in
+            self.collectionView.isHidden = hideTable
+        }.store(in: &bag)
+        
         setUpChart()
         viewModel?.chartViewModelPublisher.sink{chartViewModel in
             self.updateChart(chartViewModel)
