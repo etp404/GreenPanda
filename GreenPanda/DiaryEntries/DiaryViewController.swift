@@ -11,6 +11,7 @@ import Charts
 
 class DiaryViewController: ViewController {
 
+    @IBOutlet weak var composeButton: UIButton!
     @IBOutlet weak var promtMessage: UILabel!
     @IBOutlet weak var chart: LineChartView!
     private var bag = Set<AnyCancellable>()
@@ -27,6 +28,8 @@ class DiaryViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        composeButton.setImage(UIImage(named: "pencil"), for: .normal)
         
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         configuration.trailingSwipeActionsConfigurationProvider = { indexPath in
