@@ -99,7 +99,9 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         greenPandaModel.deleteEntry(with: entries[row].id)
     }
     
-    func editEntry(at row: Int) {}
+    func editEntry(at row: Int) {
+        coordinatorDelegate.openEditView(diaryEntry: entries[row])
+    }
     
     private func scoreSmiley(for score:Int) -> String {
         switch (score) {

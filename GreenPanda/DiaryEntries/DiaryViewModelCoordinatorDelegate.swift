@@ -9,4 +9,5 @@ import Foundation
 
 protocol DiaryViewModelCoordinatorDelegate {
     func openComposeView()
+    func openEditView(diaryEntry: EntryViewModel)
 }

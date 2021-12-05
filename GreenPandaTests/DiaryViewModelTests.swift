@@ -25,13 +25,15 @@ class DiaryViewModelTests: XCTestCase {
     let entry4Id = UUID()
     var capturedEntries: [EntryViewModel]!
     var capturedChartViewModel: ChartViewModel!
+    var diaryEntry2:DiaryEntry!
 
     override func setUp() {
         self.continueAfterFailure = false;
         mockGreenPandaModel = MockGreenPandaModel()
+        diaryEntry2 = DiaryEntry(id: entry2Id, timestamp: Date(timeIntervalSince1970: 1600642313), entryText: entry2Text, score: 3)
         mockGreenPandaModel.entriesBackingValue = [
             DiaryEntry(id: entry4Id, timestamp: Date(timeIntervalSince1970: 1603645315), entryText: entry1Text, score: 5),
-            DiaryEntry(id: entry2Id, timestamp: Date(timeIntervalSince1970: 1600642313), entryText: entry2Text, score: 3),
+            diaryEntry2,
             DiaryEntry(id: entry1Id, timestamp: Date(timeIntervalSince1970: 1600642312), entryText: entry2Text, score: 2),
             DiaryEntry(id: entry3Id, timestamp: Date(timeIntervalSince1970: 1600642314), entryText: entry2Text, score: 4),
             DiaryEntry(id: entry0Id, timestamp: Date(timeIntervalSince1970: 1600642311), entryText: entry2Text, score: 1)]
@@ -147,10 +149,22 @@ class DiaryViewModelTests: XCTestCase {
         let capturedIdToDelete = try XCTUnwrap(mockGreenPandaModel.capturedIdToDelete)
         XCTAssertEqual(capturedIdToDelete, entry2Id)
     }
+    
+    func testThatCorrectEntryIsPassedToEditCall() throws {
+        diaryViewModel.editEntry(at: 2)
+        let diaryEntryBeingEdited = try XCTUnwrap(mockDiaryViewModelCoordinatorDelegate.diaryEntryBeingEdited)
+        XCTAssertEqual(diaryEntryBeingEdited.id, entry2Id)
+    }
 
 }
 
 class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {
+    var diaryEntryBeingEdited: EntryViewModel?
+    
+    func openEditView(diaryEntry: EntryViewModel) {
+        diaryEntryBeingEdited = diaryEntry
+    }
+    
     var openComposeViewInvoked = false
     
     func openComposeView() {
