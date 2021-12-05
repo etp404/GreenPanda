@@ -32,6 +32,7 @@ protocol DiaryViewModel {
     var chartViewModelPublisher: Published<ChartViewModel>.Publisher { get }
     var entriesPublisher: Published<[EntryViewModel] >.Publisher { get }
     func deleteEntry(at row:Int)
+    func editEntry(at row: Int)
 }
 
 class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
@@ -97,6 +98,8 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     func deleteEntry(at row:Int) {
         greenPandaModel.deleteEntry(with: entries[row].id)
     }
+    
+    func editEntry(at row: Int) {}
     
     private func scoreSmiley(for score:Int) -> String {
         switch (score) {

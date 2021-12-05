@@ -29,11 +29,21 @@ class DiaryViewController: ViewController {
         
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         configuration.trailingSwipeActionsConfigurationProvider = { indexPath in
-            return UISwipeActionsConfiguration(actions: [
-                UIContextualAction(style: .destructive, title: "Delete", handler: {[weak self] _, _, completion in
+            return UISwipeActionsConfiguration(actions: [{
+                let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: {[weak self] _, _, completion in
                     self?.deleteAt(indexPath: indexPath)
                     completion(true)
                 })
+                deleteAction.image = UIImage(systemName: "trash")
+                return deleteAction
+            }(), {
+                let editAction = UIContextualAction(style: .normal, title: "Edit", handler: {[weak self] _, _, completion in
+                    self?.editEntry(at: indexPath)
+                    completion(true)
+                })
+                editAction.image = UIImage(systemName: "pencil")
+                return editAction
+                }()
             ])
         }
         
@@ -83,6 +93,10 @@ class DiaryViewController: ViewController {
 
     private func deleteAt(indexPath: IndexPath) {
         viewModel?.deleteEntry(at: indexPath.row)
+    }
+    
+    private func editEntry(at indexPath: IndexPath) {
+        viewModel?.editEntry(at: indexPath.row)
     }
     
     private func updateChart(_ chartViewModel: ChartViewModel) {
