@@ -171,7 +171,6 @@ class DiaryViewModelTests: XCTestCase {
         diaryViewModel.entriesTableHiddenPublisher.sink{entriesTableHidden in
             capturedEntriesTableHidden = entriesTableHidden
         }.store(in: &bag)
-        mockGreenPandaModel.entriesBackingValue = []
 
         XCTAssertFalse(capturedEntriesTableHidden)
     }
