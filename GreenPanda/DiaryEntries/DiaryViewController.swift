@@ -29,7 +29,12 @@ class DiaryViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        composeButton.setImage(UIImage(named: "pencil"), for: .normal)
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 30,
+                                                      weight: .regular,
+                                                      scale: .large)
+
+        let pencilButton = UIImage(systemName: "square.and.pencil", withConfiguration: largeConfig)
+        composeButton.setImage(pencilButton, for: .normal)
         
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         configuration.trailingSwipeActionsConfigurationProvider = { indexPath in

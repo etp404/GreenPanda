@@ -27,20 +27,20 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" text="Your  diary entries will appear here." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuh-hZ-cpD">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="41.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="72.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aGb-gC-rao" customClass="LineChartView" customModule="Charts">
-                            <rect key="frame" x="0.0" y="41.5" width="414" height="256"/>
+                            <rect key="frame" x="0.0" y="72.5" width="414" height="256"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="256" id="u0R-Qy-VFF"/>
                             </constraints>
                         </view>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="VZH-sw-wcj">
-                            <rect key="frame" x="0.0" y="297.5" width="414" height="484.5"/>
+                            <rect key="frame" x="0.0" y="328.5" width="414" height="453.5"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AQY-zI-Vbo">
                                 <size key="itemSize" width="128" height="128"/>
@@ -52,7 +52,6 @@
                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9w-So-WDa">
                             <rect key="frame" x="0.0" y="782" width="414" height="36"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <state key="normal" title="Compose"/>
                             <connections>
                                 <action selector="composeButtonPRessed:" destination="-1" eventType="touchUpInside" id="kgc-7f-lyl"/>
                             </connections>
