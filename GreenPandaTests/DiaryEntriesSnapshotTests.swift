@@ -75,6 +75,10 @@ struct FakeEntry {
 }
 
 class FakeDiaryViewModel: DiaryViewModel {
+    func editEntry(at row: Int) {
+        
+    }
+    
     func deleteEntry(at row: Int) {
         
     }
