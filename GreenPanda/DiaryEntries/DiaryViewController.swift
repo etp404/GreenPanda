@@ -11,6 +11,7 @@ import Charts
 
 class DiaryViewController: ViewController {
 
+    @IBOutlet weak var promtMessage: UILabel!
     @IBOutlet weak var chart: LineChartView!
     private var bag = Set<AnyCancellable>()
     @IBOutlet weak var collectionView: UICollectionView!
@@ -61,6 +62,10 @@ class DiaryViewController: ViewController {
 
         viewModel?.entriesTableHiddenPublisher.sink{hideTable in
             self.collectionView.isHidden = hideTable
+        }.store(in: &bag)
+        
+        viewModel?.promptHiddenPublisher.sink{promptHidden in
+            self.promtMessage.isHidden = promptHidden
         }.store(in: &bag)
         
         setUpChart()

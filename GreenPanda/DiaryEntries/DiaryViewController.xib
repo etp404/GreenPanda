@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="chart" destination="aGb-gC-rao" id="7PL-DE-BKT"/>
                 <outlet property="collectionView" destination="VZH-sw-wcj" id="sGd-6o-Hui"/>
+                <outlet property="promtMessage" destination="cuh-hZ-cpD" id="jKl-Dp-xaC"/>
                 <outlet property="view" destination="iN0-l3-epB" id="7vP-Cg-Ar7"/>
             </connections>
         </placeholder>
