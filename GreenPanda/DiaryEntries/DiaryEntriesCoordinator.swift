@@ -8,10 +8,6 @@
 import UIKit
 
 class DiaryEntriesCoordinator: Coordinator, DiaryViewModelCoordinatorDelegate {
-    func openEditView(diaryEntry: EntryViewModel) {
-        
-    }
-    
     
     private var navigationController: UINavigationController
     private var model: GreenPandaModel
@@ -31,6 +27,10 @@ class DiaryEntriesCoordinator: Coordinator, DiaryViewModelCoordinatorDelegate {
     
     func openComposeView() {
         ComposeDiaryEntryCoordinator(navigationController: navigationController, model: model).start()
+    }
+    
+    func openEditView(diaryEntry: EntryViewModel) {
+        
     }
     
 }

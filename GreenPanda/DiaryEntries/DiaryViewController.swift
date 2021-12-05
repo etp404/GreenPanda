@@ -36,14 +36,7 @@ class DiaryViewController: ViewController {
                 })
                 deleteAction.image = UIImage(systemName: "trash")
                 return deleteAction
-            }(), {
-                let editAction = UIContextualAction(style: .normal, title: "Edit", handler: {[weak self] _, _, completion in
-                    self?.editEntry(at: indexPath)
-                    completion(true)
-                })
-                editAction.image = UIImage(systemName: "pencil")
-                return editAction
-                }()
+            }()
             ])
         }
         
