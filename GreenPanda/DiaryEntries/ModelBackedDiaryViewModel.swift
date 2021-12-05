@@ -31,6 +31,7 @@ protocol DiaryViewModel {
     func composeButtonPressed()
     var chartViewModelPublisher: Published<ChartViewModel>.Publisher { get }
     var entriesPublisher: Published<[EntryViewModel] >.Publisher { get }
+    var entriesTableVisiblePublisher: Published<Bool>.Publisher { get }
     func deleteEntry(at row:Int)
     func editEntry(at row: Int)
 }
@@ -57,7 +58,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
             self.chartViewModel.chartData = newEntries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
             self.chartViewModel.chartData = newEntries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
             self.chartViewModel.showChart = newEntries.count > 1
-
+            self.entriesTableVisible = !newEntries.isEmpty
             if let lastDatapoint = self.chartData.last {
                 self.chartViewModel.chartXOffset = Double(lastDatapoint.timestamp - 7*24*60*60)
             }
@@ -74,6 +75,11 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     @Published var chartData: [ChartDatum] = []
     var chartDataPublisher: Published<[ChartDatum]>.Publisher {
         $chartData
+    }
+    
+    @Published var entriesTableVisible: Bool = true
+    var entriesTableVisiblePublisher: Published<Bool>.Publisher {
+        $entriesTableVisible
     }
 
 
