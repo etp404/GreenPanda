@@ -175,6 +175,25 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertFalse(capturedEntriesTableHidden)
     }
     
+    func testThatPromptIsShownNoEntries() throws {
+        var capturedPromptHidden = false
+        diaryViewModel.promptHiddenPublisher.sink{promptHidden in
+            capturedPromptHidden = promptHidden
+        }.store(in: &bag)
+        mockGreenPandaModel.entriesBackingValue = []
+
+        XCTAssertFalse(capturedPromptHidden)
+    }
+    
+    func testThatPromptIsNotShownWhenThereAreEntries() throws {
+        var capturedPromptHidden = false
+        diaryViewModel.promptHiddenPublisher.sink{promptHidden in
+            capturedPromptHidden = promptHidden
+        }.store(in: &bag)
+
+        XCTAssertTrue(capturedPromptHidden)
+    }
+    
 }
 
 class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {
