@@ -19,8 +19,7 @@ class ComposeDiaryEntryViewModel {
             hideDoneButton = (entryText ?? "").isEmpty || score == nil
         }
     }
-        
-    let moodScoreReps = ["☹️", "🙁", "😐", "🙂", "☺️"]
+    let moodScoreReps = ["😩", "😕", "😐", "🙂", "😁"]
     let moodScoreRepImages = [UIImage.init(systemName: "cloud.heavyrain"),
                               UIImage.init(systemName: "cloud.drizzle"),
                               UIImage.init(systemName: "cloud"),

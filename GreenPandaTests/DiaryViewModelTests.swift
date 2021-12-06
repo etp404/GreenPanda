@@ -30,13 +30,13 @@ class DiaryViewModelTests: XCTestCase {
     override func setUp() {
         self.continueAfterFailure = false;
         mockGreenPandaModel = MockGreenPandaModel()
-        diaryEntry2 = DiaryEntry(id: entry2Id, timestamp: Date(timeIntervalSince1970: 1600642313), entryText: entry2Text, score: 3)
+        diaryEntry2 = DiaryEntry(id: entry2Id, timestamp: Date(timeIntervalSince1970: 1600642313), entryText: entry2Text, score: 2)
         mockGreenPandaModel.entriesBackingValue = [
-            DiaryEntry(id: entry4Id, timestamp: Date(timeIntervalSince1970: 1603645315), entryText: entry1Text, score: 5),
+            DiaryEntry(id: entry4Id, timestamp: Date(timeIntervalSince1970: 1603645315), entryText: entry1Text, score: 4),
             diaryEntry2,
-            DiaryEntry(id: entry1Id, timestamp: Date(timeIntervalSince1970: 1600642312), entryText: entry2Text, score: 2),
-            DiaryEntry(id: entry3Id, timestamp: Date(timeIntervalSince1970: 1600642314), entryText: entry2Text, score: 4),
-            DiaryEntry(id: entry0Id, timestamp: Date(timeIntervalSince1970: 1600642311), entryText: entry2Text, score: 1)]
+            DiaryEntry(id: entry1Id, timestamp: Date(timeIntervalSince1970: 1600642312), entryText: entry2Text, score: 1),
+            DiaryEntry(id: entry3Id, timestamp: Date(timeIntervalSince1970: 1600642314), entryText: entry2Text, score: 3),
+            DiaryEntry(id: entry0Id, timestamp: Date(timeIntervalSince1970: 1600642311), entryText: entry2Text, score: 0)]
         mockDiaryViewModelCoordinatorDelegate = MockDiaryViewModelCoordinatorDelegate()
 
         diaryViewModel = ModelBackedDiaryViewModel(model: mockGreenPandaModel,
@@ -77,11 +77,11 @@ class DiaryViewModelTests: XCTestCase {
     }
     
     func testThatExpectedScoreIsReturnedAsExpected() throws {
-        XCTAssertEqual(capturedEntries?[0].score, "☺️")
+        XCTAssertEqual(capturedEntries?[0].score, "😁")
         XCTAssertEqual(capturedEntries?[1].score, "🙂")
         XCTAssertEqual(capturedEntries?[2].score, "😐")
-        XCTAssertEqual(capturedEntries?[3].score, "🙁")
-        XCTAssertEqual(capturedEntries?[4].score, "☹️")
+        XCTAssertEqual(capturedEntries?[3].score, "😕")
+        XCTAssertEqual(capturedEntries?[4].score, "😩")
     }
     
     func testThatPressingTheComposeButtonOpensTheComposeView() {
@@ -100,10 +100,10 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertEqual(capturedChartViewModel.chartData.count, 5)
 
         XCTAssertEqual(capturedChartViewModel.chartData[0].timestamp,1600642311)
-        XCTAssertEqual(capturedChartViewModel.chartData[0].moodScore,1)
+        XCTAssertEqual(capturedChartViewModel.chartData[0].moodScore, 0)
 
         XCTAssertEqual(capturedChartViewModel.chartData[4].timestamp, 1603645315)
-        XCTAssertEqual(capturedChartViewModel.chartData[4].moodScore, 5)
+        XCTAssertEqual(capturedChartViewModel.chartData[4].moodScore, 4)
     }
 
     func testThatChartDataArePublished() {

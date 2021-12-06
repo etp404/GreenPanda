@@ -67,7 +67,7 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
     func testThatExpectedMoodScoreEmojiIsReturned() {
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel())
         
-        XCTAssertEqual(composeDiaryEntryViewModel.moodScoreReps, ["☹️", "🙁", "😐", "🙂", "☺️"])
+        XCTAssertEqual(composeDiaryEntryViewModel.moodScoreReps, ["😩", "😕", "😐", "🙂", "😁"])
     }
     
     func testThatGivenComposeIsTapped_ViewIsDismissed() {
