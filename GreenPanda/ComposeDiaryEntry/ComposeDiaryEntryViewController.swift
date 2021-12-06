@@ -41,6 +41,8 @@ class ComposeDiaryEntryViewController: UIViewController {
         entryTextInput.delegate = self
         viewModel?.entryText = entryTextInput.text
         
+        entryTextInput.becomeFirstResponder()
+        
     }
     
     @IBAction func submit(_ sender: Any) {
