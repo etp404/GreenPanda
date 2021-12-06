@@ -77,11 +77,11 @@ class DiaryViewModelTests: XCTestCase {
     }
     
     func testThatExpectedScoreIsReturnedAsExpected() throws {
-        XCTAssertEqual(capturedEntries?[0].score, "😁")
+        XCTAssertEqual(capturedEntries?[0].score, "☺️")
         XCTAssertEqual(capturedEntries?[1].score, "🙂")
         XCTAssertEqual(capturedEntries?[2].score, "😐")
-        XCTAssertEqual(capturedEntries?[3].score, "😕")
-        XCTAssertEqual(capturedEntries?[4].score, "😩")
+        XCTAssertEqual(capturedEntries?[3].score, "🙁")
+        XCTAssertEqual(capturedEntries?[4].score, "☹️")
     }
     
     func testThatPressingTheComposeButtonOpensTheComposeView() {
