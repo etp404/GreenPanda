@@ -99,6 +99,10 @@ class DiaryViewController: ViewController {
         chart.leftAxis.enabled = false
         chart.rightAxis.enabled = false
         chart.legend.enabled = false
+        
+        chart.doubleTapToZoomEnabled = false
+        chart.pinchZoomEnabled = false
+        chart.scaleYEnabled = false
     }
 
     private func deleteAt(indexPath: IndexPath) {
