@@ -39,6 +39,7 @@ class ComposeDiaryEntryViewModel {
     
     func composeButtonPressed(failedValidation:()->Void) {
         guard let entryText = entryText,
+              !entryText.isEmpty,
               let score = score else {
             failedValidation()
             return

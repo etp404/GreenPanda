@@ -48,6 +48,23 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
         XCTAssertTrue(failedValidationInvoked)
     }
     
+    func testThatGivenEntryIsEmptyWhenComposeIsPressedErrorCallbackIsInvoked() throws {
+        let mockGreenPandaModel = MockGreenPandaModel()
+        
+        let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: mockGreenPandaModel)
+        composeDiaryEntryViewModel.score = somSliderValue
+        composeDiaryEntryViewModel.entryText = ""
+
+        composeDiaryEntryViewModel.composeButtonPressed(failedValidation: {})
+        
+        var failedValidationInvoked = false
+        composeDiaryEntryViewModel.composeButtonPressed {
+            failedValidationInvoked = true
+        }
+        
+        XCTAssertTrue(failedValidationInvoked)
+    }
+    
     func testThatGivenScoreIsNilWhenComposeIsPressedErrorCallbackIsInvoked() throws {
         let mockGreenPandaModel = MockGreenPandaModel()
         
@@ -73,7 +90,7 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
     func testThatGivenComposeIsTapped_ViewIsDismissed() {
         let mockComposeDiaryEntryCoordinatorDelegate = MockComposeDiaryEntryCoordinatorDelegate()
         let composeDiaryEntryViewModel = ComposeDiaryEntryViewModel(model: MockGreenPandaModel(), coordinatorDelegate: mockComposeDiaryEntryCoordinatorDelegate)
-        composeDiaryEntryViewModel.entryText = ""
+        composeDiaryEntryViewModel.entryText = "entry text"
         composeDiaryEntryViewModel.score = somSliderValue
         
         composeDiaryEntryViewModel.composeButtonPressed{}
