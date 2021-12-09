@@ -96,6 +96,9 @@ class DiaryViewController: ViewController {
         chart.xAxis.valueFormatter = DateValueFormatter()
         chart.xAxis.labelRotationAngle = -45
         
+        chart.leftAxis.axisMinimum = 0.0
+        chart.leftAxis.axisMaximum = 4.0
+        
         chart.leftAxis.enabled = false
         chart.rightAxis.enabled = false
         chart.legend.enabled = false
