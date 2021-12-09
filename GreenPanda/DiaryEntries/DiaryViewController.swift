@@ -29,7 +29,7 @@ class DiaryViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 30,
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 24,
                                                       weight: .regular,
                                                       scale: .large)
 
