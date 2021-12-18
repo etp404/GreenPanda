@@ -80,6 +80,8 @@ class DiaryViewController: ViewController {
         viewModel?.chartViewModelPublisher.sink{chartViewModel in
             self.updateChart(chartViewModel)
         }.store(in: &bag)
+        
+        collectionView.delegate = self
     }
     
     func applySnapshot(entries:[EntryViewModel]?, animatingDifferences: Bool = true) {
@@ -152,5 +154,15 @@ private class DateValueFormatter: NSObject, AxisValueFormatter {
 
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return dateFormatter.string(from: Date(timeIntervalSince1970: value))
+    }
+}
+
+extension DiaryViewController: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        #if (DEBUG)
+        if let topRpw = collectionView.indexPathForItem(at: scrollView.contentOffset)?.row {
+            viewModel?.updateTopVisibleRowNumber(to: topRpw)
+        }
+        #endif
     }
 }

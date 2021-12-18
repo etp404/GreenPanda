@@ -75,6 +75,10 @@ struct FakeEntry {
 }
 
 class FakeDiaryViewModel: DiaryViewModel {
+    func updateTopVisibleRowNumber(to rowNumber: Int) {
+        
+    }
+    
     func editEntry(at row: Int) {
         
     }
