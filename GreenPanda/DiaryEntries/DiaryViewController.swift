@@ -108,7 +108,7 @@ class DiaryViewController: ViewController {
         chart.doubleTapToZoomEnabled = false
         chart.pinchZoomEnabled = false
         chart.scaleYEnabled = false
-        chart.scaleXEnabled = true
+        chart.scaleXEnabled = false
         chart.highlightPerTapEnabled = false
         chart.highlightPerDragEnabled = false
     }
