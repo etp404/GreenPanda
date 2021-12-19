@@ -34,6 +34,7 @@ protocol DiaryViewModel {
     var entriesTableHiddenPublisher: Published<Bool>.Publisher { get }
     var promptHiddenPublisher: Published<Bool>.Publisher { get }
     func updateTopVisibleRowNumber(to rowNumber: Int)
+    func updateChartHighestVisibleDate(to date:TimeInterval)
     func deleteEntry(at row:Int)
     func editEntry(at row: Int)
 }
@@ -123,6 +124,11 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         }).store(in: &bag)
         
     }
+    
+    func updateChartHighestVisibleDate(to date: TimeInterval) {
+        
+    }
+    
     
     private func scoreSmiley(for score:Int) -> String {
         switch (score) {

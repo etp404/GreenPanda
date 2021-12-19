@@ -108,9 +108,10 @@ class DiaryViewController: ViewController {
         chart.doubleTapToZoomEnabled = false
         chart.pinchZoomEnabled = false
         chart.scaleYEnabled = false
-        chart.scaleXEnabled = false
+        chart.scaleXEnabled = true
         chart.highlightPerTapEnabled = false
         chart.highlightPerDragEnabled = false
+        chart.delegate = self
     }
 
     private func deleteAt(indexPath: IndexPath) {
@@ -163,6 +164,14 @@ extension DiaryViewController: UICollectionViewDelegate {
         if let topRpw = collectionView.indexPathForItem(at: scrollView.contentOffset)?.row {
             viewModel?.updateTopVisibleRowNumber(to: topRpw)
         }
+        #endif
+    }
+}
+
+extension DiaryViewController: ChartViewDelegate {
+    func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
+        #if (DEBUG)
+        viewModel?.updateChartHighestVisibleDate(to: chart.highestVisibleX)
         #endif
     }
 }
