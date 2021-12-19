@@ -137,7 +137,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
             let offset = newEntries
                 .sorted{$0.timestamp > $1.timestamp}
                 .firstIndex(where: {entry in
-                entry.timestamp.timeIntervalSince1970 < date
+                entry.timestamp.timeIntervalSince1970 <= date
                 })
             self.diaryOffset = offset ?? 0
         }).store(in: &bag)

@@ -226,6 +226,20 @@ class DiaryViewModelTests: XCTestCase {
         let unwrappedCapturedDiaryOffset = try XCTUnwrap(capturedDiaryOffset)
         XCTAssertEqual(unwrappedCapturedDiaryOffset, 1)
     }
+    
+    func testThatScrollOffsetIsSetWhenChartIsScrolledToLasstEntry() throws {
+        var capturedDiaryOffset: Int?
+        diaryViewModel.diaryOffsetPublisher.sink{diaryOffset in
+            capturedDiaryOffset = diaryOffset
+        }.store(in: &bag)
+        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
+        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
+        
+        diaryViewModel.updateChartHighestVisibleDate(to: date2033Jun29_08_08_35)
+
+        let unwrappedCapturedDiaryOffset = try XCTUnwrap(capturedDiaryOffset)
+        XCTAssertEqual(unwrappedCapturedDiaryOffset, 0)
+    }
 }
 
 class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {
