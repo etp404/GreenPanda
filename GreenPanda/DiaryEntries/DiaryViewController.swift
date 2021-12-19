@@ -81,7 +81,9 @@ class DiaryViewController: ViewController {
             self.updateChart(chartViewModel)
         }.store(in: &bag)
         viewModel?.diaryOffsetPublisher.sink{diaryOffset in
-            self.collectionView.scrollToItem(at: IndexPath(row: diaryOffset, section: 0), at: .top, animated: true)
+            if let diaryOffset = diaryOffset {
+                self.collectionView.scrollToItem(at: IndexPath(row: diaryOffset, section: 0), at: .top, animated: true)
+            }
         }.store(in: &bag)
         collectionView.delegate = self
     }

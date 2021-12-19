@@ -240,6 +240,14 @@ class DiaryViewModelTests: XCTestCase {
         let unwrappedCapturedDiaryOffset = try XCTUnwrap(capturedDiaryOffset)
         XCTAssertEqual(unwrappedCapturedDiaryOffset, 0)
     }
+    
+    func testThatScrollOffsetIsInitiallyNil() {
+        var capturedDiaryOffset: Int?
+        diaryViewModel.diaryOffsetPublisher.sink{diaryOffset in
+            capturedDiaryOffset = diaryOffset
+        }.store(in: &bag)
+        XCTAssertNil(capturedDiaryOffset)
+    }
 }
 
 class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {

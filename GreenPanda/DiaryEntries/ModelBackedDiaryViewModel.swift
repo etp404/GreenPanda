@@ -33,7 +33,7 @@ protocol DiaryViewModel {
     var entriesPublisher: Published<[EntryViewModel] >.Publisher { get }
     var entriesTableHiddenPublisher: Published<Bool>.Publisher { get }
     var promptHiddenPublisher: Published<Bool>.Publisher { get }
-    var diaryOffsetPublisher: Published<Int>.Publisher { get }
+    var diaryOffsetPublisher: Published<Int?>.Publisher { get }
     func updateTopVisibleRowNumber(to rowNumber: Int)
     func updateChartHighestVisibleDate(to date:TimeInterval)
     func deleteEntry(at row:Int)
@@ -98,8 +98,8 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         $promptHidden
     }
     
-    @Published var diaryOffset = 0
-    var diaryOffsetPublisher: Published<Int>.Publisher {
+    @Published var diaryOffset: Int?
+    var diaryOffsetPublisher: Published<Int?>.Publisher {
         $diaryOffset
     }
 
