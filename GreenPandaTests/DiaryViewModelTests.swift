@@ -17,6 +17,8 @@ class DiaryViewModelTests: XCTestCase {
     let date2020Sep20_22_51_52: TimeInterval = 1600642312
     let date2020Sep20_22_51_54: TimeInterval = 1600642314
     let date2020Sep20_23_51_51: TimeInterval = 1600642311
+    let date2033Jun29_08_08_35: TimeInterval = 2003645315
+
     let entry1Text = "entry1Text"
     let entry2Text = "entry2Text"
     var mockGreenPandaModel: MockGreenPandaModel!
@@ -203,13 +205,26 @@ class DiaryViewModelTests: XCTestCase {
     }
     
     func testThatChartXOffsetIsSetWhenUserScrolls() {
-        let date2033Jun29_08_08_35: TimeInterval = 2003645315
         mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
         mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
         
         diaryViewModel.updateTopVisibleRowNumber(to: 1)
 
         XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(date2020Oct25_17_01_55-7*24*60*60))
+    }
+    
+    func testThatScrollOffsetIsSetWhenChartIsScrolled() throws {
+        var capturedDiaryOffset: Int?
+        diaryViewModel.diaryOffsetPublisher.sink{diaryOffset in
+            capturedDiaryOffset = diaryOffset
+        }.store(in: &bag)
+        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
+        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
+        
+        diaryViewModel.updateChartHighestVisibleDate(to: date2033Jun29_08_08_35-7*24*60*60)
+
+        let unwrappedCapturedDiaryOffset = try XCTUnwrap(capturedDiaryOffset)
+        XCTAssertEqual(unwrappedCapturedDiaryOffset, 1)
     }
 }
 

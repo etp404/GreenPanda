@@ -74,7 +74,7 @@ struct FakeEntry {
     let score: String
 }
 
-class FakeDiaryViewModel: DiaryViewModel {
+class FakeDiaryViewModel: DiaryViewModel {    
     func updateChartHighestVisibleDate(to date: TimeInterval) {
         
     }
@@ -129,4 +129,9 @@ class FakeDiaryViewModel: DiaryViewModel {
     @Published private var entries: [EntryViewModel] = []
     @Published private var entriesTableHidden = false
     @Published private var promptHidden = false
+    
+    @Published var diaryOffset = 0
+    var diaryOffsetPublisher: Published<Int>.Publisher {
+        $diaryOffset
+    }
 }

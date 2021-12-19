@@ -33,6 +33,7 @@ protocol DiaryViewModel {
     var entriesPublisher: Published<[EntryViewModel] >.Publisher { get }
     var entriesTableHiddenPublisher: Published<Bool>.Publisher { get }
     var promptHiddenPublisher: Published<Bool>.Publisher { get }
+    var diaryOffsetPublisher: Published<Int>.Publisher { get }
     func updateTopVisibleRowNumber(to rowNumber: Int)
     func updateChartHighestVisibleDate(to date:TimeInterval)
     func deleteEntry(at row:Int)
@@ -96,6 +97,12 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     var promptHiddenPublisher: Published<Bool>.Publisher {
         $promptHidden
     }
+    
+    @Published var diaryOffset = 0
+    var diaryOffsetPublisher: Published<Int>.Publisher {
+        $diaryOffset
+    }
+
 
     let chartVisibleRange = Double(7*24*60*60)
 
@@ -126,7 +133,14 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func updateChartHighestVisibleDate(to date: TimeInterval) {
-        
+        greenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
+            let offset = newEntries
+                .sorted{$0.timestamp > $1.timestamp}
+                .firstIndex(where: {entry in
+                entry.timestamp.timeIntervalSince1970 < date
+                })
+            self.diaryOffset = offset ?? 0
+        }).store(in: &bag)
     }
     
     

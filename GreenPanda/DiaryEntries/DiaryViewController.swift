@@ -80,7 +80,9 @@ class DiaryViewController: ViewController {
         viewModel?.chartViewModelPublisher.sink{chartViewModel in
             self.updateChart(chartViewModel)
         }.store(in: &bag)
-        
+        viewModel?.diaryOffsetPublisher.sink{diaryOffset in
+            self.collectionView.scrollToItem(at: IndexPath(row: diaryOffset, section: 0), at: .top, animated: true)
+        }.store(in: &bag)
         collectionView.delegate = self
     }
     
