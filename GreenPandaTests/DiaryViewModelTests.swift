@@ -122,7 +122,6 @@ class DiaryViewModelTests: XCTestCase {
     }
 
     func testThatCorrectXPositionIsReturnedFromViewModel() {
-        // 29 June 2033 08:08:35
         let date2033Jun29_08_08_35: TimeInterval = 2003645315
         let date2033Jun22_08_08_35: TimeInterval = 2003040515
 
@@ -203,6 +202,15 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertTrue(capturedPromptHidden)
     }
     
+    func testThatChartXOffsetIsSetWhenUserScrolls() {
+        let date2033Jun29_08_08_35: TimeInterval = 2003645315
+        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
+        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
+        
+        diaryViewModel.updateTopVisibleRowNumber(to: 1)
+
+        XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(date2020Oct25_17_01_55-7*24*60*60))
+    }
 }
 
 class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {

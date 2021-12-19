@@ -43,7 +43,9 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     private let timezone: TimeZone
     private let coordinatorDelegate: DiaryViewModelCoordinatorDelegate
     private var cancellable: AnyCancellable? = nil
-    
+    private let aWeekInSeconds: TimeInterval = 7*24*60*60
+    private var bag = Set<AnyCancellable>()
+
     init(model greenPandaModel: GreenPandaModel,
          timezone: TimeZone,
          coordinatorDelegate: DiaryViewModelCoordinatorDelegate) {
@@ -56,17 +58,21 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         
         cancellable = greenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
             self.entries = newEntries.sorted(by: {$0.timestamp > $1.timestamp}).map { self.convertToViewModel(entry: $0) }
-            self.chartData = newEntries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
-            self.chartViewModel.chartData = newEntries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
-            self.chartViewModel.chartData = newEntries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
-            self.chartViewModel.showChart = newEntries.count > 1
             self.entriesTableHidden = newEntries.isEmpty
             self.promptHidden = !newEntries.isEmpty
-            if let lastDatapoint = self.chartData.last {
-                self.chartViewModel.chartXOffset = Double(lastDatapoint.timestamp - 7*24*60*60)
-            }
-        } )
-
+            
+            self.updateChart(entries: newEntries)
+        })
+    }
+    
+    private func updateChart(entries: [DiaryEntry], topRowNumber: Int = 0) {
+        self.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
+        self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
+        self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
+        self.chartViewModel.showChart = entries.count > 1
+        if entries.count > 1 {
+            self.chartViewModel.chartXOffset = entries.sorted(by: {$0.timestamp > $1.timestamp})[topRowNumber].timestamp.timeIntervalSince1970 - self.aWeekInSeconds
+        }
     }
     
     @Published var entries: [EntryViewModel] = []
@@ -91,12 +97,6 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
 
     let chartVisibleRange = Double(7*24*60*60)
-    var chartXOffset: Double {
-        get {
-            guard let lastDatapoint = chartData.last else {return 0.0}
-            return Double(lastDatapoint.timestamp - 7*24*60*60)
-        }
-    }
 
     var showChart: Bool {
         get {
@@ -117,6 +117,10 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func updateTopVisibleRowNumber(to rowNumber: Int) {
+        greenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
+            self.updateChart(entries: newEntries, topRowNumber: rowNumber)
+            
+        }).store(in: &bag)
         
     }
     
