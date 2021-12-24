@@ -23,7 +23,7 @@ struct ChartDatum {
 struct ChartViewModel {
     var chartData: [ChartDatum]
     var showChart: Bool
-    var chartXOffset: Double = 0.0
+    var chartXOffset: Double = 0
     var chartVisibleRange: Double = Double(7*24*60*60)
 }
 
@@ -34,10 +34,11 @@ protocol DiaryViewModel {
     var entriesTableHiddenPublisher: Published<Bool>.Publisher { get }
     var promptHiddenPublisher: Published<Bool>.Publisher { get }
     var diaryOffsetPublisher: Published<Int?>.Publisher { get }
-    func updateTopVisibleRowNumber(to rowNumber: Int)
-    func updateChartHighestVisibleDate(to date:TimeInterval)
+    func topVisibleRowNumberDidChange(to rowNumber: Int)
+    func topVisibleXValueOnChartDidChange(to date:TimeInterval)
     func deleteEntry(at row:Int)
     func editEntry(at row: Int)
+    func scrollViewDidEndAnimating()
 }
 
 class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
@@ -58,7 +59,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
 
         super.init()
         
-        cancellable = greenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
+        cancellable = greenPandaModel.entriesPublisher.sink(receiveValue: { (newEntries:[DiaryEntry]) in
             self.entries = newEntries.sorted(by: {$0.timestamp > $1.timestamp}).map { self.convertToViewModel(entry: $0) }
             self.entriesTableHidden = newEntries.isEmpty
             self.promptHidden = !newEntries.isEmpty
@@ -103,9 +104,8 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         $diaryOffset
     }
 
-
     let chartVisibleRange = Double(7*24*60*60)
-
+    
     var showChart: Bool {
         get {
             !self.entries.isEmpty
@@ -124,23 +124,24 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         coordinatorDelegate.openEditView(diaryEntry: entries[row])
     }
     
-    func updateTopVisibleRowNumber(to rowNumber: Int) {
-        greenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
-            self.updateChart(entries: newEntries, topRowNumber: rowNumber)
-            
-        }).store(in: &bag)
-        
+    func topVisibleRowNumberDidChange(to rowNumber: Int) {
+        self.updateChart(entries: greenPandaModel.entries, topRowNumber: rowNumber)
+        print("topVisibleRowNumberDidChange")
     }
     
-    func updateChartHighestVisibleDate(to date: TimeInterval) {
-        greenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
-            let offset = newEntries
-                .sorted{$0.timestamp > $1.timestamp}
-                .firstIndex(where: {entry in
+    func scrollViewDidEndAnimating() {
+        print("scrollViewDidEndAnimating")
+    }
+    
+    func topVisibleXValueOnChartDidChange(to date: TimeInterval) {
+        print("topVisibleXValueOnChartDidChange")
+        let offset = greenPandaModel
+            .entries
+            .sorted{$0.timestamp > $1.timestamp}
+            .firstIndex(where: {entry in
                 entry.timestamp.timeIntervalSince1970 <= date
-                })
-            self.diaryOffset = offset ?? 0
-        }).store(in: &bag)
+            })
+        self.diaryOffset = offset ?? 0
     }
     
     

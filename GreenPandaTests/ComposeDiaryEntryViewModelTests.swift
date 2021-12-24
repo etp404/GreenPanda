@@ -26,7 +26,7 @@ class ComposeDiaryEntryViewModelTests: XCTestCase {
 
         composeDiaryEntryViewModel.composeButtonPressed(failedValidation: {})
         
-        let lastEntryAdded = try XCTUnwrap(mockGreenPandaModel.entriesBackingValue.last)
+        let lastEntryAdded = try XCTUnwrap(mockGreenPandaModel.entries.last)
         XCTAssertEqual(lastEntryAdded.timestamp, someDate)
         XCTAssertEqual(lastEntryAdded.entryText, someEntryText)
         XCTAssertEqual(lastEntryAdded.score, Int(someScore))

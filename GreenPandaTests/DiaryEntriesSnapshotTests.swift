@@ -75,11 +75,15 @@ struct FakeEntry {
 }
 
 class FakeDiaryViewModel: DiaryViewModel {
-    func updateChartHighestVisibleDate(to date: TimeInterval) {
+    func scrollViewDidEndAnimating() {
         
     }
     
-    func updateTopVisibleRowNumber(to rowNumber: Int) {
+    func topVisibleXValueOnChartDidChange(to date: TimeInterval) {
+        
+    }
+    
+    func topVisibleRowNumberDidChange(to rowNumber: Int) {
         
     }
     

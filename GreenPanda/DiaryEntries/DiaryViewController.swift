@@ -166,16 +166,20 @@ extension DiaryViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         #if (DEBUG)
         if let topRpw = collectionView.indexPathForItem(at: scrollView.contentOffset)?.row {
-            viewModel?.updateTopVisibleRowNumber(to: topRpw)
+            viewModel?.topVisibleRowNumberDidChange(to: topRpw)
         }
         #endif
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        viewModel?.scrollViewDidEndAnimating()
     }
 }
 
 extension DiaryViewController: ChartViewDelegate {
     func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
         #if (DEBUG)
-        viewModel?.updateChartHighestVisibleDate(to: chart.highestVisibleX)
+        viewModel?.topVisibleXValueOnChartDidChange(to: chart.highestVisibleX)
         #endif
     }
 }

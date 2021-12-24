@@ -10,11 +10,11 @@ import CoreData
 
 class CoreDataGreenPandaModel: GreenPandaModel {
     
-    var entries: Published<[DiaryEntry]>.Publisher {
-        return $entriesBackingValue
+    var entriesPublisher: Published<[DiaryEntry]>.Publisher {
+        return $entries
     }
     
-    @Published private var entriesBackingValue: [DiaryEntry] = []
+    @Published public var entries: [DiaryEntry] = []
     
     private let context: NSManagedObjectContext
     private let clock: Clock
@@ -66,7 +66,7 @@ class CoreDataGreenPandaModel: GreenPandaModel {
             NSFetchRequest<NSManagedObject>(entityName: "DiaryEntryEntity")
         
         if let diaryEntries: [NSManagedObject] = try? context.fetch(fetchRequest) {
-            entriesBackingValue = diaryEntries.compactMap{$0.toDiaryEntry()}
+            entries = diaryEntries.compactMap{$0.toDiaryEntry()}
         }
     }
     

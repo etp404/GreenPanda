@@ -16,8 +16,8 @@ struct DiaryEntry {
 
 protocol GreenPandaModel {
     
-    var entries: Published<[DiaryEntry]>.Publisher { get }
-        
+    var entriesPublisher: Published<[DiaryEntry]>.Publisher { get }
+    var entries: [DiaryEntry] { get }
     func add(entry: NewDiaryEntry)
     func deleteEntry(with id:UUID)
 }

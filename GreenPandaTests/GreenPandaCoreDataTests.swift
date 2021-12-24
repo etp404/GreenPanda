@@ -41,7 +41,7 @@ class GreenPandaCoreDataTests: XCTestCase {
     
     func testThatUpdatesToTheModelAreEmittedToTheSubscriber() {
         var retrievedEntries = [DiaryEntry]()
-        cancellable = coreDataGreenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
+        cancellable = coreDataGreenPandaModel.entriesPublisher.sink(receiveValue: { (newEntries:[DiaryEntry]) in
             retrievedEntries = newEntries
         })
         
@@ -77,7 +77,7 @@ class GreenPandaCoreDataTests: XCTestCase {
         coreDataGreenPandaModel.add(entry: diaryEntryToSave2)
         
         var retrievedEntries = [DiaryEntry]()
-        cancellable = coreDataGreenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
+        cancellable = coreDataGreenPandaModel.entriesPublisher.sink(receiveValue: { (newEntries:[DiaryEntry]) in
             retrievedEntries = newEntries
         })
         let retrievedEntry1 = retrievedEntries.filter{ $0.id == diaryEntryToSave1.id}.first
@@ -102,7 +102,7 @@ class GreenPandaCoreDataTests: XCTestCase {
         coreDataGreenPandaModel.deleteEntry(with: id2)
         
         var retrievedEntries = [DiaryEntry]()
-        cancellable = coreDataGreenPandaModel.entries.sink(receiveValue: { (newEntries:[DiaryEntry]) in
+        cancellable = coreDataGreenPandaModel.entriesPublisher.sink(receiveValue: { (newEntries:[DiaryEntry]) in
             retrievedEntries = newEntries
         })
         XCTAssertEqual(2, retrievedEntries.count)

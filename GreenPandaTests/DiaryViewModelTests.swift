@@ -38,7 +38,7 @@ class DiaryViewModelTests: XCTestCase {
         self.continueAfterFailure = false;
         mockGreenPandaModel = MockGreenPandaModel()
         diaryEntry2 = DiaryEntry(id: entry2Id, timestamp: Date(timeIntervalSince1970: date2020Sep20_22_51_53), entryText: entry2Text, score: 2)
-        mockGreenPandaModel.entriesBackingValue = [
+        mockGreenPandaModel.entries = [
             DiaryEntry(id: entry4Id, timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: entry1Text, score: 4),
             diaryEntry2,
             DiaryEntry(id: entry1Id, timestamp: Date(timeIntervalSince1970: date2020Sep20_22_51_52), entryText: entry2Text, score: 1),
@@ -127,13 +127,13 @@ class DiaryViewModelTests: XCTestCase {
         let date2033Jun29_08_08_35: TimeInterval = 2003645315
         let date2033Jun22_08_08_35: TimeInterval = 2003040515
 
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
 
         XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(date2033Jun22_08_08_35))
     }
@@ -148,9 +148,9 @@ class DiaryViewModelTests: XCTestCase {
             self.capturedChartViewModel = chartViewModel
         }.store(in: &bag)
         XCTAssertFalse(capturedChartViewModel.showChart)
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 2003645315), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 2003645315), entryText: "abc", score: 0))
         XCTAssertFalse(capturedChartViewModel.showChart)
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 2003645315), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 2003645315), entryText: "abc", score: 0))
         XCTAssertTrue(capturedChartViewModel.showChart)
     }
     
@@ -171,7 +171,7 @@ class DiaryViewModelTests: XCTestCase {
         diaryViewModel.entriesTableHiddenPublisher.sink{entriesTableHidden in
             capturedEntriesTableHidden = entriesTableHidden
         }.store(in: &bag)
-        mockGreenPandaModel.entriesBackingValue = []
+        mockGreenPandaModel.entries = []
 
         XCTAssertTrue(capturedEntriesTableHidden)
     }
@@ -190,7 +190,7 @@ class DiaryViewModelTests: XCTestCase {
         diaryViewModel.promptHiddenPublisher.sink{promptHidden in
             capturedPromptHidden = promptHidden
         }.store(in: &bag)
-        mockGreenPandaModel.entriesBackingValue = []
+        mockGreenPandaModel.entries = []
 
         XCTAssertFalse(capturedPromptHidden)
     }
@@ -205,10 +205,10 @@ class DiaryViewModelTests: XCTestCase {
     }
     
     func testThatChartXOffsetIsSetWhenUserScrolls() {
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
         
-        diaryViewModel.updateTopVisibleRowNumber(to: 1)
+        diaryViewModel.topVisibleRowNumberDidChange(to: 1)
 
         XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(date2020Oct25_17_01_55-7*24*60*60))
     }
@@ -218,10 +218,10 @@ class DiaryViewModelTests: XCTestCase {
         diaryViewModel.diaryOffsetPublisher.sink{diaryOffset in
             capturedDiaryOffset = diaryOffset
         }.store(in: &bag)
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
         
-        diaryViewModel.updateChartHighestVisibleDate(to: date2033Jun29_08_08_35-7*24*60*60)
+        diaryViewModel.topVisibleXValueOnChartDidChange(to: date2033Jun29_08_08_35-7*24*60*60)
 
         let unwrappedCapturedDiaryOffset = try XCTUnwrap(capturedDiaryOffset)
         XCTAssertEqual(unwrappedCapturedDiaryOffset, 1)
@@ -232,10 +232,10 @@ class DiaryViewModelTests: XCTestCase {
         diaryViewModel.diaryOffsetPublisher.sink{diaryOffset in
             capturedDiaryOffset = diaryOffset
         }.store(in: &bag)
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entriesBackingValue.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
         
-        diaryViewModel.updateChartHighestVisibleDate(to: date2033Jun29_08_08_35)
+        diaryViewModel.topVisibleXValueOnChartDidChange(to: date2033Jun29_08_08_35)
 
         let unwrappedCapturedDiaryOffset = try XCTUnwrap(capturedDiaryOffset)
         XCTAssertEqual(unwrappedCapturedDiaryOffset, 0)
