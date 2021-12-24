@@ -38,7 +38,7 @@ protocol DiaryViewModel {
     func topVisibleXValueOnChartDidChange(to date:TimeInterval)
     func deleteEntry(at row:Int)
     func editEntry(at row: Int)
-    func scrollViewDidEndAnimating()
+    func chartViewDidEndPanning()
 }
 
 class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
@@ -48,7 +48,8 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     private var cancellable: AnyCancellable? = nil
     private let aWeekInSeconds: TimeInterval = 7*24*60*60
     private var bag = Set<AnyCancellable>()
-
+    private var chartIsBeingChanged: Bool = false
+    
     init(model greenPandaModel: GreenPandaModel,
          timezone: TimeZone,
          coordinatorDelegate: DiaryViewModelCoordinatorDelegate) {
@@ -125,16 +126,16 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func topVisibleRowNumberDidChange(to rowNumber: Int) {
+        if chartIsBeingChanged { return }
         self.updateChart(entries: greenPandaModel.entries, topRowNumber: rowNumber)
-        print("topVisibleRowNumberDidChange")
     }
     
-    func scrollViewDidEndAnimating() {
-        print("scrollViewDidEndAnimating")
+    func chartViewDidEndPanning() {
+        
     }
     
     func topVisibleXValueOnChartDidChange(to date: TimeInterval) {
-        print("topVisibleXValueOnChartDidChange")
+        chartIsBeingChanged = true
         let offset = greenPandaModel
             .entries
             .sorted{$0.timestamp > $1.timestamp}

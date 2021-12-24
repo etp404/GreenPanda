@@ -75,8 +75,7 @@ struct FakeEntry {
 }
 
 class FakeDiaryViewModel: DiaryViewModel {
-    func scrollViewDidEndAnimating() {
-        
+    func chartViewDidEndPanning() {
     }
     
     func topVisibleXValueOnChartDidChange(to date: TimeInterval) {

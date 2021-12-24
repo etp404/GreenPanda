@@ -170,10 +170,6 @@ extension DiaryViewController: UICollectionViewDelegate {
         }
         #endif
     }
-    
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        viewModel?.scrollViewDidEndAnimating()
-    }
 }
 
 extension DiaryViewController: ChartViewDelegate {
@@ -181,5 +177,9 @@ extension DiaryViewController: ChartViewDelegate {
         #if (DEBUG)
         viewModel?.topVisibleXValueOnChartDidChange(to: chart.highestVisibleX)
         #endif
+    }
+    
+    func chartViewDidEndPanning(_ chartView: ChartViewBase) {
+        viewModel?.chartViewDidEndPanning()
     }
 }

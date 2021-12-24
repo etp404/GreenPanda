@@ -248,6 +248,19 @@ class DiaryViewModelTests: XCTestCase {
         }.store(in: &bag)
         XCTAssertNil(capturedDiaryOffset)
     }
+    
+    func testThatWhenChartIsScrolling_changsToTheDiaryViewDoesntResultInChartUpdate() {
+        var capturedChartViewModel: ChartViewModel?
+        diaryViewModel.chartViewModelPublisher.sink{chartViewModel in
+            capturedChartViewModel = chartViewModel
+        }.store(in: &bag)
+        
+        diaryViewModel.topVisibleXValueOnChartDidChange(to: 0)
+        capturedChartViewModel = nil
+        
+        diaryViewModel.topVisibleRowNumberDidChange(to: 0)
+        XCTAssertNil(capturedChartViewModel)
+    }
 }
 
 class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {
