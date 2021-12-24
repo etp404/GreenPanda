@@ -131,7 +131,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func chartViewDidEndPanning() {
-        
+        chartIsBeingChanged = false
     }
     
     func topVisibleXValueOnChartDidChange(to date: TimeInterval) {
