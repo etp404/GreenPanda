@@ -49,7 +49,6 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     private var cancellable: AnyCancellable? = nil
     private let aWeekInSeconds: TimeInterval = 7*24*60*60
     private var bag = Set<AnyCancellable>()
-    private var chartIsBeingChanged: Bool = false
     private var targetRowToMoveTo: Int?
     private var lastRecordedRow: Int?
     
@@ -144,11 +143,9 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func diaryViewAnimationEnded() {
-        chartIsBeingChanged = false
     }
     
     func topVisibleXValueOnChartDidChange(to date: TimeInterval) {
-        chartIsBeingChanged = true
         let offset = greenPandaModel
             .entries
             .sorted{$0.timestamp > $1.timestamp}
