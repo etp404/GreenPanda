@@ -50,6 +50,8 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     private let aWeekInSeconds: TimeInterval = 7*24*60*60
     private var bag = Set<AnyCancellable>()
     private var chartIsBeingChanged: Bool = false
+    private var targetRowToMoveTo: Int?
+    private var lastRecordedRow: Int?
     
     init(model greenPandaModel: GreenPandaModel,
          timezone: TimeZone,
@@ -127,7 +129,14 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func topVisibleRowNumberDidChange(to rowNumber: Int) {
-        if chartIsBeingChanged { return }
+        if self.lastRecordedRow == rowNumber { return }
+        self.lastRecordedRow = rowNumber
+        if let targetRowToMoveTo = targetRowToMoveTo {
+            if targetRowToMoveTo != rowNumber {
+                self.targetRowToMoveTo = nil
+            }
+            return
+        }
         self.updateChart(entries: greenPandaModel.entries, topRowNumber: rowNumber)
     }
     
@@ -146,7 +155,10 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
             .firstIndex(where: {entry in
                 entry.timestamp.timeIntervalSince1970 <= date
             })
-        self.diaryOffset = offset ?? 0
+        let rowToMoveTo = offset ?? 0
+        if targetRowToMoveTo == rowToMoveTo { return }
+        targetRowToMoveTo = rowToMoveTo
+        self.diaryOffset = rowToMoveTo
     }
     
     

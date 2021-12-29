@@ -82,6 +82,7 @@ class DiaryViewController: ViewController {
         }.store(in: &bag)
         viewModel?.diaryOffsetPublisher.sink{diaryOffset in
             if let diaryOffset = diaryOffset {
+                print("Scrolling to \(diaryOffset)")
                 self.collectionView.scrollToItem(at: IndexPath(row: diaryOffset, section: 0), at: .top, animated: true)
             }
         }.store(in: &bag)
