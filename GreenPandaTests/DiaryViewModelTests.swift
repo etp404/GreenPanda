@@ -249,7 +249,7 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertNil(capturedDiaryOffset)
     }
     
-    func testThatWhenChartIsScrolling_changsToTheDiaryViewDontResultInChartUpdate() {
+    func testThatWhenChartIsScrolling_changesToTheDiaryViewDontResultInChartUpdate() {
         var capturedChartViewModel: ChartViewModel?
         diaryViewModel.chartViewModelPublisher.sink{chartViewModel in
             capturedChartViewModel = chartViewModel
@@ -262,7 +262,7 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertNil(capturedChartViewModel)
     }
     
-    func testThatWhenChartIsFinishedScrolling_changsToTheDiaryViewDuringAnimationDoNotResultInChartUpdate() {
+    func testThatWhenChartIsFinishedScrolling_changesToTheDiaryViewDoResultInChartUpdate() {
         mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
         mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
        
