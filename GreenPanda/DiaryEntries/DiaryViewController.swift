@@ -170,6 +170,11 @@ extension DiaryViewController: UICollectionViewDelegate {
         }
         #endif
     }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        viewModel?.diaryViewAnimationEnded()
+    }
+
 }
 
 extension DiaryViewController: ChartViewDelegate {

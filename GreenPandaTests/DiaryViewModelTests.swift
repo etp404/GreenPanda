@@ -262,12 +262,13 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertNil(capturedChartViewModel)
     }
     
-    func testThatWhenChartIsFinishedScrolling_changsToTheDiaryViewDoResultInChartUpdate() {
+    func testThatWhenChartIsFinishedScrolling_changsToTheDiaryViewDuringAnimationDoNotResultInChartUpdate() {
         mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
         mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
        
         diaryViewModel.topVisibleXValueOnChartDidChange(to: 0)
         diaryViewModel.chartViewDidEndPanning()
+        diaryViewModel.diaryViewAnimationEnded()
         
         diaryViewModel.topVisibleRowNumberDidChange(to: 1)
 

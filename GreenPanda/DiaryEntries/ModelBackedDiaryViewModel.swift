@@ -39,6 +39,7 @@ protocol DiaryViewModel {
     func deleteEntry(at row:Int)
     func editEntry(at row: Int)
     func chartViewDidEndPanning()
+    func diaryViewAnimationEnded()
 }
 
 class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
@@ -132,6 +133,10 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     
     func chartViewDidEndPanning() {
         chartIsBeingChanged = false
+    }
+    
+    func diaryViewAnimationEnded() {
+        
     }
     
     func topVisibleXValueOnChartDidChange(to date: TimeInterval) {

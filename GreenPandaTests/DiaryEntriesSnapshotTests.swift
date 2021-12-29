@@ -75,6 +75,10 @@ struct FakeEntry {
 }
 
 class FakeDiaryViewModel: DiaryViewModel {
+    func diaryViewAnimationEnded() {
+        
+    }
+    
     func chartViewDidEndPanning() {
     }
     
