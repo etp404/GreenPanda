@@ -287,6 +287,16 @@ class DiaryViewModelTests: XCTestCase {
 
         XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(date2020Oct25_17_01_55-7*24*60*60))
     }
+    
+    
+    func testThatChartIsntUpdatedWhenDiaryViewMovesButTopEntryDoesntChange() {
+        diaryViewModel.topVisibleRowNumberDidChange(to: 2)
+        capturedChartViewModel = nil
+        diaryViewModel.topVisibleRowNumberDidChange(to: 2)
+        
+        XCTAssertNil(capturedChartViewModel)
+    }
+    
 }
 
 class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {

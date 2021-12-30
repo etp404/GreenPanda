@@ -50,6 +50,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     private let aWeekInSeconds: TimeInterval = 7*24*60*60
     private var bag = Set<AnyCancellable>()
     private var chartIsBeingChanged: Bool = false
+    @Published private var topVisibleRowNumber:Int? = nil
     
     init(model greenPandaModel: GreenPandaModel,
          timezone: TimeZone,
@@ -68,6 +69,11 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
             
             self.updateChart(entries: newEntries)
         })
+        
+        $topVisibleRowNumber.removeDuplicates().compactMap{$0}.sink(receiveValue: { (topVisibleRow: Int) in
+            self.updateChart(entries: greenPandaModel.entries, topRowNumber: topVisibleRow)
+        }).store(in: &bag)
+        
     }
     
     private func updateChart(entries: [DiaryEntry], topRowNumber: Int = 0) {
@@ -128,7 +134,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     
     func topVisibleRowNumberDidChange(to rowNumber: Int) {
         if chartIsBeingChanged { return }
-        self.updateChart(entries: greenPandaModel.entries, topRowNumber: rowNumber)
+        topVisibleRowNumber = rowNumber
     }
     
     func chartViewDidEndPanning() {
