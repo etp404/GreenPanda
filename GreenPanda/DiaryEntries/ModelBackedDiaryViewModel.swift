@@ -49,7 +49,6 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     private var cancellable: AnyCancellable? = nil
     private let aWeekInSeconds: TimeInterval = 7*24*60*60
     private var bag = Set<AnyCancellable>()
-    private var chartIsBeingChanged: Bool = false
     @Published private var topVisibleRowNumber:Int? = nil
     
     init(model greenPandaModel: GreenPandaModel,
@@ -72,6 +71,10 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         
         $topVisibleRowNumber.removeDuplicates().compactMap{$0}.sink(receiveValue: { (topVisibleRow: Int) in
             self.updateChart(entries: greenPandaModel.entries, topRowNumber: topVisibleRow)
+        }).store(in: &bag)
+        
+        $newValueForDiaryOffset.removeDuplicates().compactMap{$0}.sink(receiveValue: { (diaryOffset: Int) in
+            self.diaryOffset = diaryOffset
         }).store(in: &bag)
         
     }
@@ -107,7 +110,11 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         $promptHidden
     }
     
+    @Published private var newValueForDiaryOffset: Int?
+    
     @Published var diaryOffset: Int?
+    var targetDiaryOffset: Int?
+    
     var diaryOffsetPublisher: Published<Int?>.Publisher {
         $diaryOffset
     }
@@ -133,7 +140,8 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func topVisibleRowNumberDidChange(to rowNumber: Int) {
-        if chartIsBeingChanged { return }
+        if targetDiaryOffset != nil && rowNumber != targetDiaryOffset { return }
+        targetDiaryOffset = nil
         topVisibleRowNumber = rowNumber
     }
     
@@ -141,18 +149,17 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func diaryViewAnimationEnded() {
-        chartIsBeingChanged = false
     }
     
     func topVisibleXValueOnChartDidChange(to date: TimeInterval) {
-        chartIsBeingChanged = true
         let offset = greenPandaModel
             .entries
             .sorted{$0.timestamp > $1.timestamp}
             .firstIndex(where: {entry in
                 entry.timestamp.timeIntervalSince1970 <= date
             })
-        self.diaryOffset = offset ?? 0
+        targetDiaryOffset = offset ?? 0
+        newValueForDiaryOffset = targetDiaryOffset
     }
     
     

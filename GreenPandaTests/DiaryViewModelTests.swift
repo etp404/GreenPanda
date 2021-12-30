@@ -249,46 +249,6 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertNil(capturedDiaryOffset)
     }
     
-    func testThatWhenChartIsScrolling_changesToTheDiaryViewDontResultInChartUpdate() {
-        var capturedChartViewModel: ChartViewModel?
-        diaryViewModel.chartViewModelPublisher.sink{chartViewModel in
-            capturedChartViewModel = chartViewModel
-        }.store(in: &bag)
-        
-        diaryViewModel.topVisibleXValueOnChartDidChange(to: 0)
-        capturedChartViewModel = nil
-        
-        diaryViewModel.topVisibleRowNumberDidChange(to: 0)
-        XCTAssertNil(capturedChartViewModel)
-    }
-    
-    func testThatWhenChartIsNotFinishedScrolling_changesToTheDiaryViewDoNotResultInChartUpdate() {
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
-       
-        diaryViewModel.topVisibleXValueOnChartDidChange(to: 0)
-        diaryViewModel.chartViewDidEndPanning()
-        capturedChartViewModel = nil
-
-        diaryViewModel.topVisibleRowNumberDidChange(to: 1)
-
-        XCTAssertNil(capturedChartViewModel)
-    }
-    
-    func testThatWhenChartIsFinishedScrolling_changesToTheDiaryViewDoResultInChartUpdate() {
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
-       
-        diaryViewModel.topVisibleXValueOnChartDidChange(to: 0)
-        diaryViewModel.chartViewDidEndPanning()
-        diaryViewModel.diaryViewAnimationEnded()
-        
-        diaryViewModel.topVisibleRowNumberDidChange(to: 1)
-
-        XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(date2020Oct25_17_01_55-7*24*60*60))
-    }
-    
-    
     func testThatChartIsntUpdatedWhenDiaryViewMovesButTopEntryDoesntChange() {
         diaryViewModel.topVisibleRowNumberDidChange(to: 2)
         capturedChartViewModel = nil
@@ -297,6 +257,30 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertNil(capturedChartViewModel)
     }
     
+    func testGivenDiaryCollectionViewHasBeenToldToScrollToRow_updatesOfTheTopVisibleRowAreNotPropagatedToChartUntilRowIsReached() {
+        diaryViewModel.topVisibleXValueOnChartDidChange(to: date2020Sep20_22_51_53)
+        capturedChartViewModel = nil
+        diaryViewModel.topVisibleRowNumberDidChange(to: 1)
+        XCTAssertNil(capturedChartViewModel)
+        
+        diaryViewModel.topVisibleRowNumberDidChange(to: 2)
+        diaryViewModel.topVisibleRowNumberDidChange(to: 1)
+        XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(date2020Sep20_22_51_54-7*24*60*60))
+    }
+    
+    func testThatDiaryOfsetIsntUpdateWhenChartMovesButHighestVisibleXDoesntChange() {
+        var capturedDiaryOffset: Int?
+        diaryViewModel.diaryOffsetPublisher.sink{diaryOffset in
+            capturedDiaryOffset = diaryOffset
+        }.store(in: &bag)
+        diaryViewModel.topVisibleXValueOnChartDidChange(to: date2020Sep20_22_51_53)
+        XCTAssertNotNil(capturedDiaryOffset)
+        capturedDiaryOffset = nil
+        
+        diaryViewModel.topVisibleXValueOnChartDidChange(to: date2020Sep20_22_51_53)
+        XCTAssertNil(capturedDiaryOffset)
+    }
+        
 }
 
 class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {
