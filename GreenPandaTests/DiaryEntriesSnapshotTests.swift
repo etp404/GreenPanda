@@ -79,13 +79,6 @@ class FakeDiaryViewModel: DiaryViewModel {
         
     }
     
-    func chartViewDidEndPanning() {
-    }
-    
-    func topVisibleXValueOnChartDidChange(to date: TimeInterval) {
-        
-    }
-    
     func topVisibleRowNumberDidChange(to rowNumber: Int) {
         
     }

@@ -33,13 +33,9 @@ protocol DiaryViewModel {
     var entriesPublisher: Published<[EntryViewModel] >.Publisher { get }
     var entriesTableHiddenPublisher: Published<Bool>.Publisher { get }
     var promptHiddenPublisher: Published<Bool>.Publisher { get }
-    var diaryOffsetPublisher: Published<Int?>.Publisher { get }
     func topVisibleRowNumberDidChange(to rowNumber: Int)
-    func topVisibleXValueOnChartDidChange(to date:TimeInterval)
     func deleteEntry(at row:Int)
     func editEntry(at row: Int)
-    func chartViewDidEndPanning()
-    func diaryViewAnimationEnded()
 }
 
 class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
@@ -143,12 +139,6 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         if targetDiaryOffset != nil && rowNumber != targetDiaryOffset { return }
         targetDiaryOffset = nil
         topVisibleRowNumber = rowNumber
-    }
-    
-    func chartViewDidEndPanning() {
-    }
-    
-    func diaryViewAnimationEnded() {
     }
     
     func topVisibleXValueOnChartDidChange(to date: TimeInterval) {

@@ -80,11 +80,6 @@ class DiaryViewController: ViewController {
         viewModel?.chartViewModelPublisher.sink{chartViewModel in
             self.updateChart(chartViewModel)
         }.store(in: &bag)
-        viewModel?.diaryOffsetPublisher.sink{diaryOffset in
-            if let diaryOffset = diaryOffset {
-                self.collectionView.scrollToItem(at: IndexPath(row: diaryOffset, section: 0), at: .top, animated: true)
-            }
-        }.store(in: &bag)
         collectionView.delegate = self
     }
     
@@ -115,7 +110,7 @@ class DiaryViewController: ViewController {
         chart.scaleXEnabled = true
         chart.highlightPerTapEnabled = false
         chart.highlightPerDragEnabled = false
-        chart.delegate = self
+        chart.dragEnabled = false
     }
 
     private func deleteAt(indexPath: IndexPath) {
@@ -169,22 +164,5 @@ extension DiaryViewController: UICollectionViewDelegate {
             viewModel?.topVisibleRowNumberDidChange(to: topRpw)
         }
         #endif
-    }
-    
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        viewModel?.diaryViewAnimationEnded()
-    }
-
-}
-
-extension DiaryViewController: ChartViewDelegate {
-    func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
-        #if (DEBUG)
-        viewModel?.topVisibleXValueOnChartDidChange(to: chart.highestVisibleX)
-        #endif
-    }
-    
-    func chartViewDidEndPanning(_ chartView: ChartViewBase) {
-        viewModel?.chartViewDidEndPanning()
     }
 }
