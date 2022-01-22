@@ -58,7 +58,8 @@ class DiaryEntriesSnapshotTests: XCTestCase {
         fakeDiaryViewModel.chartViewModel.chartXOffset = 1617440087 + Double(5*24*60*60)
         let diaryEntriesViewController = DiaryViewController()
         diaryEntriesViewController.configure(with: fakeDiaryViewModel)
-        assertSnapshot(matching: diaryEntriesViewController, as: .image, record: recordMode)
+        UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController = diaryEntriesViewController
+        assertSnapshot(matching: diaryEntriesViewController, as: .wait(for: 1, on: .image), record: recordMode)
     }
 
     func fakeEntries(n: Int) -> [FakeEntry] {
