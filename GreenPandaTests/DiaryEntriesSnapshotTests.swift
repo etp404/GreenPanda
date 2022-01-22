@@ -16,6 +16,7 @@ class DiaryEntriesSnapshotTests: XCTestCase {
     let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
+        dateFormatter.timeZone = TimeZone.init(abbreviation: "CET")!
         return dateFormatter
     }()
     
@@ -104,11 +105,8 @@ class FakeDiaryViewModel: DiaryViewModel {
             EntryViewModel(id: $0.id, date: $0.date, entryText: $0.entryText, score: $0.moodScoreEmoji)
         })
 
-        let chartData: [ChartDatum] = fakeEntries.map({
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
-            dateFormatter.timeZone = TimeZone.init(abbreviation: "CET")!
-            return ChartDatum(timestamp: $0.timestamp, moodScore: $0.moodScore.truncatingRemainder(dividingBy: 5))
+        let chartData = fakeEntries.map({
+            ChartDatum(timestamp: $0.timestamp, moodScore: $0.moodScore.truncatingRemainder(dividingBy: 5))
         })
 
         let showChart = !fakeEntries.isEmpty
