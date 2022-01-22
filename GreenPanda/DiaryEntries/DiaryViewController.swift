@@ -138,8 +138,9 @@ class DiaryViewController: ViewController {
         self.chart.data = data
         
         chart.setVisibleXRangeMaximum(chartViewModel.chartVisibleRange)
-        chart.resetViewPortOffsets()
+        
         chart.moveViewToX(chartViewModel.chartXOffset)
+        chart.resetViewPortOffsets()
     }
 
 }
