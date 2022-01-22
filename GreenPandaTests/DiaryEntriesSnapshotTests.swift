@@ -11,7 +11,7 @@ import SnapshotTesting
 
 class DiaryEntriesSnapshotTests: XCTestCase {
 
-    let recordMode = true
+    let recordMode = false
     
     let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -107,7 +107,7 @@ class FakeDiaryViewModel: DiaryViewModel {
         let chartData: [ChartDatum] = fakeEntries.map({
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
-            print(dateFormatter.string(from: Date(timeIntervalSince1970: $0.timestamp)) + " \($0.moodScore.truncatingRemainder(dividingBy: 5))")
+            dateFormatter.timeZone = TimeZone.init(abbreviation: "CET")!
             return ChartDatum(timestamp: $0.timestamp, moodScore: $0.moodScore.truncatingRemainder(dividingBy: 5))
         })
 
