@@ -109,7 +109,6 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     @Published private var newValueForDiaryOffset: Int?
     
     @Published var diaryOffset: Int?
-    var targetDiaryOffset: Int?
     
     var diaryOffsetPublisher: Published<Int?>.Publisher {
         $diaryOffset
@@ -136,20 +135,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func topVisibleRowNumberDidChange(to rowNumber: Int) {
-        if targetDiaryOffset != nil && rowNumber != targetDiaryOffset { return }
-        targetDiaryOffset = nil
         topVisibleRowNumber = rowNumber
-    }
-    
-    func topVisibleXValueOnChartDidChange(to date: TimeInterval) {
-        let offset = greenPandaModel
-            .entries
-            .sorted{$0.timestamp > $1.timestamp}
-            .firstIndex(where: {entry in
-                entry.timestamp.timeIntervalSince1970 <= date
-            })
-        targetDiaryOffset = offset ?? 0
-        newValueForDiaryOffset = targetDiaryOffset
     }
     
     
