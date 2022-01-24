@@ -164,6 +164,10 @@ extension DiaryViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         #if (DEBUG)
         if let topRpw = collectionView.indexPathForItem(at: scrollView.contentOffset)?.row {
+            let topCell = collectionView.cellForItem(at: collectionView.indexPathForItem(at: scrollView.contentOffset)!)
+            let cellRect = collectionView.convert(topCell!.frame, from: topCell?.superview!)
+            let inter = cellRect.intersection(collectionView.bounds)
+            viewModel?.topCellVisibility(proportion: inter.size.height/cellRect.height, index: topRpw)
             viewModel?.topVisibleRowNumberDidChange(to: topRpw)
         }
         #endif

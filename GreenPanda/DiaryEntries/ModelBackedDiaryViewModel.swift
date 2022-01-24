@@ -33,6 +33,7 @@ protocol DiaryViewModel {
     var entriesPublisher: Published<[EntryViewModel] >.Publisher { get }
     var entriesTableHiddenPublisher: Published<Bool>.Publisher { get }
     var promptHiddenPublisher: Published<Bool>.Publisher { get }
+    func topCellVisibility(proportion: Double, index: Int)
     func topVisibleRowNumberDidChange(to rowNumber: Int)
     func deleteEntry(at row:Int)
     func editEntry(at row: Int)
@@ -138,6 +139,9 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         topVisibleRowNumber = rowNumber
     }
     
+    func topCellVisibility(proportion: Double, index: Int) {
+        print("\(proportion) of \(index) is visible")
+    }
     
     private func scoreSmiley(for score:Int) -> String {
         switch (score) {

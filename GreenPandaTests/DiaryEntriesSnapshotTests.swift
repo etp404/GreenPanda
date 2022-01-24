@@ -85,6 +85,10 @@ struct FakeEntry {
 }
 
 class FakeDiaryViewModel: DiaryViewModel {
+    func topCellVisibility(proportion: Double, index: Int) {
+        
+    }
+    
     func diaryViewAnimationEnded() {
         
     }
