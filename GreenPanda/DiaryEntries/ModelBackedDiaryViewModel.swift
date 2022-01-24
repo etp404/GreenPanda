@@ -140,7 +140,6 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func topCellVisibility(proportion: Double, index: Int) {
-        print("\(proportion) of \(index) is visible")
     }
     
     private func scoreSmiley(for score:Int) -> String {

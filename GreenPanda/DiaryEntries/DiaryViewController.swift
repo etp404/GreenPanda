@@ -163,11 +163,25 @@ private class DateValueFormatter: NSObject, AxisValueFormatter {
 extension DiaryViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         #if (DEBUG)
-        if let topRpw = collectionView.indexPathForItem(at: scrollView.contentOffset)?.row {
-            let topCell = collectionView.cellForItem(at: collectionView.indexPathForItem(at: scrollView.contentOffset)!)
-            let cellRect = collectionView.convert(topCell!.frame, from: topCell?.superview!)
+        if let topRpw = collectionView.indexPathForItem(at:  scrollView.contentOffset)?.row {
+            let topCell = collectionView.cellForItem(at: collectionView.indexPathForItem(at: scrollView.contentOffset)!)!
+            let cellRect = collectionView.convert(topCell.frame, from: topCell.superview)
             let inter = cellRect.intersection(collectionView.bounds)
             viewModel?.topCellVisibility(proportion: inter.size.height/cellRect.height, index: topRpw)
+//            print(collectionView.superview!.convert(topCell.frame, from: topCell))
+//            print(topCell.convert(topCell.frame, to: view).origin.y)
+//            print("-----------")
+//            print(collectionView.convert(topCell.frame, to: view).origin.y)
+//            print(collectionView.bounds.origin.y)
+//            print("-----------")
+            print("-----------")
+            let topCellTopInView = topCell.superview!.convert(topCell.frame, to:view).origin.y
+            let collectionViewTopInView = collectionView.superview!.convert(collectionView.frame, to:view).origin.y
+            let positionOfTopCutOffInCell = collectionViewTopInView - topCellTopInView
+            let positionOfTopCutOffAsProportionOfCell = positionOfTopCutOffInCell/topCell.frame.size.height
+            
+            print("positionOfTopCutOffInCell \(positionOfTopCutOffInCell)")
+            print("positionOfTopCutOffAsProportionOfCell \(positionOfTopCutOffAsProportionOfCell)")
             viewModel?.topVisibleRowNumberDidChange(to: topRpw)
         }
         #endif
