@@ -163,12 +163,11 @@ private class DateValueFormatter: NSObject, AxisValueFormatter {
 extension DiaryViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         #if (DEBUG)
-        if let topRpw = collectionView.indexPathForItem(at: scrollView.contentOffset)?.row {
-            let topCell = collectionView.cellForItem(at: collectionView.indexPathForItem(at: scrollView.contentOffset)!)
-            let cellRect = collectionView.convert(topCell!.frame, from: topCell?.superview!)
+        if let topRow = collectionView.indexPathForItem(at: scrollView.contentOffset),
+           let topCell = collectionView.cellForItem(at: topRow) {
+            let cellRect = collectionView.convert(topCell.frame, from: collectionView)
             let inter = cellRect.intersection(collectionView.bounds)
-            viewModel?.topCellVisibility(proportion: inter.size.height/cellRect.height, index: topRpw)
-            viewModel?.topVisibleRowNumberDidChange(to: topRpw)
+            viewModel?.topCellVisibility(proportion: inter.size.height/cellRect.height, index: topRow.row)
         }
         #endif
     }
