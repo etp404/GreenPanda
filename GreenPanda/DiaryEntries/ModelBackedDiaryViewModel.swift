@@ -150,7 +150,11 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         let timestampForTopVisible = entries.reversed()[topCell.index].timestamp.timeIntervalSince1970
         let timestampForItemBelow = entries.reversed()[topCell.index+1].timestamp.timeIntervalSince1970
         let timstampThatWantsToBeVisible = timestampForItemBelow + Double(timestampForTopVisible - timestampForItemBelow) * (1-topCell.proportionAboveTheTopOfCollectionView)
-        return timstampThatWantsToBeVisible - aWeekInSeconds
+        let potentialTimestamp = timstampThatWantsToBeVisible - aWeekInSeconds
+        if potentialTimestamp <= entries[0].timestamp.timeIntervalSince1970 {
+            return entries[0].timestamp.timeIntervalSince1970
+        }
+        return potentialTimestamp
     }
     
     private func scoreSmiley(for score:Int) -> String {
