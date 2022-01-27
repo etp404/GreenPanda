@@ -139,8 +139,7 @@ class DiaryViewController: ViewController {
         
         chart.setVisibleXRangeMaximum(chartViewModel.chartVisibleRange)
         
-        chart.moveViewToAnimated(xValue: chartViewModel.chartXOffset, yValue: 0, axis: .left, duration: 0.2)
-        //chart.moveViewToX(chartViewModel.chartXOffset)
+        chart.moveViewToX(chartViewModel.chartXOffset)
 
         chart.resetViewPortOffsets()
     }

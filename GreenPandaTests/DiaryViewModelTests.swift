@@ -208,11 +208,9 @@ class DiaryViewModelTests: XCTestCase {
         mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
         mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
         
-        diaryViewModel.topVisibleRowNumberDidChange(to: 1)
-
-        XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(date2020Oct25_17_01_55-7*24*60*60))
+        diaryViewModel.proportionOfCellAboveTopOfCollectionView(0.4, index: 2)        
+        XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(1602444114.6 - 7*24*60*60))
     }
-    
     
     func testThatChartIsntUpdatedWhenDiaryViewMovesButTopEntryDoesntChange() {
         diaryViewModel.topVisibleRowNumberDidChange(to: 2)

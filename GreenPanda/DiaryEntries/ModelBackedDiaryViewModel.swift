@@ -46,6 +46,11 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     private var cancellable: AnyCancellable? = nil
     private let aWeekInSeconds: TimeInterval = 7*24*60*60
     private var bag = Set<AnyCancellable>()
+    private var topCell = TopCell(index: 0, proportionAboveTheTopOfCollectionView: 0) {
+        didSet {
+            updateChart(entries: greenPandaModel.entries)
+        }
+    }
     @Published private var topVisibleRowNumber:Int? = nil
     
     init(model greenPandaModel: GreenPandaModel,
@@ -62,27 +67,22 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
             self.entries = newEntries.sorted(by: {$0.timestamp > $1.timestamp}).map { self.convertToViewModel(entry: $0) }
             self.entriesTableHidden = newEntries.isEmpty
             self.promptHidden = !newEntries.isEmpty
-            
             self.updateChart(entries: newEntries)
         })
-        
-        $topVisibleRowNumber.removeDuplicates().compactMap{$0}.sink(receiveValue: { (topVisibleRow: Int) in
-            self.updateChart(entries: greenPandaModel.entries, topRowNumber: topVisibleRow)
-        }).store(in: &bag)
         
         $newValueForDiaryOffset.removeDuplicates().compactMap{$0}.sink(receiveValue: { (diaryOffset: Int) in
             self.diaryOffset = diaryOffset
         }).store(in: &bag)
-        
     }
     
-    private func updateChart(entries: [DiaryEntry], topRowNumber: Int = 0) {
-        self.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
+    private func updateChart(entries: [DiaryEntry]) {
+        let sortedEntries = entries.sorted(by: {$0.timestamp < $1.timestamp})
+        self.chartData = sortedEntries.map { self.convertToChartDatum(entry: $0) }
         self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
         self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
         self.chartViewModel.showChart = entries.count > 1
         if entries.count > 1 {
-            self.chartViewModel.chartXOffset = entries.sorted(by: {$0.timestamp > $1.timestamp})[topRowNumber].timestamp.timeIntervalSince1970 - self.aWeekInSeconds
+            self.chartViewModel.chartXOffset = calculateChartOffset(sortedEntries)
         }
     }
     
@@ -140,7 +140,14 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func proportionOfCellAboveTopOfCollectionView(_ proportion: Double, index: Int) {
-        print("\(proportion) of \(index) is visible")
+       topCell = TopCell(index: index, proportionAboveTheTopOfCollectionView: proportion)
+    }
+    
+    func calculateChartOffset(_ entries: [DiaryEntry]) -> Double {
+        let timestampForTopVisible = entries.reversed()[topCell.index].timestamp.timeIntervalSince1970
+        let timestampForItemBelow = entries.reversed()[topCell.index+1].timestamp.timeIntervalSince1970
+        let timstampThatWantsToBeVisible = timestampForItemBelow + Double(timestampForTopVisible - timestampForItemBelow) * (1-topCell.proportionAboveTheTopOfCollectionView)
+        return timstampThatWantsToBeVisible - aWeekInSeconds
     }
     
     private func scoreSmiley(for score:Int) -> String {
@@ -166,6 +173,11 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
 
     private func convertToChartDatum(entry: DiaryEntry) -> ChartDatum {
         return ChartDatum(timestamp: entry.timestamp.timeIntervalSince1970, moodScore: Double(entry.score))
+    }
+    
+    struct TopCell {
+        let index: Int
+        let proportionAboveTheTopOfCollectionView: Double
     }
 
 }
