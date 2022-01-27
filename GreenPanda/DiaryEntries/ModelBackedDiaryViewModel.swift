@@ -144,6 +144,9 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func calculateChartOffset(_ entries: [DiaryEntry]) -> Double {
+        if entries.count == topCell.index+1 {
+            return entries[0].timestamp.timeIntervalSince1970
+        }
         let timestampForTopVisible = entries.reversed()[topCell.index].timestamp.timeIntervalSince1970
         let timestampForItemBelow = entries.reversed()[topCell.index+1].timestamp.timeIntervalSince1970
         let timstampThatWantsToBeVisible = timestampForItemBelow + Double(timestampForTopVisible - timestampForItemBelow) * (1-topCell.proportionAboveTheTopOfCollectionView)

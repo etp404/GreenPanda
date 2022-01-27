@@ -212,6 +212,14 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(1602444114.6 - 7*24*60*60))
     }
     
+    func testThatCorrectChartXOffsetIsSetWhenUserScrollsToTheLastEntry() {
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
+        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
+        
+        diaryViewModel.proportionOfCellAboveTopOfCollectionView(0.4, index: 6)
+        XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(date2020Sep20_23_51_51))
+    }
+    
     func testThatChartIsntUpdatedWhenDiaryViewMovesButTopEntryDoesntChange() {
         diaryViewModel.topVisibleRowNumberDidChange(to: 2)
         capturedChartViewModel = nil
