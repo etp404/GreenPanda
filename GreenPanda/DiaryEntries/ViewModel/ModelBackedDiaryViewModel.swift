@@ -8,35 +8,13 @@
 import Foundation
 import Combine
 
-struct EntryViewModel: Hashable {
-    let id: UUID
-    let date: String
-    let entryText: String
-    let score: String
-}
 
-struct ChartDatum {
-    let timestamp: TimeInterval
-    let moodScore: Double
-}
 
 struct ChartViewModel {
     var chartData: [ChartDatum]
     var showChart: Bool
     var chartXOffset: Double = 0
     var chartVisibleRange: Double = Double(7*24*60*60)
-}
-
-protocol DiaryViewModel {
-    func composeButtonPressed()
-    var chartViewModelPublisher: Published<ChartViewModel>.Publisher { get }
-    var entriesPublisher: Published<[EntryViewModel] >.Publisher { get }
-    var entriesTableHiddenPublisher: Published<Bool>.Publisher { get }
-    var promptHiddenPublisher: Published<Bool>.Publisher { get }
-    func proportionOfCellAboveTopOfCollectionView(_ proportion: Double, index: Int)
-    func topVisibleRowNumberDidChange(to rowNumber: Int)
-    func deleteEntry(at row:Int)
-    func editEntry(at row: Int)
 }
 
 class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
