@@ -10,7 +10,6 @@ import Combine
 
 struct ChartViewModel {
     var chartData: [ChartDatum]
-    var showChart: Bool
     var chartXOffset: Double = 0
     var chartVisibleRange: Double = Double(7*24*60*60)
 }
@@ -34,7 +33,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     @Published private var chartViewModel: ChartViewModel
     var chartViewModelPublisher: Published<ChartViewModel>.Publisher { $chartViewModel }
 
-    @Published var chartData: [ChartDatum] = []
+    @Published private var chartData: [ChartDatum] = []
     var chartDataPublisher: Published<[ChartDatum]>.Publisher {
         $chartData
     }
@@ -44,9 +43,14 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         $entriesTableHidden
     }
 
-    @Published var promptHidden = false
+    @Published private var promptHidden = false
     var promptHiddenPublisher: Published<Bool>.Publisher {
         $promptHidden
+    }
+    
+    @Published var showChart = false
+    var showChartPublisher: Published<Bool>.Publisher {
+        $showChart
     }
     
     init(model greenPandaModel: GreenPandaModel,
@@ -58,7 +62,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         dateFormatter.timeZone = timezone
         
         self.coordinatorDelegate = coordinatorDelegate
-        chartViewModel = ChartViewModel(chartData: [], showChart: false)
+        chartViewModel = ChartViewModel(chartData: [])
 
         super.init()
         
@@ -74,15 +78,9 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         let sortedEntries = entries.sorted(by: {$0.timestamp < $1.timestamp})
         self.chartData = sortedEntries.map { self.convertToChartDatum(entry: $0) }
         self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
-        self.chartViewModel.showChart = entries.count > 1
+        self.showChart = entries.count > 1
         if entries.count > 1 {
             self.chartViewModel.chartXOffset = calculateChartOffset(sortedEntries)
-        }
-    }
-
-    var showChart: Bool {
-        get {
-            !self.entries.isEmpty
         }
     }
     

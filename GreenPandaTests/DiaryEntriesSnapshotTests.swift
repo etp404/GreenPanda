@@ -85,6 +85,11 @@ struct FakeEntry {
 }
 
 class FakeDiaryViewModel: DiaryViewModel {
+    @Published var showChart = false
+    var showChartPublisher: Published<Bool>.Publisher {
+        $showChart
+    }
+    
     func proportionOfCellAboveTopOfCollectionView(_ proportion: Double, index: Int) {
         
     }
@@ -114,9 +119,9 @@ class FakeDiaryViewModel: DiaryViewModel {
             ChartDatum(timestamp: $0.timestamp, moodScore: $0.moodScore.truncatingRemainder(dividingBy: 5))
         })
 
-        let showChart = !fakeEntries.isEmpty
+        showChart = !fakeEntries.isEmpty
 
-        chartViewModel = ChartViewModel(chartData: chartData, showChart: showChart, chartXOffset: 0.0, chartVisibleRange: Double(7*24*60*60))
+        chartViewModel = ChartViewModel(chartData: chartData, chartXOffset: 0.0, chartVisibleRange: Double(7*24*60*60))
 
     }
 
@@ -139,7 +144,7 @@ class FakeDiaryViewModel: DiaryViewModel {
         $promptHidden
     }
 
-    @Published var chartViewModel: ChartViewModel = ChartViewModel(chartData: [], showChart: false)
+    @Published var chartViewModel: ChartViewModel = ChartViewModel(chartData: [])
     @Published private var entries: [EntryViewModel] = []
     @Published private var entriesTableHidden = false
     @Published var promptHidden = false

@@ -72,6 +72,10 @@ class DiaryViewController: ViewController {
             self.collectionView.isHidden = hideTable
         }.store(in: &bag)
         
+        viewModel?.showChartPublisher.sink{showChart in
+            self.chart.isHidden = !showChart
+        }.store(in: &bag)
+        
         viewModel?.promptHiddenPublisher.sink{promptHidden in
             self.promtMessage.isHidden = promptHidden
         }.store(in: &bag)
@@ -122,11 +126,11 @@ class DiaryViewController: ViewController {
     }
     
     private func updateChart(_ chartViewModel: ChartViewModel) {
-        if !chartViewModel.showChart {
+        if let viewModel = viewModel,
+           !viewModel.showChart {
             chart.isHidden = true
             return
         }
-        chart.isHidden = false
         let dataset = LineChartDataSet(entries: chartViewModel.chartData.map{
             ChartDataEntry(x: $0.timestamp, y: $0.moodScore)
         })

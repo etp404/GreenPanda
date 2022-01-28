@@ -32,6 +32,7 @@ class DiaryViewModelTests: XCTestCase {
     let entry4Id = UUID()
     var capturedEntries: [EntryViewModel]!
     var capturedChartViewModel: ChartViewModel!
+    var capturedShowChart: Bool!
     var diaryEntry2:DiaryEntry!
 
     override func setUp() {
@@ -144,14 +145,14 @@ class DiaryViewModelTests: XCTestCase {
         let someViewModel = ModelBackedDiaryViewModel(model: mockGreenPandaModel,
                                         timezone: TimeZone.init(abbreviation: "CET")!,
                                         coordinatorDelegate: mockDiaryViewModelCoordinatorDelegate)
-        someViewModel.chartViewModelPublisher.sink{chartViewModel in
-            self.capturedChartViewModel = chartViewModel
+        someViewModel.showChartPublisher.sink{showChart in
+            self.capturedShowChart = showChart
         }.store(in: &bag)
-        XCTAssertFalse(capturedChartViewModel.showChart)
+        XCTAssertFalse(capturedShowChart)
         mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 2003645315), entryText: "abc", score: 0))
-        XCTAssertFalse(capturedChartViewModel.showChart)
+        XCTAssertFalse(capturedShowChart)
         mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: 2003645315), entryText: "abc", score: 0))
-        XCTAssertTrue(capturedChartViewModel.showChart)
+        XCTAssertTrue(capturedShowChart)
     }
     
     func testThatDeletionByIdIsPassedToCore() throws {
