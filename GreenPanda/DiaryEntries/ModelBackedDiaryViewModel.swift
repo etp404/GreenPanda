@@ -40,10 +40,10 @@ protocol DiaryViewModel {
 }
 
 class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
+    private let dateFormatter: DateFormatter
+    
     private let greenPandaModel: GreenPandaModel
-    private let timezone: TimeZone
     private let coordinatorDelegate: DiaryViewModelCoordinatorDelegate
-    private var cancellable: AnyCancellable? = nil
     private let aWeekInSeconds: TimeInterval = 7*24*60*60
     private var bag = Set<AnyCancellable>()
     private var topCell = TopCell(index: 0, proportionAboveTheTopOfCollectionView: 0) {
@@ -57,18 +57,21 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
          timezone: TimeZone,
          coordinatorDelegate: DiaryViewModelCoordinatorDelegate) {
         self.greenPandaModel = greenPandaModel
-        self.timezone = timezone
+        dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
+        dateFormatter.timeZone = timezone
+        
         self.coordinatorDelegate = coordinatorDelegate
         chartViewModel = ChartViewModel(chartData: [], showChart: false)
 
         super.init()
         
-        cancellable = greenPandaModel.entriesPublisher.sink(receiveValue: { (newEntries:[DiaryEntry]) in
+        greenPandaModel.entriesPublisher.sink(receiveValue: { (newEntries:[DiaryEntry]) in
             self.entries = newEntries.sorted(by: {$0.timestamp > $1.timestamp}).map { self.convertToViewModel(entry: $0) }
             self.entriesTableHidden = newEntries.isEmpty
             self.promptHidden = !newEntries.isEmpty
             self.updateChart(entries: newEntries)
-        })
+        }).store(in: &bag)
         
         $newValueForDiaryOffset.removeDuplicates().compactMap{$0}.sink(receiveValue: { (diaryOffset: Int) in
             self.diaryOffset = diaryOffset
@@ -86,10 +89,10 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         }
     }
     
-    @Published var entries: [EntryViewModel] = []
+    @Published private var entries: [EntryViewModel] = []
     var entriesPublisher: Published<[EntryViewModel]>.Publisher { $entries }
 
-    @Published var chartViewModel: ChartViewModel
+    @Published private var chartViewModel: ChartViewModel
     var chartViewModelPublisher: Published<ChartViewModel>.Publisher { $chartViewModel }
 
     @Published var chartData: [ChartDatum] = []
@@ -97,7 +100,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         $chartData
     }
     
-    @Published var entriesTableHidden: Bool = true
+    @Published private var entriesTableHidden: Bool = true
     var entriesTableHiddenPublisher: Published<Bool>.Publisher {
         $entriesTableHidden
     }
@@ -169,9 +172,6 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     private func convertToViewModel(entry: DiaryEntry) -> EntryViewModel {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
-        dateFormatter.timeZone = timezone
         return EntryViewModel(id: entry.id,
                               date: dateFormatter.string(from:entry.timestamp),
                               entryText: entry.entryText,
