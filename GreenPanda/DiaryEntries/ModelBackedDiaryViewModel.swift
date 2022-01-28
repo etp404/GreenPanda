@@ -151,17 +151,6 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         return potentialTimestamp
     }
     
-    private func scoreSmiley(for score:Int) -> String {
-        switch (score) {
-        case 0: return "😩"
-        case 1: return "😕"
-        case 2: return "😐"
-        case 3: return "🙂"
-        case 4: return "😁"
-        default: return ""
-        }
-    }
-    
     private func convertToViewModel(entry: DiaryEntry) -> EntryViewModel {
         return EntryViewModel(id: entry.id,
                               date: dateFormatter.string(from:entry.timestamp),
@@ -172,10 +161,4 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     private func convertToChartDatum(entry: DiaryEntry) -> ChartDatum {
         return ChartDatum(timestamp: entry.timestamp.timeIntervalSince1970, moodScore: Double(entry.score))
     }
-    
-    struct TopCell {
-        let index: Int
-        let proportionAboveTheTopOfCollectionView: Double
-    }
-
 }
