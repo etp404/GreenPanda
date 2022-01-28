@@ -41,7 +41,6 @@ protocol DiaryViewModel {
 
 class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     private let dateFormatter: DateFormatter
-    
     private let greenPandaModel: GreenPandaModel
     private let coordinatorDelegate: DiaryViewModelCoordinatorDelegate
     private let aWeekInSeconds: TimeInterval = 7*24*60*60
@@ -71,10 +70,6 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
             self.entriesTableHidden = newEntries.isEmpty
             self.promptHidden = !newEntries.isEmpty
             self.updateChart(entries: newEntries)
-        }).store(in: &bag)
-        
-        $newValueForDiaryOffset.removeDuplicates().compactMap{$0}.sink(receiveValue: { (diaryOffset: Int) in
-            self.diaryOffset = diaryOffset
         }).store(in: &bag)
     }
     
@@ -109,17 +104,13 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     var promptHiddenPublisher: Published<Bool>.Publisher {
         $promptHidden
     }
-    
-    @Published private var newValueForDiaryOffset: Int?
-    
+        
     @Published var diaryOffset: Int?
     
     var diaryOffsetPublisher: Published<Int?>.Publisher {
         $diaryOffset
     }
 
-    let chartVisibleRange = Double(7*24*60*60)
-    
     var showChart: Bool {
         get {
             !self.entries.isEmpty
