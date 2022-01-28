@@ -8,8 +8,6 @@
 import Foundation
 import Combine
 
-
-
 struct ChartViewModel {
     var chartData: [ChartDatum]
     var showChart: Bool
@@ -29,6 +27,27 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         }
     }
     @Published private var topVisibleRowNumber:Int? = nil
+    
+    @Published private var entries: [EntryViewModel] = []
+    var entriesPublisher: Published<[EntryViewModel]>.Publisher { $entries }
+
+    @Published private var chartViewModel: ChartViewModel
+    var chartViewModelPublisher: Published<ChartViewModel>.Publisher { $chartViewModel }
+
+    @Published var chartData: [ChartDatum] = []
+    var chartDataPublisher: Published<[ChartDatum]>.Publisher {
+        $chartData
+    }
+    
+    @Published private var entriesTableHidden: Bool = true
+    var entriesTableHiddenPublisher: Published<Bool>.Publisher {
+        $entriesTableHidden
+    }
+
+    @Published var promptHidden = false
+    var promptHiddenPublisher: Published<Bool>.Publisher {
+        $promptHidden
+    }
     
     init(model greenPandaModel: GreenPandaModel,
          timezone: TimeZone,
@@ -55,38 +74,10 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         let sortedEntries = entries.sorted(by: {$0.timestamp < $1.timestamp})
         self.chartData = sortedEntries.map { self.convertToChartDatum(entry: $0) }
         self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
-        self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
         self.chartViewModel.showChart = entries.count > 1
         if entries.count > 1 {
             self.chartViewModel.chartXOffset = calculateChartOffset(sortedEntries)
         }
-    }
-    
-    @Published private var entries: [EntryViewModel] = []
-    var entriesPublisher: Published<[EntryViewModel]>.Publisher { $entries }
-
-    @Published private var chartViewModel: ChartViewModel
-    var chartViewModelPublisher: Published<ChartViewModel>.Publisher { $chartViewModel }
-
-    @Published var chartData: [ChartDatum] = []
-    var chartDataPublisher: Published<[ChartDatum]>.Publisher {
-        $chartData
-    }
-    
-    @Published private var entriesTableHidden: Bool = true
-    var entriesTableHiddenPublisher: Published<Bool>.Publisher {
-        $entriesTableHidden
-    }
-
-    @Published var promptHidden = false
-    var promptHiddenPublisher: Published<Bool>.Publisher {
-        $promptHidden
-    }
-        
-    @Published var diaryOffset: Int?
-    
-    var diaryOffsetPublisher: Published<Int?>.Publisher {
-        $diaryOffset
     }
 
     var showChart: Bool {

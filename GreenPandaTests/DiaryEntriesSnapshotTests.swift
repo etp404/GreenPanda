@@ -143,8 +143,4 @@ class FakeDiaryViewModel: DiaryViewModel {
     @Published private var entries: [EntryViewModel] = []
     @Published private var entriesTableHidden = false
     @Published var promptHidden = false
-    @Published var diaryOffset: Int?
-    var diaryOffsetPublisher: Published<Int?>.Publisher {
-        $diaryOffset
-    }
 }
