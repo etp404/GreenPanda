@@ -78,9 +78,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         let sortedEntries = entries.sorted(by: {$0.timestamp < $1.timestamp})
         self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { $0.toChartDatum() }
         self.showChart = entries.count > 1
-        if entries.count > 1 {
-            self.chartOffset = calculateChartOffset(sortedEntries)
-        }
+        updateChartOffset(sortedEntries)
     }
     
     func composeButtonPressed() {
@@ -99,7 +97,10 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
        topCell = TopCell(index: index, proportionAboveTheTopOfCollectionView: proportion)
     }
     
-    func calculateChartOffset(_ entries: [DiaryEntry]) -> Double {
+    func updateChartOffset(_ entries: [DiaryEntry]) -> Double {
+        if entries.count <= 1 {
+            return
+        }
         if entries.count == topCell.index+1 {
             return entries[0].timestamp.timeIntervalSince1970
         }
@@ -108,13 +109,12 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         let timstampThatWantsToBeVisible = timestampForItemBelow + Double(timestampForTopVisible - timestampForItemBelow) * (1-topCell.proportionAboveTheTopOfCollectionView)
         let potentialTimestamp = timstampThatWantsToBeVisible - aWeekInSeconds
         if potentialTimestamp <= entries[0].timestamp.timeIntervalSince1970 {
-            return entries[0].timestamp.timeIntervalSince1970
+            self.chartOffset = entries[0].timestamp.timeIntervalSince1970
         }
-        return potentialTimestamp
-    }
+        self.chartOffset = potentialTimestamp
     }
 
-private extension DiaryEntry {
+extension DiaryEntry {
     func toViewModel(dateFormatter: DateFormatter) -> EntryViewModel {
         return EntryViewModel(id: id,
                               date: dateFormatter.string(from:timestamp),
