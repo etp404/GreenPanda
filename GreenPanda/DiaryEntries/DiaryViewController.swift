@@ -84,6 +84,11 @@ class DiaryViewController: ViewController {
         viewModel?.chartViewModelPublisher.sink{chartViewModel in
             self.updateChart(chartViewModel)
         }.store(in: &bag)
+        
+        viewModel?.chartOffsetPublisher.sink{chartOffset in
+            self.chart.moveViewToX(chartOffset)
+        }.store(in: &bag)
+        
         collectionView.delegate = self
     }
     
@@ -142,9 +147,6 @@ class DiaryViewController: ViewController {
         self.chart.data = data
         
         chart.setVisibleXRangeMaximum(chartViewModel.chartVisibleRange)
-        
-        chart.moveViewToX(chartViewModel.chartXOffset)
-
         chart.resetViewPortOffsets()
     }
 

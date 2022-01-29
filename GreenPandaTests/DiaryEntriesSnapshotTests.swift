@@ -55,7 +55,7 @@ class DiaryEntriesSnapshotTests: XCTestCase {
         let fakeDiaryViewModel = FakeDiaryViewModel()
         fakeDiaryViewModel.promptHidden = true
         fakeDiaryViewModel.setFakeEntries(fakeEntries: fakeEntries(n: 12))
-        fakeDiaryViewModel.chartViewModel.chartXOffset = 1617440087 + Double(5*24*60*60)
+        fakeDiaryViewModel.chartOffset = 1617440087 + Double(5*24*60*60)
         let diaryEntriesViewController = DiaryViewController()
         diaryEntriesViewController.configure(with: fakeDiaryViewModel)
         UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController = diaryEntriesViewController
