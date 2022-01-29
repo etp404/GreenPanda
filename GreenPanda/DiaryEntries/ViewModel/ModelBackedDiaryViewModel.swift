@@ -79,7 +79,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { $0.toChartDatum() }
         self.showChart = entries.count > 1
         if entries.count > 1 {
-            self.chartOffset = calculateChartOffset(sortedEntries)
+            uddateChartOffset(sortedEntries)
         }
     }
     
@@ -99,20 +99,23 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
        topCell = TopCell(index: index, proportionAboveTheTopOfCollectionView: proportion)
     }
     
-    func calculateChartOffset(_ entries: [DiaryEntry]) -> Double {
+    func uddateChartOffset(_ entries: [DiaryEntry]) {
         if entries.count == topCell.index+1 {
-            return entries[0].timestamp.timeIntervalSince1970
+            chartOffset = entries[0].timestamp.timeIntervalSince1970
+        } else {
+            let timestampForTopVisible = entries.reversed()[topCell.index].timestamp.timeIntervalSince1970
+            let timestampForItemBelow = entries.reversed()[topCell.index+1].timestamp.timeIntervalSince1970
+            let timstampThatWantsToBeVisible = timestampForItemBelow + Double(timestampForTopVisible - timestampForItemBelow) * (1-topCell.proportionAboveTheTopOfCollectionView)
+            let potentialTimestamp = timstampThatWantsToBeVisible - aWeekInSeconds
+            if potentialTimestamp <= entries[0].timestamp.timeIntervalSince1970 {
+                chartOffset = entries[0].timestamp.timeIntervalSince1970
+            }
+            else {
+                chartOffset = potentialTimestamp
+            }
         }
-        let timestampForTopVisible = entries.reversed()[topCell.index].timestamp.timeIntervalSince1970
-        let timestampForItemBelow = entries.reversed()[topCell.index+1].timestamp.timeIntervalSince1970
-        let timstampThatWantsToBeVisible = timestampForItemBelow + Double(timestampForTopVisible - timestampForItemBelow) * (1-topCell.proportionAboveTheTopOfCollectionView)
-        let potentialTimestamp = timstampThatWantsToBeVisible - aWeekInSeconds
-        if potentialTimestamp <= entries[0].timestamp.timeIntervalSince1970 {
-            return entries[0].timestamp.timeIntervalSince1970
-        }
-        return potentialTimestamp
     }
-    }
+}
 
 private extension DiaryEntry {
     func toViewModel(dateFormatter: DateFormatter) -> EntryViewModel {
