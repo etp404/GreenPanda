@@ -107,13 +107,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
             let timestampForTopVisible = entries.reversed()[topCell.index].timestamp.timeIntervalSince1970
             let timestampForItemBelow = entries.reversed()[topCell.index+1].timestamp.timeIntervalSince1970
             let timstampThatWantsToBeVisible = timestampForItemBelow + Double(timestampForTopVisible - timestampForItemBelow) * (1-topCell.proportionAboveTheTopOfCollectionView)
-            let potentialTimestamp = timstampThatWantsToBeVisible - aWeekInSeconds
-            if potentialTimestamp <= entries[0].timestamp.timeIntervalSince1970 {
-                chartOffset = entries[0].timestamp.timeIntervalSince1970
-            }
-            else {
-                chartOffset = potentialTimestamp
-            }
+            chartOffset = max(timstampThatWantsToBeVisible - aWeekInSeconds, entries[0].timestamp.timeIntervalSince1970)
         }
     }
 }
