@@ -85,6 +85,12 @@ struct FakeEntry {
 }
 
 class FakeDiaryViewModel: DiaryViewModel {
+    
+    @Published var chartOffset = 0.0
+    var chartOffsetPublisher: Published<Double>.Publisher {
+        $chartOffset
+    }
+    
     @Published var showChart = false
     var showChartPublisher: Published<Bool>.Publisher {
         $showChart

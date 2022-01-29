@@ -14,7 +14,7 @@ struct ChartViewModel {
     var chartVisibleRange: Double = Double(7*24*60*60)
 }
 
-class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
+class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {    
     private let dateFormatter: DateFormatter
     private let greenPandaModel: GreenPandaModel
     private let coordinatorDelegate: DiaryViewModelCoordinatorDelegate
@@ -25,7 +25,10 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
             updateChart(entries: greenPandaModel.entries)
         }
     }
-    
+
+    @Published private var chartOffset: Double = 0.0
+    var chartOffsetPublisher: Published<Double>.Publisher { $chartOffset }
+
     @Published private var entries: [EntryViewModel] = []
     var entriesPublisher: Published<[EntryViewModel]>.Publisher { $entries }
 
@@ -79,6 +82,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
         self.showChart = entries.count > 1
         if entries.count > 1 {
+            self.chartOffset = calculateChartOffset(sortedEntries)
             self.chartViewModel.chartXOffset = calculateChartOffset(sortedEntries)
         }
     }

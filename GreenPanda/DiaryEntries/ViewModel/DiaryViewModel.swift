@@ -12,6 +12,7 @@ protocol DiaryViewModel {
     var chartViewModelPublisher: Published<ChartViewModel>.Publisher { get }
     var entriesPublisher: Published<[EntryViewModel] >.Publisher { get }
     var entriesTableHiddenPublisher: Published<Bool>.Publisher { get }
+    var chartOffsetPublisher: Published<Double>.Publisher { get }
     var showChartPublisher: Published<Bool>.Publisher { get }
     var showChart: Bool { get }
     var promptHiddenPublisher: Published<Bool>.Publisher { get }
