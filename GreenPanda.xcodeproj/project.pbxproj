@@ -18,6 +18,7 @@
 		C92E6473257BD81600723239 /* GreenPandaCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */; };
 		C93405C025A0A84C00B544F6 /* NewDiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93405BF25A0A84C00B544F6 /* NewDiaryEntry.swift */; };
 		C9384EFA259FB6B400DAF25A /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9384EF9259FB6B400DAF25A /* Clock.swift */; };
+		C942D05527A5360200A9625E /* ChartOffsetOnViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C942D05427A5360200A9625E /* ChartOffsetOnViewModelTests.swift */; };
 		C95CA0C72610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95CA0C62610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift */; };
 		C97C09AF25409A30001E1E5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09AE25409A30001E1E5A /* AppDelegate.swift */; };
 		C97C09B125409A30001E1E5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09B025409A30001E1E5A /* SceneDelegate.swift */; };
@@ -76,6 +77,7 @@
 		C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenPandaCoreDataTests.swift; sourceTree = "<group>"; };
 		C93405BF25A0A84C00B544F6 /* NewDiaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryEntry.swift; sourceTree = "<group>"; };
 		C9384EF9259FB6B400DAF25A /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
+		C942D05427A5360200A9625E /* ChartOffsetOnViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartOffsetOnViewModelTests.swift; sourceTree = "<group>"; };
 		C95CA0C62610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEntriesSnapshotTests.swift; sourceTree = "<group>"; };
 		C97C09AB25409A30001E1E5A /* GreenPanda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenPanda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97C09AE25409A30001E1E5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +153,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C942D05627A5362600A9625E /* DiaryViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				C97C09C525409A31001E1E5A /* DiaryViewModelTests.swift */,
+				C942D05427A5360200A9625E /* ChartOffsetOnViewModelTests.swift */,
+			);
+			path = DiaryViewModelTests;
+			sourceTree = "<group>";
+		};
 		C97C09A225409A30001E1E5A = {
 			isa = PBXGroup;
 			children = (
@@ -198,7 +209,7 @@
 		C97C09C425409A31001E1E5A /* GreenPandaTests */ = {
 			isa = PBXGroup;
 			children = (
-				C97C09C525409A31001E1E5A /* DiaryViewModelTests.swift */,
+				C942D05627A5362600A9625E /* DiaryViewModelTests */,
 				C97C09C725409A31001E1E5A /* Info.plist */,
 				C9BCF99F25531BB500F2232E /* ComposeDiaryEntryViewModelTests.swift */,
 				C9BCF9A425531D3E00F2232E /* MockGreenPandaModel.swift */,
@@ -420,6 +431,7 @@
 				C9BCF9A525531D3E00F2232E /* MockGreenPandaModel.swift in Sources */,
 				C95CA0C72610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift in Sources */,
 				C9BCF9A025531BB500F2232E /* ComposeDiaryEntryViewModelTests.swift in Sources */,
+				C942D05527A5360200A9625E /* ChartOffsetOnViewModelTests.swift in Sources */,
 				C9B26432256939BE0089A1BB /* MockupOfCombineVersion.swift in Sources */,
 				C97C09C625409A31001E1E5A /* DiaryViewModelTests.swift in Sources */,
 				C92E6473257BD81600723239 /* GreenPandaCoreDataTests.swift in Sources */,

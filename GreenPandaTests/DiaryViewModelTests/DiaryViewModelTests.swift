@@ -23,7 +23,7 @@ class DiaryViewModelTests: XCTestCase {
     let entry2Text = "entry2Text"
     var mockGreenPandaModel: MockGreenPandaModel!
     var diaryViewModel: DiaryViewModel!
-    var mockDiaryViewModelCoordinatorDelegate: MockDiaryViewModelCoordinatorDelegate!
+    private var mockDiaryViewModelCoordinatorDelegate: MockDiaryViewModelCoordinatorDelegate!
     var bag = Set<AnyCancellable>()
     let entry0Id = UUID()
     let entry1Id = UUID()
@@ -124,21 +124,6 @@ class DiaryViewModelTests: XCTestCase {
         XCTAssertEqual(capturedChartViewModel.chartVisibleRange, Double(7*24*60*60))
     }
 
-    func testThatCorrectXPositionIsReturnedFromViewModel() {
-        let date2033Jun29_08_08_35: TimeInterval = 2003645315
-        let date2033Jun22_08_08_35: TimeInterval = 2003040515
-
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
-
-        XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(date2033Jun22_08_08_35))
-    }
-
     func testReturnShowChartFromViewModel() {
         let mockGreenPandaModel = MockGreenPandaModel()
 
@@ -204,42 +189,10 @@ class DiaryViewModelTests: XCTestCase {
 
         XCTAssertTrue(capturedPromptHidden)
     }
-    
-    func testThatChartXOffsetIsSetWhenUserScrolls() {
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
-        
-        diaryViewModel.proportionOfCellAboveTopOfCollectionView(0.4, index: 2)        
-        XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(1602444114.6 - 7*24*60*60))
-    }
-    
-    func testThatCorrectChartXOffsetIsSetWhenUserScrollsToTheLastEntry() {
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
-        
-        diaryViewModel.proportionOfCellAboveTopOfCollectionView(0.4, index: 6)
-        XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(date2020Sep20_23_51_51))
-    }
-    
-    func testThatOffsetDoesntGoFurtherThanLastTimestamp() {
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2020Oct25_17_01_55), entryText: "abc", score: 0))
-        mockGreenPandaModel.entries.append(DiaryEntry(id: UUID(), timestamp: Date(timeIntervalSince1970: date2033Jun29_08_08_35), entryText: "abc", score: 0))
-        
-        diaryViewModel.proportionOfCellAboveTopOfCollectionView(0, index: 4)
-        XCTAssertEqual(capturedChartViewModel.chartXOffset, Double(date2020Sep20_23_51_51))
-    }
-    
-    func testThatChartIsntUpdatedWhenDiaryViewMovesButTopEntryDoesntChange() {
-        diaryViewModel.topVisibleRowNumberDidChange(to: 2)
-        capturedChartViewModel = nil
-        diaryViewModel.topVisibleRowNumberDidChange(to: 2)
-        
-        XCTAssertNil(capturedChartViewModel)
-    }
         
 }
 
-class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {
+private class MockDiaryViewModelCoordinatorDelegate : DiaryViewModelCoordinatorDelegate {
     var diaryEntryBeingEdited: EntryViewModel?
     
     func openEditView(diaryEntry: EntryViewModel) {
