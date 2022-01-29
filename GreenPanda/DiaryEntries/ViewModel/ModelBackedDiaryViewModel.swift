@@ -79,7 +79,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { $0.toChartDatum() }
         self.showChart = entries.count > 1
         if entries.count > 1 {
-            uddateChartOffset(sortedEntries)
+            updateChartOffset(sortedEntries)
         }
     }
     
@@ -99,7 +99,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
        topCell = TopCell(index: index, proportionAboveTheTopOfCollectionView: proportion)
     }
     
-    func uddateChartOffset(_ entries: [DiaryEntry]) {
+    func updateChartOffset(_ entries: [DiaryEntry]) {
         if entries.count == topCell.index+1 {
             chartOffset = entries[0].timestamp.timeIntervalSince1970
         } else {
