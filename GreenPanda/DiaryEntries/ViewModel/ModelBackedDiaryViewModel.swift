@@ -61,14 +61,13 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
         dateFormatter.timeZone = timezone
-        
         self.coordinatorDelegate = coordinatorDelegate
         chartViewModel = ChartViewModel(chartData: [])
 
         super.init()
         
         greenPandaModel.entriesPublisher.sink(receiveValue: { (newEntries:[DiaryEntry]) in
-            self.entries = newEntries.sorted(by: {$0.timestamp > $1.timestamp}).map { self.convertToViewModel(entry: $0) }
+            self.entries = newEntries.sorted(by: {$0.timestamp > $1.timestamp}).map { $0.toViewModel(dateFormatter: self.dateFormatter) }
             self.entriesTableHidden = newEntries.isEmpty
             self.promptHidden = !newEntries.isEmpty
             self.updateChart(entries: newEntries)
@@ -77,8 +76,7 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     
     private func updateChart(entries: [DiaryEntry]) {
         let sortedEntries = entries.sorted(by: {$0.timestamp < $1.timestamp})
-        self.chartData = sortedEntries.map { self.convertToChartDatum(entry: $0) }
-        self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { self.convertToChartDatum(entry: $0) }
+        self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { $0.toChartDatum() }
         self.showChart = entries.count > 1
         if entries.count > 1 {
             self.chartOffset = calculateChartOffset(sortedEntries)
@@ -114,15 +112,17 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         }
         return potentialTimestamp
     }
-    
-    private func convertToViewModel(entry: DiaryEntry) -> EntryViewModel {
-        return EntryViewModel(id: entry.id,
-                              date: dateFormatter.string(from:entry.timestamp),
-                              entryText: entry.entryText,
-                              score: scoreSmiley(for: entry.score))
     }
 
-    private func convertToChartDatum(entry: DiaryEntry) -> ChartDatum {
-        return ChartDatum(timestamp: entry.timestamp.timeIntervalSince1970, moodScore: Double(entry.score))
+private extension DiaryEntry {
+    func toViewModel(dateFormatter: DateFormatter) -> EntryViewModel {
+        return EntryViewModel(id: id,
+                              date: dateFormatter.string(from:timestamp),
+                              entryText: entryText,
+                              score: scoreSmiley(for: score))
+    }
+    
+    func toChartDatum() -> ChartDatum {
+        return ChartDatum(timestamp: timestamp.timeIntervalSince1970, moodScore: Double(score))
     }
 }
