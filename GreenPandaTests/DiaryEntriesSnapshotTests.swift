@@ -98,10 +98,6 @@ class FakeDiaryViewModel: DiaryViewModel {
         
     }
     
-    func topVisibleRowNumberDidChange(to rowNumber: Int) {
-        
-    }
-    
     func editEntry(at row: Int) {
         
     }

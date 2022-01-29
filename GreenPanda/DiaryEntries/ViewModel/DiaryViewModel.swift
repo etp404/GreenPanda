@@ -16,7 +16,6 @@ protocol DiaryViewModel {
     var showChart: Bool { get }
     var promptHiddenPublisher: Published<Bool>.Publisher { get }
     func proportionOfCellAboveTopOfCollectionView(_ proportion: Double, index: Int)
-    func topVisibleRowNumberDidChange(to rowNumber: Int)
     func deleteEntry(at row:Int)
     func editEntry(at row: Int)
 }

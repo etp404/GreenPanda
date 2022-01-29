@@ -25,7 +25,6 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
             updateChart(entries: greenPandaModel.entries)
         }
     }
-    @Published private var topVisibleRowNumber:Int? = nil
     
     @Published private var entries: [EntryViewModel] = []
     var entriesPublisher: Published<[EntryViewModel]>.Publisher { $entries }
@@ -94,10 +93,6 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     
     func editEntry(at row: Int) {
         coordinatorDelegate.openEditView(diaryEntry: entries[row])
-    }
-    
-    func topVisibleRowNumberDidChange(to rowNumber: Int) {
-        topVisibleRowNumber = rowNumber
     }
     
     func proportionOfCellAboveTopOfCollectionView(_ proportion: Double, index: Int) {
