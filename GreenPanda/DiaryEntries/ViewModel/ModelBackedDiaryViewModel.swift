@@ -10,7 +10,6 @@ import Combine
 
 struct ChartViewModel {
     var chartData: [ChartDatum]
-    var chartXOffset: Double = 0
     var chartVisibleRange: Double = Double(7*24*60*60)
 }
 
@@ -83,7 +82,6 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         self.showChart = entries.count > 1
         if entries.count > 1 {
             self.chartOffset = calculateChartOffset(sortedEntries)
-            self.chartViewModel.chartXOffset = calculateChartOffset(sortedEntries)
         }
     }
     

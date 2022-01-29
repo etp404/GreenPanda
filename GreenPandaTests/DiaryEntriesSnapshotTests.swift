@@ -123,7 +123,7 @@ class FakeDiaryViewModel: DiaryViewModel {
 
         showChart = !fakeEntries.isEmpty
 
-        chartViewModel = ChartViewModel(chartData: chartData, chartXOffset: 0.0, chartVisibleRange: Double(7*24*60*60))
+        chartViewModel = ChartViewModel(chartData: chartData, chartVisibleRange: Double(7*24*60*60))
 
     }
 
