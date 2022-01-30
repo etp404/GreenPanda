@@ -19,7 +19,9 @@
 		C93405C025A0A84C00B544F6 /* NewDiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93405BF25A0A84C00B544F6 /* NewDiaryEntry.swift */; };
 		C9384EFA259FB6B400DAF25A /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9384EF9259FB6B400DAF25A /* Clock.swift */; };
 		C942D05827A5385500A9625E /* ChartOffsetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C942D05727A5385500A9625E /* ChartOffsetTests.swift */; };
+		C94DD27B27A6ACF80060E6C5 /* Array+SafeGet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94DD27A27A6ACF80060E6C5 /* Array+SafeGet.swift */; };
 		C95CA0C72610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95CA0C62610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift */; };
+		C95DA55727A6DDC600D19A98 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95DA55627A6DDC500D19A98 /* ArrayExtensionTests.swift */; };
 		C97C09AF25409A30001E1E5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09AE25409A30001E1E5A /* AppDelegate.swift */; };
 		C97C09B125409A30001E1E5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09B025409A30001E1E5A /* SceneDelegate.swift */; };
 		C97C09B325409A30001E1E5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C09B225409A30001E1E5A /* ViewController.swift */; };
@@ -78,7 +80,9 @@
 		C93405BF25A0A84C00B544F6 /* NewDiaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryEntry.swift; sourceTree = "<group>"; };
 		C9384EF9259FB6B400DAF25A /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		C942D05727A5385500A9625E /* ChartOffsetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartOffsetTests.swift; sourceTree = "<group>"; };
+		C94DD27A27A6ACF80060E6C5 /* Array+SafeGet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SafeGet.swift"; sourceTree = "<group>"; };
 		C95CA0C62610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEntriesSnapshotTests.swift; sourceTree = "<group>"; };
+		C95DA55627A6DDC500D19A98 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
 		C97C09AB25409A30001E1E5A /* GreenPanda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenPanda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97C09AE25409A30001E1E5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C97C09B025409A30001E1E5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 				C92E646C257BD78C00723239 /* GreenPandaDataModel.xcdatamodeld */,
 				C9034520257CF7D1002A76C5 /* CoreDataGreenPandaModel.swift */,
 				C9384EF9259FB6B400DAF25A /* Clock.swift */,
+				C94DD27A27A6ACF80060E6C5 /* Array+SafeGet.swift */,
 			);
 			path = GreenPanda;
 			sourceTree = "<group>";
@@ -216,6 +221,7 @@
 				C9B26431256939BE0089A1BB /* MockupOfCombineVersion.swift */,
 				C92E6472257BD81600723239 /* GreenPandaCoreDataTests.swift */,
 				C95CA0C62610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift */,
+				C95DA55627A6DDC500D19A98 /* ArrayExtensionTests.swift */,
 			);
 			path = GreenPandaTests;
 			sourceTree = "<group>";
@@ -421,6 +427,7 @@
 				C9B4F47825437E550077DE2A /* ModelBackedDiaryViewModel.swift in Sources */,
 				C98052D92548A78E0071B64C /* ComposeDiaryEntryCoordinator.swift in Sources */,
 				C97C09B125409A30001E1E5A /* SceneDelegate.swift in Sources */,
+				C94DD27B27A6ACF80060E6C5 /* Array+SafeGet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +438,7 @@
 				C9BCF9A525531D3E00F2232E /* MockGreenPandaModel.swift in Sources */,
 				C95CA0C72610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift in Sources */,
 				C9BCF9A025531BB500F2232E /* ComposeDiaryEntryViewModelTests.swift in Sources */,
+				C95DA55727A6DDC600D19A98 /* ArrayExtensionTests.swift in Sources */,
 				C9B26432256939BE0089A1BB /* MockupOfCombineVersion.swift in Sources */,
 				C942D05827A5385500A9625E /* ChartOffsetTests.swift in Sources */,
 				C97C09C625409A31001E1E5A /* DiaryViewModelTests.swift in Sources */,

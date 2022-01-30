@@ -104,8 +104,8 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         if entries.count == topCell.index+1 {
             chartOffset = entries[0].timestamp.timeIntervalSince1970
         } else {
-            let timestampForTopVisible = entries.reversed()[topCell.index].timestamp.timeIntervalSince1970
-            let timestampForSecondFromTheTop = entries.reversed()[topCell.index+1].timestamp.timeIntervalSince1970
+            let timestampForTopVisible = entries.reversed()[safe: topCell.index]!.timestamp.timeIntervalSince1970
+            let timestampForSecondFromTheTop = entries.reversed()[safe: topCell.index+1]!.timestamp.timeIntervalSince1970
             let timestampForTheTopmostVisiblePoint = timestampForSecondFromTheTop + Double(timestampForTopVisible - timestampForSecondFromTheTop) * (1-topCell.proportionAboveTheTopOfCollectionView)
             chartOffset = max(timestampForTheTopmostVisiblePoint - aWeekInSeconds, entries[0].timestamp.timeIntervalSince1970)
         }
