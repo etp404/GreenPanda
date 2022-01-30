@@ -168,7 +168,6 @@ private class DateValueFormatter: NSObject, AxisValueFormatter {
 
 extension DiaryViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        #if (DEBUG)
         if let topRow = collectionView.indexPathForItem(at:  scrollView.contentOffset),
            let topCell = collectionView.cellForItem(at: topRow) {
             let topCellTopInView = collectionView.convert(topCell.frame, to:view).origin.y
@@ -178,6 +177,5 @@ extension DiaryViewController: UICollectionViewDelegate {
             viewModel?.proportionOfCellAboveTopOfCollectionView(positionOfTopCutOffAsProportionOfCell,
                                                                 index: topRow.row)
         }
-        #endif
     }
 }
