@@ -14,17 +14,14 @@ class DiaryViewController: ViewController {
     @IBOutlet weak var composeButton: UIButton!
     @IBOutlet weak var promtMessage: UILabel!
     @IBOutlet weak var chart: LineChartView!
-    private var bag = Set<AnyCancellable>()
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBAction func composeButtonPRessed(_ sender: Any) {
+    @IBAction func composeButtonPressed(_ sender: Any) {
         viewModel?.composeButtonPressed()
     }
     
+    private var bag = Set<AnyCancellable>()
     private var viewModel:DiaryViewModel?
     private var dataSource:UICollectionViewDiffableDataSource<Int, EntryViewModel>?
-    func configure(with viewModel: DiaryViewModel) {
-        self.viewModel = viewModel
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +87,10 @@ class DiaryViewController: ViewController {
         }.store(in: &bag)
         
         collectionView.delegate = self
+    }
+    
+    func configure(with viewModel: DiaryViewModel) {
+        self.viewModel = viewModel
     }
     
     func applySnapshot(entries:[EntryViewModel]?, animatingDifferences: Bool = true) {
