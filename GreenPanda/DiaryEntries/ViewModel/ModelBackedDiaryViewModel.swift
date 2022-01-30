@@ -13,18 +13,8 @@ struct ChartViewModel {
     var chartVisibleRange: Double = Double(7*24*60*60)
 }
 
-class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {    
-    private let dateFormatter: DateFormatter
-    private let greenPandaModel: GreenPandaModel
-    private let coordinatorDelegate: DiaryViewModelCoordinatorDelegate
-    private let aWeekInSeconds: TimeInterval = 7*24*60*60
-    private var bag = Set<AnyCancellable>()
-    private var topCell = TopCell(index: 0, proportionAboveTheTopOfCollectionView: 0) {
-        didSet {
-            updateChart(entries: greenPandaModel.entries)
-        }
-    }
-
+class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
+    
     @Published private var chartOffset: Double = 0.0
     var chartOffsetPublisher: Published<Double>.Publisher { $chartOffset }
 
@@ -54,19 +44,31 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
         $showChart
     }
     
+    private let dateFormatter: DateFormatter
+    private let greenPandaModel: GreenPandaModel
+    private let coordinatorDelegate: DiaryViewModelCoordinatorDelegate
+    private let aWeekInSeconds: TimeInterval = 7*24*60*60
+    private var bag = Set<AnyCancellable>()
+    private var topCell = TopCell(index: 0, proportionAboveTheTopOfCollectionView: 0) {
+        didSet {
+            updateChart(entries: greenPandaModel.entries)
+        }
+    }
+    
     init(model greenPandaModel: GreenPandaModel,
          timezone: TimeZone,
          coordinatorDelegate: DiaryViewModelCoordinatorDelegate) {
         self.greenPandaModel = greenPandaModel
-        dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
-        dateFormatter.timeZone = timezone
+        self.dateFormatter = DateFormatter()
+        self.dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
+        self.dateFormatter.timeZone = timezone
+        
         self.coordinatorDelegate = coordinatorDelegate
-        chartViewModel = ChartViewModel(chartData: [])
+        self.chartViewModel = ChartViewModel(chartData: [])
 
         super.init()
         
-        greenPandaModel.entriesPublisher.sink(receiveValue: { (newEntries:[DiaryEntry]) in
+        self.greenPandaModel.entriesPublisher.sink(receiveValue: { (newEntries:[DiaryEntry]) in
             self.entries = newEntries.sorted(by: {$0.timestamp > $1.timestamp}).map { $0.toViewModel(dateFormatter: self.dateFormatter) }
             self.entriesTableHidden = newEntries.isEmpty
             self.promptHidden = !newEntries.isEmpty
@@ -75,10 +77,12 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     private func updateChart(entries: [DiaryEntry]) {
-        let sortedEntries = entries.sorted(by: {$0.timestamp < $1.timestamp})
-        self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { $0.toChartDatum() }
-        self.showChart = entries.count > 1
-        updateChartOffset(sortedEntries)
+        showChart = entries.count > 1
+        if showChart {
+            let sortedEntries = entries.sorted(by: {$0.timestamp < $1.timestamp})
+            self.chartViewModel.chartData = entries.sorted(by: {$0.timestamp < $1.timestamp}).map { $0.toChartDatum() }
+            updateChartOffset(sortedEntries)
+        }
     }
     
     func composeButtonPressed() {
@@ -98,16 +102,12 @@ class ModelBackedDiaryViewModel: NSObject, DiaryViewModel {
     }
     
     func updateChartOffset(_ entries: [DiaryEntry]) {
-        if entries.count <= 1 {
-            return
-        }
-        if entries.count == topCell.index+1 {
-            chartOffset = entries[0].timestamp.timeIntervalSince1970
-        } else {
-            let timestampForTopVisible = entries[safe: -(topCell.index+1)]!.timestamp.timeIntervalSince1970
-            let timestampForSecondFromTheTop = entries[safe: -(topCell.index+2)]!.timestamp.timeIntervalSince1970
+        if let timestampForTopVisible = entries[safe: -(topCell.index+1)]?.timestamp.timeIntervalSince1970,
+           let timestampForSecondFromTheTop = entries[safe: -(topCell.index+2)]?.timestamp.timeIntervalSince1970 {
             let timestampForTheTopmostVisiblePoint = timestampForSecondFromTheTop + Double(timestampForTopVisible - timestampForSecondFromTheTop) * (1-topCell.proportionAboveTheTopOfCollectionView)
             chartOffset = max(timestampForTheTopmostVisiblePoint - aWeekInSeconds, entries[0].timestamp.timeIntervalSince1970)
+        } else {
+            chartOffset = entries[0].timestamp.timeIntervalSince1970
         }
     }
 }
