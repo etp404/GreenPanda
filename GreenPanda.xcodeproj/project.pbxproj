@@ -43,6 +43,7 @@
 		C9C726F02610B12C004DD1C5 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = C9C726EF2610B12C004DD1C5 /* SnapshotTesting */; };
 		C9CB0E3F2544845600D7C2B3 /* DiaryEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CB0E3D2544845600D7C2B3 /* DiaryEntryCell.swift */; };
 		C9CB0E402544845600D7C2B3 /* DiaryEntryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9CB0E3E2544845600D7C2B3 /* DiaryEntryCell.xib */; };
+		C9CE037327B7B0820023E636 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9CE037227B7B0820023E636 /* CloudKit.framework */; };
 		C9D836B92556D42400E68F65 /* ComposeDiaryEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D836B82556D42400E68F65 /* ComposeDiaryEntryViewModel.swift */; };
 		C9E069CE25443B1100B5978B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E069CD25443B1100B5978B /* Coordinator.swift */; };
 		C9E069D325443CAF00B5978B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E069D225443CAF00B5978B /* MainCoordinator.swift */; };
@@ -110,6 +111,7 @@
 		C9BCF9A425531D3E00F2232E /* MockGreenPandaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGreenPandaModel.swift; sourceTree = "<group>"; };
 		C9CB0E3D2544845600D7C2B3 /* DiaryEntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEntryCell.swift; sourceTree = "<group>"; };
 		C9CB0E3E2544845600D7C2B3 /* DiaryEntryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiaryEntryCell.xib; sourceTree = "<group>"; };
+		C9CE037227B7B0820023E636 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		C9D836B82556D42400E68F65 /* ComposeDiaryEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeDiaryEntryViewModel.swift; sourceTree = "<group>"; };
 		C9E069CD25443B1100B5978B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C9E069D225443CAF00B5978B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56941AFF2603514C00165A22 /* Charts in Frameworks */,
+				C9CE037327B7B0820023E636 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +177,7 @@
 				C97C09C425409A31001E1E5A /* GreenPandaTests */,
 				C97C09CF25409A31001E1E5A /* GreenPandaUITests */,
 				C97C09AC25409A30001E1E5A /* Products */,
+				C9CE037127B7B0820023E636 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -259,6 +263,14 @@
 				C98052C92548A31D0071B64C /* DiaryViewModelCoordinatorDelegate.swift */,
 			);
 			path = DiaryEntries;
+			sourceTree = "<group>";
+		};
+		C9CE037127B7B0820023E636 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C9CE037227B7B0820023E636 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

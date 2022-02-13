@@ -22,6 +22,7 @@ class CoreDataGreenPandaModel: GreenPandaModel {
     init(context: NSManagedObjectContext,
          clock: Clock = DateClock()) {
         self.context = context
+        self.context.automaticallyMergesChangesFromParent = true
         self.clock = clock
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: context)
