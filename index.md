@@ -1,1 +1,1 @@
-## Privacy Poicy for Green Panda
+## Privacy Policy for Green Panda
