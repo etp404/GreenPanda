@@ -14,7 +14,10 @@ public protocol Clock {
 public struct DateClock : Clock {
     public var date: Date {
         get {
-            Date()
+            let rangeInt = -3*60*60..<3*60*60
+            let randomElement: Int = Int.random(in: rangeInt)
+            let randomDouble = Double(randomElement)
+            return Date(timeIntervalSince1970: (Double(1642360072 + 24*60*60 * CoreDataGreenPandaModel.globalCount) + randomDouble))
         }
     }
 }
