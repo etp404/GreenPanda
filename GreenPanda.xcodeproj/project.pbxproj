@@ -84,7 +84,7 @@
 		C94DD27A27A6ACF80060E6C5 /* Array+SafeGet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SafeGet.swift"; sourceTree = "<group>"; };
 		C95CA0C62610A9EE00901C5B /* DiaryEntriesSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEntriesSnapshotTests.swift; sourceTree = "<group>"; };
 		C95DA55627A6DDC500D19A98 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
-		C97C09AB25409A30001E1E5A /* GreenPanda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenPanda.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C97C09AB25409A30001E1E5A /* GreenPandas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenPandas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97C09AE25409A30001E1E5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C97C09B025409A30001E1E5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C97C09B225409A30001E1E5A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 		C97C09AC25409A30001E1E5A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C97C09AB25409A30001E1E5A /* GreenPanda.app */,
+				C97C09AB25409A30001E1E5A /* GreenPandas.app */,
 				C97C09C125409A31001E1E5A /* GreenPandaTests.xctest */,
 				C97C09CC25409A31001E1E5A /* GreenPandaUITests.xctest */,
 			);
@@ -293,7 +293,7 @@
 				56941AFE2603514C00165A22 /* Charts */,
 			);
 			productName = GreenPanda;
-			productReference = C97C09AB25409A30001E1E5A /* GreenPanda.app */;
+			productReference = C97C09AB25409A30001E1E5A /* GreenPandas.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C97C09C025409A31001E1E5A /* GreenPandaTests */ = {
@@ -633,7 +633,7 @@
 				);
 				MARKETING_VERSION = 0.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.mould.matt.GreenPanda;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GreenPandas;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -656,7 +656,7 @@
 				);
 				MARKETING_VERSION = 0.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.mould.matt.GreenPanda;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GreenPandas;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
